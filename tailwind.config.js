@@ -1,3 +1,5 @@
+const { AdjustmentsHorizontalIcon } = require("@heroicons/react/24/outline");
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -11,6 +13,12 @@ module.exports = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      },
+      colors: {
+        primary: "#CDA400",
+      },
+      fontFamily: {
+        custom: ["League Spartan", "sans-serif"],
       },
     },
   },
