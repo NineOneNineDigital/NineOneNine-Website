@@ -19,9 +19,8 @@ import {
   PlusSmallIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
+import Image from "next/image";
 import { useState } from "react";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const navigation = {
   main: [
@@ -184,7 +183,7 @@ export default function Example() {
           <div className="flex lg:flex-1">
             <a href="#" className="-m-1.5 p-1.5">
               <span className="sr-only">NineOneNine</span>
-              <img
+              <Image
                 className="h-8 w-auto"
                 src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
                 alt=""
@@ -223,7 +222,7 @@ export default function Example() {
             <div className="flex items-center justify-between">
               <a href="#" className="-m-1.5 p-1.5">
                 <span className="sr-only">nineonenine</span>
-                <img
+                <Image
                   className="h-8 w-auto"
                   src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
                   alt=""
@@ -260,7 +259,7 @@ export default function Example() {
 
       <main className="isolate">
         <div className="relative isolate overflow-hidden pt-14">
-          <img
+          <Image
             src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2830&q=80&blend=303030&sat=-100&exp=&blend-mode=multiply"
             alt=""
             className="absolute inset-0 -z-10 h-full w-full object-cover"
@@ -272,8 +271,9 @@ export default function Example() {
                 Welcome to nineonenine
               </h1>
               <p className="mt-6 text-xl leading-8 text-gray-300">
-                We're a custom web design and development company based in
-                Raleigh, North Carolina
+                {
+                  "We're a custom web design and development company based in Raleigh, North Carolina"
+                }
               </p>
               <div className="mt-10 flex items-center justify-center gap-x-6">
                 <a
@@ -298,14 +298,14 @@ export default function Example() {
             <p className="mt-6 text-lg leading-6  text-gray-500">
               Started in 2019, we have been committed to delivering the highest
               level of service to our clients. We build custom web and mobile
-              applications for indiviuals and businesses across many different
+              applications for individuals and businesses across many different
               industries. Our goal is to help bring concepts and ideas to life
               for our clients while building strong relationships.
             </p>
             <p className="mt-6 text-lg leading-6  text-gray-500">
               No matter the size or the scope of your project, we can discuss a
               plan to build a website or application that is specific to your
-              needs. We will be there every step of the way to ensure a seemless
+              needs. We will be there every step of the way to ensure a seamless
               process.
             </p>
             <p className="mt-6 text-lg leading-6 text-gray-500">
@@ -321,11 +321,10 @@ export default function Example() {
                   />
                   <span className="text-gray-500">
                     <strong className="font-semibold text-white">
-                      We're Creative
+                      {"We're Creative"}
                     </strong>{" "}
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Maiores impedit perferendis suscipit eaque, iste dolor
-                    cupiditate blanditiis ratione.
+                    Our designs are sure to make your project stand out from the
+                    competition
                   </span>
                 </li>
                 <li className="flex gap-x-3">
@@ -335,9 +334,9 @@ export default function Example() {
                   />
                   <span className="text-gray-500">
                     <strong className="font-semibold text-white">
-                      We're Professional
+                      {"We're Professional"}
                     </strong>{" "}
-                    We hold ourselves to a high level to ensure you recieve a
+                    We hold ourselves to a high level to ensure you receive a
                     stress free process
                   </span>
                 </li>
@@ -348,7 +347,7 @@ export default function Example() {
                   />
                   <span className="text-gray-500">
                     <strong className="font-semibold text-white">
-                      We're Committed
+                      {"We're Committed"}
                     </strong>{" "}
                     Your goals are our goals! From start to finish, we are
                     devoted to your project
@@ -530,7 +529,6 @@ export default function Example() {
           </div>
         </footer>
       </div>
-      <ToastContainer />
     </div>
   );
 }
