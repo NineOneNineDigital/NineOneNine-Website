@@ -9,12 +9,9 @@ import {
   DisclosurePanel,
 } from "@headlessui/react";
 import {
-  ArrowPathIcon,
   Bars3Icon,
   CheckCircleIcon,
-  CloudArrowUpIcon,
-  FingerPrintIcon,
-  LockClosedIcon,
+  CodeBracketIcon,
   MinusSmallIcon,
   PlusSmallIcon,
   XMarkIcon,
@@ -97,37 +94,37 @@ const services = [
     name: "Custom Web Application Development",
     description:
       "Internet of Things apps. Systems for managing customer relationships (CRMs). social media sites. Tools for visualizing data. These are but a handful of the numerous varieties of customized web applications with which we deal on a daily basis.",
-    icon: CloudArrowUpIcon,
+    icon: CodeBracketIcon,
   },
   {
     name: "eCommerce Development",
     description:
       "Create user-friendly storefronts that provide enjoyable shopping experiences. Incorporate payment processing systems, customer service chatbots, checkout systems, and more.",
-    icon: LockClosedIcon,
+    icon: CodeBracketIcon,
   },
   {
     name: "Front-End Design & Development",
     description:
       "First impressions matter. Since the front end is the part of web development solutions that users can see and interact with, it must be intuitive and engaging. It should provide fast loading times and responsive layouts so users can find everything they need quickly and easily.",
-    icon: ArrowPathIcon,
+    icon: CodeBracketIcon,
   },
   {
     name: "Back-End Web Development",
     description:
       "Even though the back end of a website is hidden from view, it is central to the web development process. This is the powerhouse of web development—the infrastructure of web solutions. It focuses on the logic, functionality, and database interactions. ",
-    icon: FingerPrintIcon,
+    icon: CodeBracketIcon,
   },
   {
     name: "Content Management System (CMS) Development",
     description:
       "Simplify content management. With a robust CMS, you can create, store, and publish digital content without extensive technical knowledge. You can also visualize performance and user interactions to inform your business strategy.",
-    icon: FingerPrintIcon,
+    icon: CodeBracketIcon,
   },
   {
     name: "API Development and Integration",
     description:
       "When you access location-based services, make purchases on e-commerce websites, or book flights online, that's all thanks to APIs. Application Programming Interfaces are central to many of the services we use every day, sharing and communicating data seamlessly among apps.",
-    icon: FingerPrintIcon,
+    icon: CodeBracketIcon,
   },
 ];
 
@@ -171,6 +168,7 @@ function classNames(...classes) {
 
 export default function Example() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const currentYear = new Date().getFullYear();
 
   return (
     <div className="bg-black">
@@ -398,10 +396,7 @@ export default function Example() {
         </div>
 
         {/* Services section */}
-        <div
-          id="services"
-          className="mx-auto mt-32 max-w-7xl px-6 sm:mt-56 lg:px-8"
-        >
+        <div id="services" className="mx-auto px-6 py-32 lg:px-8">
           <div className="mx-auto max-w-2xl lg:text-center">
             <h2 className="text-base font-semibold leading-7 text-primary">
               How can we help you?
@@ -439,7 +434,7 @@ export default function Example() {
 
         {/* FAQs */}
         <div id="FAQ">
-          <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8 lg:py-40">
+          <div className="mx-auto px-6 py-32 lg:px-8">
             <div className="mx-auto max-w-4xl divide-y divide-white/10">
               <h2 className="text-2xl font-bold leading-10 tracking-tight text-white">
                 Frequently asked questions
@@ -486,7 +481,7 @@ export default function Example() {
         {/* Contact Form */}
         <div
           id="contact"
-          className="relative isolate bg-black px-6 py-24 sm:py-32 lg:px-8"
+          className="relative isolate bg-black px-6 py-32 lg:px-8"
         >
           <div className="mx-auto max-w-xl lg:max-w-4xl">
             <h2 className="text-4xl font-bold tracking-tight text-white">
@@ -523,7 +518,7 @@ export default function Example() {
               ))}
             </nav>
             <p className="mt-10 text-center text-xs leading-5 text-gray-500">
-              &copy; 2020 nineonenine, Inc. All rights reserved.
+              &copy; {currentYear} nineonenine, Inc. All rights reserved.
             </p>
           </div>
         </footer>
