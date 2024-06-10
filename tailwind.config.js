@@ -18,7 +18,7 @@ module.exports = {
         primary: "#CDA400",
       },
       fontFamily: {
-        custom: ["League Spartan", "sans-serif"],
+        custom: ["Lato", "sans-serif"],
       },
     },
   },

@@ -16,7 +16,9 @@ import {
   PlusSmallIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
+import Image from "next/image";
 import { useState } from "react";
+import logoGold from "../../public/logoGold.png";
 
 const navigation = {
   main: [
@@ -165,13 +167,17 @@ const faqs = [
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
+const metadata = {
+  title: "My Page Title",
+};
 
 export default function Example() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const currentYear = new Date().getFullYear();
 
   return (
-    <div className="bg-black">
+    <div className="bg-black font-custom">
+      <title>NineOneNine Studio</title>
       <header className="absolute inset-x-0 top-0 z-50">
         <nav
           className="flex items-center justify-between p-6 lg:px-8"
@@ -180,11 +186,7 @@ export default function Example() {
           <div className="flex lg:flex-1">
             <a href="#" className="-m-1.5 p-1.5">
               <span className="sr-only">NineOneNine</span>
-              <img
-                className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                alt=""
-              />
+              <Image className="h-6 w-auto" src={logoGold} alt="Company Logo" />
             </a>
           </div>
           <div className="flex lg:hidden">
@@ -202,7 +204,7 @@ export default function Example() {
               <a
                 key={item.name}
                 href={item.href}
-                className="text-sm font-semibold leading-6 text-white"
+                className="text-md font-semibold leading-6 text-white"
               >
                 {item.name}
               </a>
@@ -218,11 +220,11 @@ export default function Example() {
           <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-black px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-white/10">
             <div className="flex items-center justify-between">
               <a href="#" className="-m-1.5 p-1.5">
-                <span className="sr-only">nineonenine</span>
-                <img
-                  className="h-8 w-auto"
-                  src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                  alt=""
+                <span className="sr-only">NineOneNine</span>
+                <Image
+                  className="h-6 w-auto"
+                  src={logoGold}
+                  alt="Company Logo"
                 />
               </a>
               <button
@@ -262,10 +264,10 @@ export default function Example() {
             className="absolute inset-0 -z-10 h-full w-full object-cover"
           />
 
-          <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
-            <div className="text-center">
+          <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56 px-6 py-32 ">
+            <div className="text-center max-w-3xl">
               <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
-                Welcome to nineonenine
+                Welcome to NineOneNine
               </h1>
               <p className="mt-6 text-xl leading-8 text-gray-300">
                 {
@@ -275,7 +277,7 @@ export default function Example() {
               <div className="mt-10 flex items-center justify-center gap-x-6">
                 <a
                   href="#"
-                  className="rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400"
+                  className="rounded-md bg-primary px-3.5 py-2.5 text-md font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400"
                 >
                   Get started
                 </a>
@@ -396,12 +398,12 @@ export default function Example() {
         </div>
 
         {/* Services section */}
-        <div id="services" className="mx-auto px-6 py-32 lg:px-8">
+        <div id="services" className="mx-auto px-6 py-32 lg:px-8 bg-white">
           <div className="mx-auto max-w-2xl lg:text-center">
             <h2 className="text-base font-semibold leading-7 text-primary">
               How can we help you?
             </h2>
-            <p className="mt-2 text-3xl font-bold tracking-tight text-White sm:text-4xl">
+            <p className="mt-2 text-3xl font-bold tracking-tight text-black sm:text-4xl">
               Development services we provide
             </p>
             <p className="mt-6 text-lg leading-8 text-gray-500">
@@ -414,7 +416,7 @@ export default function Example() {
             <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
               {services.map((service) => (
                 <div key={service.name} className="relative pl-16">
-                  <dt className="text-base font-semibold leading-7 text-white">
+                  <dt className="text-base font-semibold leading-7 text-black">
                     <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-primary">
                       <service.icon
                         className="h-6 w-6 text-white"
@@ -436,7 +438,7 @@ export default function Example() {
         <div id="FAQ">
           <div className="mx-auto px-6 py-32 lg:px-8">
             <div className="mx-auto max-w-4xl divide-y divide-white/10">
-              <h2 className="text-2xl font-bold leading-10 tracking-tight text-white">
+              <h2 className="text-3xl sm:text-4xl font-bold leading-10 tracking-tight text-white">
                 Frequently asked questions
               </h2>
               <dl className="mt-10 space-y-6 divide-y divide-white/10">
@@ -481,17 +483,17 @@ export default function Example() {
         {/* Contact Form */}
         <div
           id="contact"
-          className="relative isolate bg-black px-6 py-32 lg:px-8"
+          className="relative isolate bg-white px-6 py-32 lg:px-8"
         >
           <div className="mx-auto max-w-xl lg:max-w-4xl">
-            <h2 className="text-4xl font-bold tracking-tight text-white">
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-black">
               Let’s talk about your project
             </h2>
             <p className="mt-2 text-lg leading-8 text-gray-500">
               Ready to start a new project? Do you have an idea you would like
               to discuss? Contact us today!
             </p>
-            <div className="mt-16 flex flex-col gap-16 sm:gap-y-20 lg:flex-row">
+            <div className="mt-10 flex flex-col gap-16 sm:gap-y-20 lg:flex-row">
               <ContactForm />
             </div>
           </div>
@@ -510,15 +512,15 @@ export default function Example() {
                 <div key={item.name} className="pb-6">
                   <a
                     href={item.href}
-                    className="text-sm leading-6 text-gray-500 hover:text-gray-900"
+                    className="text-md leading-6 text-gray-500 hover:text-gray-900"
                   >
                     {item.name}
                   </a>
                 </div>
               ))}
             </nav>
-            <p className="mt-10 text-center text-xs leading-5 text-gray-500">
-              &copy; {currentYear} nineonenine, Inc. All rights reserved.
+            <p className="mt-10 text-center text-md leading-5 text-gray-500">
+              &copy; {currentYear} NineOneNine, Inc. All rights reserved.
             </p>
           </div>
         </footer>
@@ -532,7 +534,7 @@ function ContactForm() {
   const [state, handleSubmit] = useForm("xbjnvypq");
   if (state.succeeded) {
     return (
-      <p className="text-xl text-white">
+      <p className="text-xl text-black">
         Thanks for your submission! A team member will reply shortly.
       </p>
     );
@@ -543,7 +545,7 @@ function ContactForm() {
         <div>
           <label
             htmlFor="first-name"
-            className="block text-sm font-semibold leading-6 text-white"
+            className="block text-md font-semibold leading-6 text-black"
           >
             First name
           </label>
@@ -554,7 +556,7 @@ function ContactForm() {
               id="firstName"
               required
               autoComplete="given-name"
-              className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
             />
             <ValidationError
               prefix="First Name"
@@ -566,7 +568,7 @@ function ContactForm() {
         <div>
           <label
             htmlFor="last-name"
-            className="block text-sm font-semibold leading-6 text-white"
+            className="block text-md font-semibold leading-6 text-black"
           >
             Last name
           </label>
@@ -577,7 +579,7 @@ function ContactForm() {
               id="last-name"
               required
               autoComplete="family-name"
-              className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
             />
             <ValidationError
               prefix="Last Name"
@@ -589,7 +591,7 @@ function ContactForm() {
         <div>
           <label
             htmlFor="budget"
-            className="block text-sm font-semibold leading-6 text-white"
+            className="block text-md font-semibold leading-6 text-black"
           >
             Email
           </label>
@@ -599,7 +601,7 @@ function ContactForm() {
               name="email"
               type="email"
               required
-              className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
             />
             <ValidationError
               field="email"
@@ -611,7 +613,7 @@ function ContactForm() {
         <div>
           <label
             htmlFor="website"
-            className="block text-sm font-semibold leading-6 text-white"
+            className="block text-md font-semibold leading-6 text-black"
           >
             Website
           </label>
@@ -621,7 +623,7 @@ function ContactForm() {
               name="website"
               id="website"
               required
-              className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
             />
             <ValidationError
               prefix="Website"
@@ -633,7 +635,7 @@ function ContactForm() {
         <div className="sm:col-span-2">
           <label
             htmlFor="message"
-            className="block text-sm font-semibold leading-6 text-white"
+            className="block text-md font-semibold leading-6 text-black"
           >
             Message
           </label>
@@ -642,7 +644,7 @@ function ContactForm() {
               id="message"
               name="message"
               rows={4}
-              className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
               defaultValue={""}
             />
           </div>
@@ -657,7 +659,7 @@ function ContactForm() {
         <button
           type="submit"
           disabled={state.submitting}
-          className="block w-full rounded-md bg-primary px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          className="block w-full rounded-md bg-primary px-3.5 py-2.5 text-center text-md font-semibold text-white shadow-sm hover:bg-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
         >
           Let’s talk
         </button>
