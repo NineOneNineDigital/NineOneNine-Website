@@ -280,7 +280,7 @@ export default function Example() {
         </div>
 
         <div id="about" className="bg-black px-6 py-32 lg:px-8">
-          <div className="mx-auto max-w-3xl text-base leading-7 text-gray-700">
+          <div className="mx-auto max-w-4xl text-base leading-7 text-gray-700">
             <p className="text-base font-semibold leading-7 text-primary">
               Who are we?
             </p>
@@ -304,8 +304,11 @@ export default function Example() {
               If you are ready to take your idea to the next level, contact us
               today!
             </p>
-            <div className="mt-10 max-w-2xl">
-              <ul role="list" className="mt-8 max-w-xl space-y-8 text-gray-600">
+            <div className="mt-10 max-w-4xl">
+              <ul
+                role="list"
+                className="mt-8 max-w-4xl space-y-8 text-gray-600"
+              >
                 <li className="flex gap-x-3">
                   <CheckCircleIcon
                     className="mt-1 h-5 w-5 flex-none text-primary"
@@ -313,7 +316,7 @@ export default function Example() {
                   />
                   <span className="text-gray-500">
                     <strong className="font-semibold text-white">
-                      {"We're Creative"}
+                      {"We're Creative - "}
                     </strong>{" "}
                     Our designs are sure to make your project stand out from the
                     competition
@@ -326,7 +329,7 @@ export default function Example() {
                   />
                   <span className="text-gray-500">
                     <strong className="font-semibold text-white">
-                      {"We're Professional"}
+                      {"We're Professional - "}
                     </strong>{" "}
                     We hold ourselves to a high level to ensure you receive a
                     stress free process
@@ -339,7 +342,7 @@ export default function Example() {
                   />
                   <span className="text-gray-500">
                     <strong className="font-semibold text-white">
-                      {"We're Committed"}
+                      {"We're Committed - "}
                     </strong>{" "}
                     Your goals are our goals! From start to finish, we are
                     devoted to your project
@@ -392,7 +395,7 @@ export default function Example() {
 
         {/* Services section */}
         <div id="services" className="mx-auto px-6 py-32 lg:px-8 bg-white">
-          <div className="mx-auto max-w-2xl lg:text-center">
+          <div className="mx-auto max-w-3xl lg:text-center">
             <h2 className="text-base font-semibold leading-7 text-primary">
               How can we help you?
             </h2>
@@ -405,7 +408,7 @@ export default function Example() {
               we might be able to help.
             </p>
           </div>
-          <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
+          <div className="mx-auto mt-16 max-w-3xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
             <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
               {services.map((service) => (
                 <div key={service.name} className="relative pl-16">
@@ -478,7 +481,7 @@ export default function Example() {
           id="contact"
           className="relative isolate bg-white px-6 py-32 lg:px-8"
         >
-          <div className="mx-auto max-w-xl lg:max-w-4xl">
+          <div className="mx-auto max-w-3xl lg:max-w-4xl">
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-black">
               Let’s talk about your project
             </h2>
@@ -637,7 +640,7 @@ function ContactForm() {
               name="message"
               rows={4}
               className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
-              placeholder={"Enter message here"}
+              placeHolder={"Enter message here"}
               required
             />
           </div>
