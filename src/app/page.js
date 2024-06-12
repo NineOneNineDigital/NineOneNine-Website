@@ -164,20 +164,13 @@ const faqs = [
   // More questions...
 ];
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
-const metadata = {
-  title: "My Page Title",
-};
-
 export default function Example() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const currentYear = new Date().getFullYear();
 
   return (
     <div className="bg-black font-custom">
-      <title>NineOneNine Studio</title>
+      <title>NineOneNine</title>
       <header className="absolute inset-x-0 top-0 z-50">
         <nav
           className="flex items-center justify-between p-6 lg:px-8"
@@ -531,7 +524,7 @@ export default function Example() {
 
 //contact form
 function ContactForm() {
-  const [state, handleSubmit] = useForm("xbjnvypq");
+  const [state, handleSubmit] = useForm("mwkggbvd");
   if (state.succeeded) {
     return (
       <p className="text-xl text-black">
@@ -622,7 +615,6 @@ function ContactForm() {
               type="url"
               name="website"
               id="website"
-              required
               className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
             />
             <ValidationError
@@ -645,7 +637,8 @@ function ContactForm() {
               name="message"
               rows={4}
               className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
-              defaultValue={""}
+              placeholder={"Enter message here"}
+              required
             />
           </div>
           <ValidationError
