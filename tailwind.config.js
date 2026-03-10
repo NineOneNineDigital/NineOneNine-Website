@@ -1,5 +1,3 @@
-const { AdjustmentsHorizontalIcon } = require("@heroicons/react/24/outline");
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -9,16 +7,24 @@ module.exports = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-      },
       colors: {
-        primary: "#CDA400",
+        primary: {
+          DEFAULT: "#CDA400",
+          50: "#FFF9E5",
+          100: "#FFF3CC",
+          200: "#FFE799",
+          300: "#FFDB66",
+          400: "#FFCF33",
+          500: "#CDA400",
+          600: "#A68400",
+          700: "#7F6400",
+          800: "#574400",
+          900: "#302500",
+        },
       },
       fontFamily: {
-        custom: ["Lato", "sans-serif"],
+        sans: ["var(--font-space-grotesk)", "system-ui", "sans-serif"],
+        mono: ["var(--font-space-mono)", "ui-monospace", "monospace"],
       },
     },
   },
