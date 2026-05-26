@@ -1,4 +1,4 @@
-import { Space_Grotesk, Space_Mono } from "next/font/google";
+import { Space_Grotesk, Space_Mono, Fraunces } from "next/font/google";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -12,6 +12,13 @@ const spaceMono = Space_Mono({
   variable: "--font-space-mono",
 });
 
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-fraunces",
+  axes: ["opsz", "SOFT"],
+  style: ["normal", "italic"],
+});
+
 const SITE_URL = "https://nineonenine.dev";
 
 export const metadata = {
@@ -21,10 +28,14 @@ export const metadata = {
     template: "%s | NineOneNine",
   },
   description:
-    "NineOneNine is a software development studio in Raleigh, North Carolina. We design and build custom web applications, eCommerce platforms, and APIs for businesses of all sizes.",
+    "NineOneNine is a software development studio in Raleigh, North Carolina. We design and build custom web applications, mobile apps, eCommerce platforms, and APIs for businesses of all sizes.",
   keywords: [
     "web development",
     "software development",
+    "mobile app development",
+    "iOS app development",
+    "Android app development",
+    "React Native development",
     "Raleigh NC",
     "custom web applications",
     "React",
@@ -33,6 +44,7 @@ export const metadata = {
     "API development",
     "software development studio Raleigh",
     "web developer North Carolina",
+    "mobile app developer Raleigh NC",
     "custom software Raleigh NC",
   ],
   icons: {
@@ -50,7 +62,7 @@ export const metadata = {
   openGraph: {
     title: "NineOneNine — Software Development Studio | Raleigh, NC",
     description:
-      "Custom web applications, eCommerce platforms, and APIs. Based in Raleigh, NC.",
+      "Custom web applications, mobile apps, eCommerce platforms, and APIs. Based in Raleigh, NC.",
     url: SITE_URL,
     siteName: "NineOneNine",
     images: [
@@ -68,7 +80,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "NineOneNine — Software Development Studio | Raleigh, NC",
     description:
-      "Custom web applications, eCommerce platforms, and APIs. Based in Raleigh, NC.",
+      "Custom web applications, mobile apps, eCommerce platforms, and APIs. Based in Raleigh, NC.",
     images: [`${SITE_URL}/og-image.png`],
   },
   robots: {
@@ -149,7 +161,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body
-        className={`${spaceGrotesk.variable} ${spaceMono.variable} font-sans antialiased noise`}
+        className={`${spaceGrotesk.variable} ${spaceMono.variable} ${fraunces.variable} font-sans antialiased noise`}
       >
         {children}
       </body>

@@ -8,9 +8,43 @@ import {
 } from "@heroicons/react/24/outline";
 
 export const navigation = [
+  { name: "Work", href: "#work" },
   { name: "About", href: "#about" },
   { name: "Services", href: "#services" },
   { name: "FAQ", href: "#faq" },
+];
+
+// Real projects render with their screenshot in /public.
+// Per-project fields:
+//   image    — screenshot path (preferred; next/image optimizes on demand)
+//   video    — autoplay-on-hover silent loop (used if no image)
+//   summary  — optional one-liner (omit to render just the title)
+//   href     — optional outbound link to the live site or case study
+export const projects = [
+  {
+    id: "01",
+    name: "Bost Homes",
+    category: "Website",
+    year: "2024",
+    image: "/bost-homes-site.jpg",
+    href: "https://bosthomes.com",
+  },
+  {
+    id: "02",
+    name: "Grande Manor",
+    category: "Website",
+    year: "2024",
+    image: "/grande-manor-site.jpg",
+    href: "https://grandemanorhomes.com",
+  },
+  {
+    id: "03",
+    name: "McMillan Design",
+    category: "Website",
+    year: "2024",
+    image: "/mcmillan-design-site.jpg",
+    href: "https://mcmillan-design.com",
+  },
 ];
 
 export const services = [

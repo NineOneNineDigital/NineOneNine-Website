@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
+import Work from "@/components/Work";
 import About from "@/components/About";
 import Services from "@/components/Services";
 import Process from "@/components/Process";
@@ -57,7 +58,7 @@ export default function HomePage() {
     "@type": "WebPage",
     name: "NineOneNine — Software Development Studio",
     description:
-      "NineOneNine is a software development studio in Raleigh, North Carolina. We design and build custom web applications, eCommerce platforms, and APIs for businesses of all sizes.",
+      "NineOneNine is a software development studio in Raleigh, North Carolina. We design and build custom web applications, mobile apps, eCommerce platforms, and APIs for businesses of all sizes.",
     url: SITE_URL,
     isPartOf: {
       "@type": "WebSite",
@@ -80,6 +81,7 @@ export default function HomePage() {
       <Header />
       <main id="main">
         <Hero />
+        <Work />
         <About />
         <Services />
         <Process />

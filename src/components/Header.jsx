@@ -31,6 +31,7 @@ export default function Header() {
               className="h-6 w-auto transition-opacity duration-200 group-hover:opacity-80"
               src={logoGold}
               alt="NineOneNine"
+              priority
             />
         </a>
 
