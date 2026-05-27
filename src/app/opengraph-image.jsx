@@ -99,7 +99,7 @@ export default async function OpengraphImage() {
               color: "rgba(255,255,255,0.35)",
             }}
           >
-            nineonenine.dev
+            nineoneninedigital.com
           </div>
         </div>
       </div>

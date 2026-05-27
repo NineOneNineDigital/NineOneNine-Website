@@ -7,7 +7,7 @@ import ServiceFAQ from "@/components/ServiceFAQ";
 import ServiceCTA from "@/components/ServiceCTA";
 import { servicePages, servicePageList } from "@/lib/services-content";
 
-const SITE_URL = "https://nineonenine.dev";
+const SITE_URL = "https://nineoneninedigital.com";
 
 export function generateStaticParams() {
   return servicePageList.map((s) => ({ slug: s.slug }));

@@ -1,7 +1,7 @@
 import { servicePageList } from "@/lib/services-content";
 
 export default function sitemap() {
-  const baseUrl = "https://nineonenine.dev";
+  const baseUrl = "https://nineoneninedigital.com";
   const lastModified = new Date();
 
   return [

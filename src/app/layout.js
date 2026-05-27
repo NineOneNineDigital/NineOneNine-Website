@@ -19,7 +19,7 @@ const fraunces = Fraunces({
   style: ["normal", "italic"],
 });
 
-const SITE_URL = "https://nineonenine.dev";
+const SITE_URL = "https://nineoneninedigital.com";
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
