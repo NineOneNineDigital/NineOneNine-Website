@@ -15,11 +15,17 @@ function ServiceCard({ service }) {
     cardRef.current.style.setProperty("--mouse-y", `${y}%`);
   }, []);
 
+  const Wrapper = service.slug ? "a" : "div";
+  const wrapperProps = service.slug
+    ? { href: `/services/${service.slug}`, "aria-label": `${service.name} — learn more` }
+    : {};
+
   return (
-    <div
+    <Wrapper
       ref={cardRef}
       onMouseMove={handleMouseMove}
-      className="card-glow group relative bg-neutral-950 p-8 lg:p-10 transition-all duration-300 hover:bg-neutral-900/40"
+      {...wrapperProps}
+      className="card-glow group relative block bg-neutral-950 p-8 lg:p-10 transition-all duration-300 hover:bg-neutral-900/40"
     >
       <div className="absolute inset-0 border border-transparent group-hover:border-primary/10 transition-colors duration-300 pointer-events-none" />
       <service.icon
@@ -32,7 +38,18 @@ function ServiceCard({ service }) {
       <p className="mt-3 text-sm leading-relaxed text-white/40">
         {service.description}
       </p>
-    </div>
+      {service.slug && (
+        <span className="mt-5 inline-flex items-center gap-2 font-mono text-[10px] tracking-[0.25em] uppercase text-white/40 group-hover:text-primary transition-colors duration-300">
+          <span>Learn more</span>
+          <span
+            aria-hidden="true"
+            className="transition-transform duration-300 group-hover:translate-x-1"
+          >
+            →
+          </span>
+        </span>
+      )}
+    </Wrapper>
   );
 }
 

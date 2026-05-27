@@ -141,7 +141,7 @@ export default function Hero() {
 
               <div className="flex flex-col sm:flex-row lg:flex-col gap-3">
                 <a
-                  href="#contact"
+                  href="/#contact"
                   className="group relative inline-flex items-center justify-between gap-4 bg-primary text-black font-mono text-xs tracking-[0.2em] uppercase px-6 py-4 hover:bg-primary-400 transition-all duration-300 hover:shadow-[0_0_40px_rgba(205,164,0,0.25)]"
                 >
                   <span>Start a project</span>
@@ -153,7 +153,7 @@ export default function Hero() {
                   </span>
                 </a>
                 <a
-                  href="#work"
+                  href="/#work"
                   className="group inline-flex items-center justify-between gap-4 font-mono text-xs tracking-[0.2em] uppercase text-white/60 px-6 py-4 border border-white/10 hover:border-white/30 hover:text-white transition-all duration-300"
                 >
                   <span>Selected work</span>

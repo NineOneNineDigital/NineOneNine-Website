@@ -46,7 +46,7 @@ export default function Header() {
             </a>
           ))}
           <a
-            href="#contact"
+            href="/#contact"
             className="font-mono text-xs tracking-wide uppercase border border-primary/50 text-primary px-5 py-2.5 hover:bg-primary hover:text-black transition-all duration-300 hover:shadow-[0_0_20px_rgba(205,164,0,0.2)]"
           >
             Start a project
@@ -89,7 +89,7 @@ export default function Header() {
               </a>
             ))}
             <a
-              href="#contact"
+              href="/#contact"
               onClick={() => setOpen(false)}
               className="mt-8 font-mono text-sm tracking-wide uppercase text-center border border-primary/50 text-primary px-4 py-3.5 hover:bg-primary hover:text-black transition-all duration-300"
             >

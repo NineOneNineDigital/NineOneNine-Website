@@ -7,11 +7,12 @@ import {
   ChatBubbleLeftRightIcon,
 } from "@heroicons/react/24/outline";
 
+// Anchors use /# so they resolve from subpages back to homepage sections.
 export const navigation = [
-  { name: "Work", href: "#work" },
-  { name: "About", href: "#about" },
-  { name: "Services", href: "#services" },
-  { name: "FAQ", href: "#faq" },
+  { name: "Work", href: "/#work" },
+  { name: "About", href: "/#about" },
+  { name: "Services", href: "/#services" },
+  { name: "FAQ", href: "/#faq" },
 ];
 
 // Real projects render with their screenshot in /public.
@@ -53,18 +54,21 @@ export const services = [
     description:
       "From database architecture to pixel-perfect UI — we handle the entire stack. Custom web applications, responsive websites, CRMs, dashboards, and internal tools built end-to-end so nothing falls through the cracks.",
     icon: CodeBracketSquareIcon,
+    slug: "web-development",
   },
   {
     name: "eCommerce",
     description:
       "Storefronts engineered for conversion. Payment processing, inventory management, and checkout flows that feel effortless.",
     icon: ShoppingCartIcon,
+    slug: "ecommerce-development",
   },
   {
     name: "Mobile Development",
     description:
       "Native and cross-platform mobile applications for iOS and Android. Offline-capable, performant, and built to feel right on every device.",
     icon: DevicePhoneMobileIcon,
+    slug: "mobile-app-development",
   },
   {
     name: "CMS Development",
