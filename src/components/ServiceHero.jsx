@@ -10,13 +10,41 @@ export default function ServiceHero({ service }) {
       <div className="absolute -top-24 -right-24 w-[320px] h-[320px] rounded-full bg-primary/[0.04] blur-[100px]" />
 
       <div className="relative z-10 pt-32 lg:pt-40">
-        <div className="mx-auto max-w-6xl px-6 flex items-center justify-between text-[10px] font-mono tracking-[0.3em] uppercase text-white/30">
-          <span>{hero.eyebrow}</span>
-          <span className="flex items-center gap-6">
+        <div className="mx-auto max-w-6xl px-6 flex flex-wrap items-center justify-between gap-4 text-[10px] font-mono tracking-[0.3em] uppercase">
+          <nav aria-label="Breadcrumb">
+            <ol className="flex items-center gap-3 text-white/30">
+              <li>
+                <a
+                  href="/"
+                  className="hover:text-white transition-colors duration-200"
+                >
+                  Home
+                </a>
+              </li>
+              <li aria-hidden="true" className="text-white/15">
+                /
+              </li>
+              <li>
+                <a
+                  href="/#services"
+                  className="hover:text-white transition-colors duration-200"
+                >
+                  Services
+                </a>
+              </li>
+              <li aria-hidden="true" className="text-white/15">
+                /
+              </li>
+              <li aria-current="page" className="text-primary">
+                {name}
+              </li>
+            </ol>
+          </nav>
+          <div className="flex items-center gap-6 text-white/30">
             <span>Raleigh, NC</span>
             <span aria-hidden="true" className="h-px w-6 bg-white/15" />
-            <span>Est. 2019</span>
-          </span>
+            <span>35.78°N · 78.64°W</span>
+          </div>
         </div>
       </div>
 

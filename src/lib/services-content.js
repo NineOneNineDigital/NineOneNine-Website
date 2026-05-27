@@ -14,7 +14,6 @@ export const servicePages = {
     metaDescription:
       "Custom web application development in Raleigh, North Carolina. Production-grade React, Next.js, and full-stack apps for businesses ready to outgrow templates.",
     hero: {
-      eyebrow: "Service / 01",
       headline: "Custom web development,",
       headlineAccent: "built end to end.",
       lede: "Production-grade web applications and marketing sites — designed, engineered, and deployed by a Raleigh-based studio that handles the full stack.",
@@ -79,7 +78,6 @@ export const servicePages = {
     metaDescription:
       "iOS and Android app development in Raleigh, North Carolina. Native and React Native apps built for performance, offline support, and the app stores.",
     hero: {
-      eyebrow: "Service / 02",
       headline: "Mobile apps,",
       headlineAccent: "native where it counts.",
       lede: "iOS and Android apps engineered for performance and the long tail of post-launch updates — built by a studio that ships to both app stores.",
@@ -144,7 +142,6 @@ export const servicePages = {
     metaDescription:
       "Custom eCommerce development in Raleigh, North Carolina. Storefronts engineered for conversion — Stripe, Shopify, headless commerce, and custom platforms.",
     hero: {
-      eyebrow: "Service / 03",
       headline: "eCommerce,",
       headlineAccent: "engineered for conversion.",
       lede: "Custom storefronts, headless Shopify, and Stripe-powered checkout flows built to move product — by a Raleigh studio that treats every conversion as a design decision.",
