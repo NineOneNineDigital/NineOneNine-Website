@@ -26,7 +26,7 @@ export default function Header() {
       }`}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
-        <a href="#" className="flex items-center gap-3 group">
+        <a href="/" aria-label="NineOneNine — home" className="flex items-center gap-3 group">
           <Image
               className="h-6 w-auto transition-opacity duration-200 group-hover:opacity-80"
               src={logoGold}
