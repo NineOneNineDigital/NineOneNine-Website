@@ -9,7 +9,7 @@ import Contact from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 import { faqs, services } from "@/lib/constants";
 
-const SITE_URL = "https://nineonenine.dev";
+const SITE_URL = "https://nineoneninedigital.com";
 
 function JsonLd({ data }) {
   return (

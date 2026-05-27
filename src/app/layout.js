@@ -19,7 +19,7 @@ const fraunces = Fraunces({
   style: ["normal", "italic"],
 });
 
-const SITE_URL = "https://nineonenine.dev";
+const SITE_URL = "https://nineoneninedigital.com";
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
@@ -65,14 +65,6 @@ export const metadata = {
       "Custom web applications, mobile apps, eCommerce platforms, and APIs. Based in Raleigh, NC.",
     url: SITE_URL,
     siteName: "NineOneNine",
-    images: [
-      {
-        url: `${SITE_URL}/og-image.png`,
-        width: 1200,
-        height: 630,
-        alt: "NineOneNine — Software Development Studio",
-      },
-    ],
     type: "website",
     locale: "en_US",
   },
@@ -81,7 +73,6 @@ export const metadata = {
     title: "NineOneNine — Software Development Studio | Raleigh, NC",
     description:
       "Custom web applications, mobile apps, eCommerce platforms, and APIs. Based in Raleigh, NC.",
-    images: [`${SITE_URL}/og-image.png`],
   },
   robots: {
     index: true,
@@ -97,42 +88,69 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  const CONTACT_EMAIL = "hello@nineoneninedigital.com";
+
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "NineOneNine",
+    legalName: "NineOneNine, Inc.",
     url: SITE_URL,
     logo: `${SITE_URL}/logo-gold.png`,
+    email: CONTACT_EMAIL,
     description: metadata.description,
+    foundingDate: "2019",
+    slogan: "We build software, end to end.",
     address: {
       "@type": "PostalAddress",
       addressLocality: "Raleigh",
       addressRegion: "NC",
       addressCountry: "US",
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "customer support",
+      email: CONTACT_EMAIL,
+      areaServed: "US",
+      availableLanguage: ["English"],
     },
   };
 
   const localBusinessSchema = {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
+    "@id": `${SITE_URL}/#business`,
     name: "NineOneNine",
     url: SITE_URL,
     logo: `${SITE_URL}/logo-gold.png`,
+    email: CONTACT_EMAIL,
     description: metadata.description,
+    foundingDate: "2019",
     address: {
       "@type": "PostalAddress",
       addressLocality: "Raleigh",
       addressRegion: "NC",
       addressCountry: "US",
     },
-    areaServed: {
-      "@type": "GeoCircle",
-      geoMidpoint: {
-        "@type": "GeoCoordinates",
-        latitude: 35.7796,
-        longitude: -78.6382,
-      },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: 35.7796,
+      longitude: -78.6382,
     },
+    areaServed: [
+      {
+        "@type": "City",
+        name: "Raleigh",
+      },
+      {
+        "@type": "AdministrativeArea",
+        name: "North Carolina",
+      },
+      {
+        "@type": "Country",
+        name: "United States",
+      },
+    ],
     priceRange: "$$",
     serviceType: [
       "Web Development",

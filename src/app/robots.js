@@ -1,5 +1,5 @@
 export default function robots() {
-  const baseUrl = "https://nineonenine.dev";
+  const baseUrl = "https://nineoneninedigital.com";
 
   return {
     rules: [
