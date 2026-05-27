@@ -1,16 +1,11 @@
+import InteractiveDotGrid from "@/components/InteractiveDotGrid";
+
 export default function ServiceHero({ service }) {
   const { hero, name } = service;
 
   return (
     <section className="relative overflow-hidden border-b border-white/[0.04]">
-      <div
-        className="absolute inset-0 opacity-[0.025]"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)",
-          backgroundSize: "80px 80px",
-        }}
-      />
+      <InteractiveDotGrid />
       <div className="absolute -bottom-32 -left-32 w-[640px] h-[640px] rounded-full bg-primary/[0.07] blur-[140px]" />
       <div className="absolute -top-24 -right-24 w-[320px] h-[320px] rounded-full bg-primary/[0.04] blur-[100px]" />
 

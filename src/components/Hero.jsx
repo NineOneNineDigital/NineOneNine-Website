@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import InteractiveDotGrid from "@/components/InteractiveDotGrid";
 import { useReveal } from "@/lib/hooks";
 
 const KINETIC_WORDS = [
@@ -11,6 +12,8 @@ const KINETIC_WORDS = [
   "interfaces",
   "APIs",
 ];
+
+const SCRAMBLE_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*<>{}[]/";
 
 const TECH_MARQUEE = [
   "React",
@@ -27,9 +30,11 @@ const TECH_MARQUEE = [
   "Supabase",
 ];
 
-function KineticWord() {
+function ScrambleWord() {
   const [index, setIndex] = useState(0);
+  const spanRef = useRef(null);
 
+  // Cycle target word
   useEffect(() => {
     const id = setInterval(
       () => setIndex((i) => (i + 1) % KINETIC_WORDS.length),
@@ -38,22 +43,60 @@ function KineticWord() {
     return () => clearInterval(id);
   }, []);
 
-  // Reserve width for the longest word so layout doesn't jump.
+  // Scramble animation on word change
+  useEffect(() => {
+    const target = KINETIC_WORDS[index];
+    if (typeof window === "undefined") return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) {
+      if (spanRef.current) spanRef.current.textContent = target;
+      return;
+    }
+
+    const duration = 700;
+    const start = performance.now();
+    let raf;
+
+    const tick = (now) => {
+      const progress = Math.min(1, (now - start) / duration);
+      const locked = Math.floor(progress * target.length);
+      let out = "";
+      for (let i = 0; i < target.length; i++) {
+        if (i < locked) {
+          out += target[i];
+        } else if (target[i] === " ") {
+          out += " ";
+        } else {
+          out += SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
+        }
+      }
+      if (spanRef.current) spanRef.current.textContent = out;
+      if (progress < 1) {
+        raf = requestAnimationFrame(tick);
+      } else if (spanRef.current) {
+        spanRef.current.textContent = target;
+      }
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [index]);
+
   const widthAnchor = KINETIC_WORDS.reduce(
     (a, b) => (b.length > a.length ? b : a),
     ""
   );
 
   return (
-    <span className="relative inline-block align-baseline overflow-hidden">
+    <span className="relative inline-block align-baseline">
       <span aria-hidden="true" className="invisible whitespace-nowrap">
         {widthAnchor}
       </span>
       <span
-        key={index}
-        className="animate-word-in absolute inset-0 font-serif italic font-light text-primary whitespace-nowrap"
+        ref={spanRef}
+        aria-live="polite"
+        className="absolute inset-0 text-primary whitespace-nowrap tabular-nums"
       >
-        {KINETIC_WORDS[index]}
+        {KINETIC_WORDS[0]}
       </span>
     </span>
   );
@@ -86,28 +129,20 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen flex flex-col overflow-hidden">
-      {/* Subtle grid */}
-      <div
-        className="absolute inset-0 opacity-[0.025]"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)",
-          backgroundSize: "80px 80px",
-        }}
-      />
+      <InteractiveDotGrid />
 
-      {/* Off-center ambient glow — bottom-left, asymmetric */}
+      {/* Soft aurora — bottom-left, slow drift */}
       <div className="animate-ambient absolute -bottom-32 -left-32 w-[720px] h-[720px] rounded-full bg-primary/[0.08] blur-[140px]" />
-      {/* Secondary accent — top-right */}
       <div className="absolute -top-24 -right-24 w-[380px] h-[380px] rounded-full bg-primary/[0.04] blur-[100px]" />
 
-      {/* Top utility row — spans full width below header */}
+      {/* Top utility row */}
       <div className="relative z-10 pt-32 lg:pt-36">
-        <div className="mx-auto max-w-6xl px-6 flex items-center justify-end text-[10px] font-mono tracking-[0.3em] uppercase">
+        <div className="mx-auto max-w-6xl px-6 flex items-center justify-between text-[10px] font-mono tracking-[0.3em] uppercase">
+          <span className="text-white/30">v.2026.05</span>
           <div className="flex items-center gap-6 text-white/30">
             <span>Raleigh, NC</span>
             <span className="h-px w-6 bg-white/15" />
-            <span>Est. 2019</span>
+            <span>35.78°N · 78.64°W</span>
           </div>
         </div>
       </div>
@@ -116,28 +151,21 @@ export default function Hero() {
       <div ref={ref} className="reveal relative z-10 flex-1 flex items-center">
         <div className="mx-auto w-full max-w-6xl px-6 py-16 lg:py-24">
           <div className="grid grid-cols-12 gap-x-6 gap-y-12 items-end">
-            {/* Headline — left, oversized, asymmetric */}
+            {/* Headline */}
             <h1 className="col-span-12 lg:col-span-8 text-white font-bold tracking-[-0.03em] leading-[0.92] text-[clamp(3.5rem,11vw,9rem)]">
               <span className="block">We build</span>
               <span className="block">
-                <KineticWord />
+                <ScrambleWord />
               </span>
-              <span className="block text-white/85">— end to end.</span>
+              <span className="block text-white/85">end to end.</span>
             </h1>
 
             {/* Right meta column */}
-            <div className="col-span-12 lg:col-span-4 lg:pb-6 flex flex-col gap-8">
-              <div className="space-y-3">
-                <div className="flex items-center gap-3 font-mono text-[10px] tracking-[0.3em] uppercase text-white/30">
-                  <span className="h-px w-6 bg-white/20" />
-                  <span>01 — Studio</span>
-                </div>
-                <p className="text-base text-white/55 leading-relaxed max-w-sm">
-                  A software studio building custom web applications, mobile
-                  apps, eCommerce, and APIs for teams that need more than a
-                  template.
-                </p>
-              </div>
+            <div className="col-span-12 lg:col-span-4 lg:pb-6 flex flex-col gap-6">
+              <p className="text-base text-white/55 leading-relaxed max-w-sm">
+                A software studio building custom web applications, mobile apps,
+                eCommerce, and APIs for teams that need more than a template.
+              </p>
 
               <div className="flex flex-col sm:flex-row lg:flex-col gap-3">
                 <a
