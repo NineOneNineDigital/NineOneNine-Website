@@ -2,9 +2,8 @@
 
 import { Dialog, DialogPanel } from "@headlessui/react";
 import { Bars2Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import Image from "next/image";
 import { useState, useEffect } from "react";
-import logoGold from "../../public/logo-gold.png";
+import Wordmark from "@/components/Wordmark";
 import { navigation } from "@/lib/constants";
 
 export default function Header() {
@@ -21,18 +20,13 @@ export default function Header() {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-neutral-950/80 backdrop-blur-xl border-b border-white/[0.04] shadow-[0_1px_20px_rgba(0,0,0,0.5)]"
+          ? "bg-cream-100/85 backdrop-blur-xl border-b border-cream-300 shadow-[0_1px_20px_rgba(0,0,0,0.06)]"
           : ""
       }`}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
         <a href="/" aria-label="NineOneNine — home" className="flex items-center gap-3 group">
-          <Image
-              className="h-6 w-auto transition-opacity duration-200 group-hover:opacity-80"
-              src={logoGold}
-              alt="NineOneNine"
-              priority
-            />
+          <Wordmark className="text-xl transition-opacity duration-200 group-hover:opacity-80" />
         </a>
 
         <nav aria-label="Main" className="hidden md:flex items-center gap-8">
@@ -40,14 +34,14 @@ export default function Header() {
             <a
               key={item.name}
               href={item.href}
-              className="relative font-mono text-xs tracking-wide text-white/50 uppercase hover:text-white transition-colors duration-200 after:absolute after:bottom-[-4px] after:left-0 after:h-px after:w-0 after:bg-primary/50 after:transition-all after:duration-300 hover:after:w-full"
+              className="relative font-mono text-xs tracking-wide text-neutral-600 uppercase hover:text-ink-900 transition-colors duration-200 after:absolute after:bottom-[-4px] after:left-0 after:h-px after:w-0 after:bg-teal-500 after:transition-all after:duration-300 hover:after:w-full"
             >
               {item.name}
             </a>
           ))}
           <a
             href="/#contact"
-            className="font-mono text-xs tracking-wide uppercase border border-primary/50 text-primary px-5 py-2.5 hover:bg-primary hover:text-black transition-all duration-300 hover:shadow-[0_0_20px_rgba(205,164,0,0.2)]"
+            className="font-mono text-xs tracking-wide uppercase rounded-lg border border-primary/60 text-primary-700 px-5 py-2.5 hover:bg-primary hover:text-ink-900 transition-all duration-300 hover:shadow-[0_0_20px_rgba(205,164,0,0.35)]"
           >
             Start a project
           </a>
@@ -55,7 +49,7 @@ export default function Header() {
 
         <button
           type="button"
-          className="md:hidden text-white/60 hover:text-white transition-colors duration-200"
+          className="md:hidden text-neutral-600 hover:text-ink-900 transition-colors duration-200"
           onClick={() => setOpen(true)}
         >
           <span className="sr-only">Open menu</span>
@@ -64,13 +58,13 @@ export default function Header() {
       </div>
 
       <Dialog className="md:hidden" open={open} onClose={setOpen}>
-        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm" />
-        <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full max-w-xs bg-neutral-950 border-l border-white/[0.04] px-6 py-6">
+        <div className="fixed inset-0 z-50 bg-ink-900/40 backdrop-blur-sm" />
+        <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full max-w-xs bg-cream-50 border-l border-cream-300 px-6 py-6">
           <div className="flex items-center justify-between">
-            <Image className="h-6 w-auto" src={logoGold} alt="NineOneNine" />
+            <Wordmark className="text-lg" />
             <button
               type="button"
-              className="text-white/60 hover:text-white"
+              className="text-neutral-600 hover:text-ink-900"
               onClick={() => setOpen(false)}
             >
               <span className="sr-only">Close</span>
@@ -83,7 +77,7 @@ export default function Header() {
                 key={item.name}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className="font-mono text-sm tracking-wide uppercase py-3.5 text-white/50 hover:text-white border-b border-white/[0.04] transition-colors duration-200"
+                className="font-mono text-sm tracking-wide uppercase py-3.5 text-neutral-600 hover:text-ink-900 border-b border-cream-300 transition-colors duration-200"
               >
                 {item.name}
               </a>
@@ -91,7 +85,7 @@ export default function Header() {
             <a
               href="/#contact"
               onClick={() => setOpen(false)}
-              className="mt-8 font-mono text-sm tracking-wide uppercase text-center border border-primary/50 text-primary px-4 py-3.5 hover:bg-primary hover:text-black transition-all duration-300"
+              className="mt-8 font-mono text-sm tracking-wide uppercase text-center rounded-lg border border-primary/60 text-primary-700 px-4 py-3.5 hover:bg-primary hover:text-ink-900 transition-all duration-300"
             >
               Start a project
             </a>

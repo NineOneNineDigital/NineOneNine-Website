@@ -94,7 +94,7 @@ function ScrambleWord() {
       <span
         ref={spanRef}
         aria-live="polite"
-        className="absolute inset-0 text-primary whitespace-nowrap tabular-nums"
+        className="absolute inset-0 text-primary-700 whitespace-nowrap tabular-nums"
       >
         {KINETIC_WORDS[0]}
       </span>
@@ -106,15 +106,15 @@ function Marquee() {
   const items = [...TECH_MARQUEE, ...TECH_MARQUEE];
 
   return (
-    <div className="marquee-mask overflow-hidden border-y border-white/[0.04] py-5">
+    <div className="marquee-mask overflow-hidden border-y border-cream-300 py-5">
       <div className="animate-marquee flex w-max items-center gap-12">
         {items.map((item, i) => (
           <span
             key={`${item}-${i}`}
-            className="flex items-center gap-12 font-mono text-xs tracking-[0.3em] uppercase text-white/35"
+            className="flex items-center gap-12 font-mono text-xs tracking-[0.3em] uppercase text-neutral-500"
           >
             {item}
-            <span aria-hidden="true" className="text-primary/40">
+            <span aria-hidden="true" className="text-teal-500/60">
               ✦
             </span>
           </span>
@@ -138,10 +138,10 @@ export default function Hero() {
       {/* Top utility row */}
       <div className="relative z-10 pt-32 lg:pt-36">
         <div className="mx-auto max-w-6xl px-6 flex items-center justify-between text-[10px] font-mono tracking-[0.3em] uppercase">
-          <span className="text-white/30">v.2026.05</span>
-          <div className="flex items-center gap-6 text-white/30">
+          <span className="text-neutral-500">v.2026.05</span>
+          <div className="flex items-center gap-6 text-neutral-500">
             <span>Raleigh, NC</span>
-            <span className="h-px w-6 bg-white/15" />
+            <span className="h-px w-6 bg-cream-400" />
             <span>35.78°N · 78.64°W</span>
           </div>
         </div>
@@ -152,17 +152,17 @@ export default function Hero() {
         <div className="mx-auto w-full max-w-6xl px-6 py-16 lg:py-24">
           <div className="grid grid-cols-12 gap-x-6 gap-y-12 items-end">
             {/* Headline */}
-            <h1 className="col-span-12 lg:col-span-8 text-white font-bold tracking-[-0.03em] leading-[0.92] text-[clamp(3.5rem,11vw,9rem)]">
+            <h1 className="col-span-12 lg:col-span-8 text-ink-900 font-bold tracking-[-0.03em] leading-[0.92] text-[clamp(3.5rem,11vw,9rem)]">
               <span className="block">We build</span>
               <span className="block">
                 <ScrambleWord />
               </span>
-              <span className="block text-white/85">end to end.</span>
+              <span className="block text-ink-800">end to end.</span>
             </h1>
 
             {/* Right meta column */}
             <div className="col-span-12 lg:col-span-4 lg:pb-6 flex flex-col gap-6">
-              <p className="text-base text-white/55 leading-relaxed max-w-sm">
+              <p className="text-base text-neutral-600 leading-relaxed max-w-sm">
                 A software studio building custom web applications, mobile apps,
                 eCommerce, and APIs for teams that need more than a template.
               </p>
@@ -170,7 +170,7 @@ export default function Hero() {
               <div className="flex flex-col sm:flex-row lg:flex-col gap-3">
                 <a
                   href="/#contact"
-                  className="group relative inline-flex items-center justify-between gap-4 bg-primary text-black font-mono text-xs tracking-[0.2em] uppercase px-6 py-4 hover:bg-primary-400 transition-all duration-300 hover:shadow-[0_0_40px_rgba(205,164,0,0.25)]"
+                  className="group relative inline-flex items-center justify-between gap-4 rounded-lg bg-primary text-ink-900 font-mono text-xs tracking-[0.2em] uppercase px-6 py-4 hover:bg-primary-700 hover:text-cream-50 transition-all duration-300 hover:shadow-[0_0_40px_rgba(205,164,0,0.35)]"
                 >
                   <span>Start a project</span>
                   <span
@@ -182,7 +182,7 @@ export default function Hero() {
                 </a>
                 <a
                   href="/#work"
-                  className="group inline-flex items-center justify-between gap-4 font-mono text-xs tracking-[0.2em] uppercase text-white/60 px-6 py-4 border border-white/10 hover:border-white/30 hover:text-white transition-all duration-300"
+                  className="group inline-flex items-center justify-between gap-4 rounded-lg font-mono text-xs tracking-[0.2em] uppercase text-teal-700 px-6 py-4 border border-teal-500/40 hover:border-teal-500 hover:bg-teal-50 hover:text-teal-800 transition-all duration-300"
                 >
                   <span>Selected work</span>
                   <span
