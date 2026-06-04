@@ -5,7 +5,7 @@ import { useEffect, useRef } from "react";
 export default function InteractiveDotGrid({
   size = 24,
   spotlight = 260,
-  baseOpacity = 0.07,
+  baseOpacity = 0.12,
 }) {
   const wrapperRef = useRef(null);
 
@@ -38,7 +38,7 @@ export default function InteractiveDotGrid({
         style={{
           opacity: baseOpacity,
           backgroundImage:
-            "radial-gradient(circle, rgba(255,255,255,0.9) 1px, transparent 1.5px)",
+            "radial-gradient(circle, rgba(26,26,26,0.55) 1px, transparent 1.5px)",
           backgroundSize: cellBg,
         }}
       />

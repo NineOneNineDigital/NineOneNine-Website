@@ -17,10 +17,10 @@ export default function FAQ() {
       <div ref={ref} className="reveal mx-auto max-w-6xl px-6">
         <div className="grid gap-16 lg:grid-cols-5 lg:gap-24">
           <div className="lg:col-span-2">
-            <p className="font-mono text-xs tracking-[0.3em] uppercase text-primary">
+            <p className="font-mono text-xs tracking-[0.3em] uppercase text-primary-700">
               FAQ
             </p>
-            <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-tight">
+            <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-ink-900 leading-tight">
               Common
               <br />
               questions.
@@ -28,26 +28,26 @@ export default function FAQ() {
           </div>
 
           <div className="lg:col-span-3">
-            <dl className="divide-y divide-white/[0.06]">
+            <dl className="divide-y divide-cream-300">
               {faqs.map((faq) => (
                 <Disclosure as="div" key={faq.id}>
                   {({ open }) => (
                     <>
                       <dt>
                         <DisclosureButton className="flex w-full items-center justify-between py-6 text-left group">
-                          <span className="text-sm font-medium text-white group-hover:text-primary transition-colors duration-200">
+                          <span className="text-sm font-medium text-ink-900 group-hover:text-primary-700 transition-colors duration-200">
                             {faq.question}
                           </span>
                           <PlusIcon
-                            className={`ml-4 h-4 w-4 flex-none text-white/20 transition-all duration-300 ${
-                              open ? "rotate-45 text-primary/60" : ""
+                            className={`ml-4 h-4 w-4 flex-none text-neutral-400 transition-all duration-300 ${
+                              open ? "rotate-45 text-primary-700" : ""
                             }`}
                             aria-hidden="true"
                           />
                         </DisclosureButton>
                       </dt>
                       <DisclosurePanel as="dd" className="pb-6 pr-12">
-                        <p className="text-sm leading-relaxed text-white/40">
+                        <p className="text-sm leading-relaxed text-neutral-600">
                           {faq.answer}
                         </p>
                       </DisclosurePanel>
@@ -61,7 +61,7 @@ export default function FAQ() {
       </div>
 
       {/* Bottom line */}
-      <div className="mt-24 lg:mt-32 h-px bg-gradient-to-r from-transparent via-primary/15 to-transparent" />
+      <div className="mt-24 lg:mt-32 h-px bg-gradient-to-r from-transparent via-teal-500/25 to-transparent" />
     </section>
   );
 }

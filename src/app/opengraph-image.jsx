@@ -17,8 +17,8 @@ export default async function OpengraphImage() {
           justifyContent: "space-between",
           padding: "80px",
           background:
-            "radial-gradient(circle at 0% 100%, rgba(205,164,0,0.18) 0%, rgba(10,10,10,0) 55%), radial-gradient(circle at 100% 0%, rgba(205,164,0,0.08) 0%, rgba(10,10,10,0) 45%), #0a0a0a",
-          color: "#ffffff",
+            "radial-gradient(circle at 0% 100%, rgba(205,164,0,0.28) 0%, rgba(244,239,227,0) 55%), radial-gradient(circle at 100% 0%, rgba(44,95,93,0.14) 0%, rgba(244,239,227,0) 45%), #F4EFE3",
+          color: "#1A1A1A",
           fontFamily: "sans-serif",
         }}
       >
@@ -31,10 +31,10 @@ export default async function OpengraphImage() {
             fontSize: 18,
             letterSpacing: "0.3em",
             textTransform: "uppercase",
-            color: "rgba(255,255,255,0.45)",
+            color: "rgba(92,85,71,0.85)",
           }}
         >
-          <div style={{ display: "flex", color: "#CDA400" }}>NineOneNine</div>
+          <div style={{ display: "flex", color: "#997900" }}>NineOneNine</div>
           <div style={{ display: "flex" }}>Raleigh, NC — Est. 2019</div>
         </div>
 
@@ -51,7 +51,7 @@ export default async function OpengraphImage() {
               fontWeight: 700,
               letterSpacing: "-0.04em",
               lineHeight: 1.05,
-              color: "#ffffff",
+              color: "#1A1A1A",
             }}
           >
             We build software,
@@ -64,7 +64,7 @@ export default async function OpengraphImage() {
               fontWeight: 400,
               letterSpacing: "-0.04em",
               lineHeight: 1.05,
-              color: "#CDA400",
+              color: "#997900",
             }}
           >
             end to end.
@@ -83,7 +83,7 @@ export default async function OpengraphImage() {
             style={{
               display: "flex",
               fontSize: 24,
-              color: "rgba(255,255,255,0.55)",
+              color: "rgba(42,42,40,0.80)",
               maxWidth: 760,
               lineHeight: 1.4,
             }}
@@ -96,7 +96,7 @@ export default async function OpengraphImage() {
               fontSize: 16,
               letterSpacing: "0.3em",
               textTransform: "uppercase",
-              color: "rgba(255,255,255,0.35)",
+              color: "rgba(92,85,71,0.85)",
             }}
           >
             nineoneninedigital.com

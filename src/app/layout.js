@@ -1,21 +1,9 @@
-import { Space_Grotesk, Space_Mono, Fraunces } from "next/font/google";
+import { Hanken_Grotesk } from "next/font/google";
 import "./globals.css";
 
-const spaceGrotesk = Space_Grotesk({
+const hankenGrotesk = Hanken_Grotesk({
   subsets: ["latin"],
-  variable: "--font-space-grotesk",
-});
-
-const spaceMono = Space_Mono({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-space-mono",
-});
-
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  variable: "--font-fraunces",
-  axes: ["opsz", "SOFT"],
+  variable: "--font-hanken",
   style: ["normal", "italic"],
 });
 
@@ -179,7 +167,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body
-        className={`${spaceGrotesk.variable} ${spaceMono.variable} ${fraunces.variable} font-sans antialiased noise`}
+        className={`${hankenGrotesk.variable} font-sans antialiased noise`}
       >
         {children}
       </body>

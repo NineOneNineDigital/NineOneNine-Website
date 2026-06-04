@@ -3,12 +3,89 @@
 @tailwind utilities;
 
 @layer base {
+  /* ── Editorial color system ───────────────────────────────────────────
+     Raw ramps mirror tailwind.config.js (keep in sync). The functional
+     aliases at the bottom are the intended API for component styles —
+     reference var(--brand), var(--text-body), etc. so the palette can be
+     swapped without rewriting every component. */
+  :root {
+    /* Cream */
+    --cream-50: #faf7f0;
+    --cream-100: #f4efe3;
+    --cream-200: #ebe4d3;
+    --cream-300: #ddd4be;
+    --cream-400: #c7bb9d;
+
+    /* Ink */
+    --ink-700: #3a3a37;
+    --ink-800: #2a2a28;
+    --ink-900: #1a1a1a;
+
+    /* Neutral (warm) */
+    --neutral-300: #b9ae96;
+    --neutral-400: #998f76;
+    --neutral-500: #7a7060;
+    --neutral-600: #5c5547;
+    --neutral-700: #423d33;
+
+    /* Gold (brand) */
+    --gold-50: #fbf7e6;
+    --gold-100: #f6edc0;
+    --gold-200: #ecda8a;
+    --gold-300: #e0c654;
+    --gold-400: #d6b22a;
+    --gold-500: #cda400;
+    --gold-600: #b38f00;
+    --gold-700: #997900;
+    --gold-800: #6b5500;
+    --gold-900: #463800;
+
+    /* Teal (counterpoint) */
+    --teal-50: #ebf2f1;
+    --teal-100: #d2e0df;
+    --teal-200: #a7c5c3;
+    --teal-300: #79a6a3;
+    --teal-400: #4e827f;
+    --teal-500: #2c5f5d;
+    --teal-600: #234c4a;
+    --teal-700: #1b3938;
+    --teal-800: #122625;
+    --teal-900: #0a1413;
+
+    /* Semantic */
+    --success: #3f7a52;
+    --warning: #c2703d;
+    --danger: #b23b3b;
+    --info: #2f6e7b;
+
+    /* ── Functional aliases — use these in component styles ── */
+    --bg-page: var(--cream-100);
+    --bg-page-alt: var(--cream-50);
+    --bg-surface: var(--cream-200);
+    --border: var(--cream-300);
+    --border-strong: var(--cream-400);
+
+    --text-primary: var(--ink-900); /* headings */
+    --text-body: var(--ink-800); /* body copy */
+    --text-muted: var(--neutral-600); /* captions, metadata */
+    --text-disabled: var(--neutral-400); /* disabled / faintest text */
+
+    --brand: var(--gold-500);
+    --brand-hover: var(--gold-700);
+    --brand-strong: var(--gold-700); /* readable gold on cream */
+
+    --accent: var(--teal-500);
+    --accent-hover: var(--teal-700);
+  }
+
   body {
-    @apply bg-neutral-950 text-white;
+    background-color: var(--bg-page);
+    color: var(--text-body);
   }
 
   ::selection {
-    @apply bg-primary/30 text-white;
+    background-color: rgb(205 164 0 / 0.28);
+    color: var(--ink-900);
   }
 }
 
@@ -73,9 +150,9 @@
   animation: ambient-pulse 6s ease-in-out infinite;
 }
 
-/* Gradient text utility */
+/* Gradient text utility — readable metallic gold on cream */
 .text-gradient {
-  background: linear-gradient(135deg, #CDA400 0%, #FFD700 50%, #CDA400 100%);
+  background: linear-gradient(135deg, #997900 0%, #cda400 50%, #997900 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -130,7 +207,7 @@
   transition: opacity 0.4s ease;
   background: radial-gradient(
     600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    rgba(205, 164, 0, 0.06),
+    rgba(205, 164, 0, 0.12),
     transparent 40%
   );
   pointer-events: none;
