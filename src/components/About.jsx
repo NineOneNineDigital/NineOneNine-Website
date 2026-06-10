@@ -8,13 +8,13 @@ function Stat({ value, suffix, label, highlight }) {
     <div ref={ref}>
       <p
         className={`font-mono text-3xl lg:text-4xl font-bold tracking-tight ${
-          highlight ? "text-gradient" : "text-ink-900"
+          highlight ? "text-gradient" : "text-ink-50"
         }`}
       >
         {count}
         {suffix}
       </p>
-      <p className="mt-2 font-mono text-xs tracking-wide uppercase text-neutral-500">
+      <p className="mt-2 font-mono text-xs tracking-wide uppercase text-ink-400">
         {label}
       </p>
     </div>
@@ -29,17 +29,17 @@ export default function About() {
       <div ref={ref} className="reveal mx-auto max-w-6xl px-6">
         <div className="grid gap-16 lg:grid-cols-2 lg:gap-24 items-start">
           <div>
-            <p className="font-mono text-xs tracking-[0.3em] uppercase text-primary-700">
+            <p className="font-mono text-xs tracking-[0.3em] uppercase text-gold-400">
               About
             </p>
-            <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-ink-900 leading-tight">
+            <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-ink-50 leading-tight">
               Building for the web
               <br />
-              <span className="text-neutral-400">since 2019.</span>
+              <span className="text-ink-500">since 2019.</span>
             </h2>
           </div>
 
-          <div className="space-y-6 text-base leading-7 text-neutral-600">
+          <div className="space-y-6 text-base leading-7 text-ink-300">
             <p>
               We started NineOneNine to do one thing well — build custom software
               for businesses that have outgrown off-the-shelf tools. Based in
@@ -52,7 +52,7 @@ export default function About() {
               on screen, every project gets the same level of care whether
               {"it's"} a single landing page or a complex multi-tenant platform.
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 pt-8 border-t border-cream-300">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 pt-8 border-t border-ink-700">
               <Stat value="10" suffix="+" label="Years experience" />
               <Stat value="50" suffix="+" label="Projects shipped" />
               <Stat value="100" suffix="%" label="Custom built" highlight />
@@ -62,7 +62,7 @@ export default function About() {
       </div>
 
       {/* Bottom line */}
-      <div className="mt-24 lg:mt-32 h-px bg-gradient-to-r from-transparent via-teal-500/25 to-transparent" />
+      <div className="mt-24 lg:mt-32 h-px bg-gradient-to-r from-transparent via-gold-500/25 to-transparent" />
     </section>
   );
 }

@@ -38,7 +38,7 @@ export default function InteractiveDotGrid({
         style={{
           opacity: baseOpacity,
           backgroundImage:
-            "radial-gradient(circle, rgba(26,26,26,0.55) 1px, transparent 1.5px)",
+            "radial-gradient(circle, rgba(250,250,247,0.55) 1px, transparent 1.5px)",
           backgroundSize: cellBg,
         }}
       />

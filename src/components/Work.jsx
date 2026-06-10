@@ -44,7 +44,7 @@ function ProjectCard({ project, className = "" }) {
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={`card-glow group relative block overflow-hidden rounded-lg bg-cream-50 border border-cream-300 hover:border-primary/40 transition-colors duration-500 ${className}`}
+      className={`card-glow group relative block overflow-hidden rounded-lg bg-ink-900 border border-ink-700 hover:border-primary/40 transition-colors duration-500 ${className}`}
     >
       {project.image && (
         <Image
@@ -75,13 +75,13 @@ function ProjectCard({ project, className = "" }) {
             className="absolute inset-0 opacity-[0.06]"
             style={{
               backgroundImage:
-                "linear-gradient(to right, #1a1a1a 1px, transparent 1px), linear-gradient(to bottom, #1a1a1a 1px, transparent 1px)",
+                "linear-gradient(to right, rgba(250,250,247,0.5) 1px, transparent 1px), linear-gradient(to bottom, rgba(250,250,247,0.5) 1px, transparent 1px)",
               backgroundSize: "40px 40px",
             }}
           />
           <div className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-primary/[0.12] blur-[100px] group-hover:bg-primary/[0.20] transition-colors duration-700" />
           <div className="absolute inset-0 flex items-center justify-center">
-            <span className="font-mono text-[clamp(4rem,12vw,9rem)] leading-none text-ink-900/[0.06] group-hover:text-ink-900/[0.10] transition-colors duration-500 select-none">
+            <span className="font-mono text-[clamp(4rem,12vw,9rem)] leading-none text-ink-50/[0.06] group-hover:text-ink-50/[0.10] transition-colors duration-500 select-none">
               {project.id}
             </span>
           </div>
@@ -99,7 +99,7 @@ function ProjectCard({ project, className = "" }) {
       {/* Meta — top row */}
       <div
         className={`absolute top-0 inset-x-0 flex items-center justify-between px-6 py-5 text-[10px] font-mono tracking-[0.2em] uppercase ${
-          hasMedia ? "text-cream-100/80" : "text-neutral-600"
+          hasMedia ? "text-ink-100/80" : "text-ink-300"
         }`}
       >
         <span>{project.category}</span>
@@ -113,8 +113,8 @@ function ProjectCard({ project, className = "" }) {
             <h3
               className={`text-2xl lg:text-3xl font-semibold tracking-tight transition-colors duration-300 truncate ${
                 hasMedia
-                  ? "text-cream-50 group-hover:text-primary-300"
-                  : "text-ink-900 group-hover:text-primary-700"
+                  ? "text-ink-50 group-hover:text-gold-200"
+                  : "text-ink-50 group-hover:text-gold-400"
               }`}
             >
               {project.name}
@@ -122,7 +122,7 @@ function ProjectCard({ project, className = "" }) {
             {project.summary && (
               <p
                 className={`mt-1.5 text-sm truncate ${
-                  hasMedia ? "text-cream-100/80" : "text-neutral-600"
+                  hasMedia ? "text-ink-100/80" : "text-ink-300"
                 }`}
               >
                 {project.summary}
@@ -133,8 +133,8 @@ function ProjectCard({ project, className = "" }) {
             aria-hidden="true"
             className={`shrink-0 font-mono text-xl group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300 ${
               hasMedia
-                ? "text-cream-100/70 group-hover:text-primary-300"
-                : "text-neutral-400 group-hover:text-primary-700"
+                ? "text-ink-100/70 group-hover:text-gold-200"
+                : "text-ink-500 group-hover:text-gold-400"
             }`}
           >
             ↗
@@ -157,21 +157,21 @@ export default function Work() {
   ];
 
   return (
-    <section id="work" className="scroll-mt-24 py-24 lg:py-32 border-t border-cream-300">
+    <section id="work" className="scroll-mt-24 py-24 lg:py-32 border-t border-ink-700">
       <div className="mx-auto max-w-6xl px-6">
         <div
           ref={headingRef}
           className="reveal flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-14"
         >
           <div className="max-w-2xl">
-            <p className="font-mono text-xs tracking-[0.3em] uppercase text-primary-700">
+            <p className="font-mono text-xs tracking-[0.3em] uppercase text-gold-400">
               Selected Work
             </p>
-            <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-ink-900">
+            <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-ink-50">
               Recent projects.
             </h2>
           </div>
-          <p className="font-mono text-xs tracking-[0.2em] uppercase text-neutral-500">
+          <p className="font-mono text-xs tracking-[0.2em] uppercase text-ink-400">
             {String(projects.length).padStart(2, "0")} / {String(projects.length).padStart(2, "0")} shown
           </p>
         </div>
@@ -190,7 +190,7 @@ export default function Work() {
         </div>
       </div>
 
-      <div className="mt-24 lg:mt-32 h-px bg-gradient-to-r from-transparent via-teal-500/25 to-transparent" />
+      <div className="mt-24 lg:mt-32 h-px bg-gradient-to-r from-transparent via-gold-500/25 to-transparent" />
     </section>
   );
 }

@@ -25,21 +25,21 @@ function ServiceCard({ service }) {
       ref={cardRef}
       onMouseMove={handleMouseMove}
       {...wrapperProps}
-      className="card-glow group relative block bg-cream-50 p-8 lg:p-10 transition-all duration-300 hover:bg-cream-200"
+      className="card-glow group relative block bg-ink-900 p-8 lg:p-10 transition-all duration-300 hover:bg-ink-800"
     >
       <div className="absolute inset-0 border border-transparent group-hover:border-primary/30 transition-colors duration-300 pointer-events-none" />
       <service.icon
-        className="h-5 w-5 text-primary-700 transition-transform duration-300 group-hover:scale-110"
+        className="h-5 w-5 text-gold-400 transition-transform duration-300 group-hover:scale-110"
         aria-hidden="true"
       />
-      <h3 className="mt-5 text-sm font-semibold text-ink-900 group-hover:text-primary-700 transition-colors duration-300">
+      <h3 className="mt-5 text-sm font-semibold text-ink-50 group-hover:text-gold-400 transition-colors duration-300">
         {service.name}
       </h3>
-      <p className="mt-3 text-sm leading-relaxed text-neutral-600">
+      <p className="mt-3 text-sm leading-relaxed text-ink-300">
         {service.description}
       </p>
       {service.slug && (
-        <span className="mt-5 inline-flex items-center gap-2 font-mono text-[10px] tracking-[0.25em] uppercase text-teal-700 group-hover:text-teal-900 transition-colors duration-300">
+        <span className="mt-5 inline-flex items-center gap-2 font-mono text-[10px] tracking-[0.25em] uppercase text-gold-400 group-hover:text-gold-200 transition-colors duration-300">
           <span>Learn more</span>
           <span
             aria-hidden="true"
@@ -61,13 +61,13 @@ export default function Services() {
     <section id="services" className="scroll-mt-24 py-24 lg:py-32">
       <div className="mx-auto max-w-6xl px-6">
         <div ref={headingRef} className="reveal max-w-2xl">
-          <p className="font-mono text-xs tracking-[0.3em] uppercase text-primary-700">
+          <p className="font-mono text-xs tracking-[0.3em] uppercase text-gold-400">
             Services
           </p>
-          <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-ink-900">
+          <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-ink-50">
             What we build.
           </h2>
-          <p className="mt-5 text-base text-neutral-600 leading-relaxed">
+          <p className="mt-5 text-base text-ink-300 leading-relaxed">
             End-to-end development services for teams that need reliable,
             production-grade software.
           </p>
@@ -75,7 +75,7 @@ export default function Services() {
 
         <div
           ref={gridRef}
-          className="reveal-stagger mt-16 grid grid-cols-1 gap-px bg-cream-300 sm:grid-cols-2 lg:grid-cols-3 border border-cream-300 rounded-lg overflow-hidden"
+          className="reveal-stagger mt-16 grid grid-cols-1 gap-px bg-ink-800 sm:grid-cols-2 lg:grid-cols-3 border border-ink-700 rounded-lg overflow-hidden"
         >
           {services.map((service) => (
             <ServiceCard key={service.name} service={service} />
@@ -83,7 +83,7 @@ export default function Services() {
         </div>
       </div>
 
-      <div className="mt-24 lg:mt-32 h-px bg-gradient-to-r from-transparent via-teal-500/25 to-transparent" />
+      <div className="mt-24 lg:mt-32 h-px bg-gradient-to-r from-transparent via-gold-500/25 to-transparent" />
     </section>
   );
 }

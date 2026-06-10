@@ -5,7 +5,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-cream-300">
+    <footer className="border-t border-ink-700">
       <div className="mx-auto max-w-6xl px-6 py-16">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8">
           <div className="flex items-center gap-3">
@@ -17,7 +17,7 @@ export default function Footer() {
               <a
                 key={item.name}
                 href={item.href}
-                className="font-mono text-xs tracking-wide uppercase text-neutral-500 hover:text-ink-900 transition-colors duration-200"
+                className="font-mono text-xs tracking-wide uppercase text-ink-400 hover:text-ink-50 transition-colors duration-200"
               >
                 {item.name}
               </a>
@@ -25,8 +25,8 @@ export default function Footer() {
           </nav>
         </div>
 
-        <div className="mt-10 pt-8 border-t border-cream-300">
-          <p className="font-mono text-xs text-neutral-400">
+        <div className="mt-10 pt-8 border-t border-ink-700">
+          <p className="font-mono text-xs text-ink-500">
             &copy; {currentYear} NineOneNine, Inc. All rights reserved.
           </p>
         </div>

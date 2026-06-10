@@ -1,9 +1,21 @@
-import { Hanken_Grotesk } from "next/font/google";
+import { Space_Grotesk, JetBrains_Mono, Newsreader } from "next/font/google";
 import "./globals.css";
 
-const hankenGrotesk = Hanken_Grotesk({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  variable: "--font-hanken",
+  variable: "--font-space-grotesk",
+  weight: ["400", "500", "600", "700"],
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains-mono",
+  weight: ["400", "500", "600"],
+});
+
+const newsreader = Newsreader({
+  subsets: ["latin"],
+  variable: "--font-newsreader",
   style: ["normal", "italic"],
 });
 
@@ -167,7 +179,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body
-        className={`${hankenGrotesk.variable} font-sans antialiased noise`}
+        className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} ${newsreader.variable} font-sans antialiased noise`}
       >
         {children}
       </body>

@@ -20,7 +20,7 @@ export default function Header() {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-cream-100/85 backdrop-blur-xl border-b border-cream-300 shadow-[0_1px_20px_rgba(0,0,0,0.06)]"
+          ? "bg-ink-950/85 backdrop-blur-xl border-b border-ink-700 shadow-[0_1px_20px_rgba(0,0,0,0.45)]"
           : ""
       }`}
     >
@@ -34,14 +34,14 @@ export default function Header() {
             <a
               key={item.name}
               href={item.href}
-              className="relative font-mono text-xs tracking-wide text-neutral-600 uppercase hover:text-ink-900 transition-colors duration-200 after:absolute after:bottom-[-4px] after:left-0 after:h-px after:w-0 after:bg-teal-500 after:transition-all after:duration-300 hover:after:w-full"
+              className="relative font-mono text-xs tracking-wide text-ink-300 uppercase hover:text-ink-50 transition-colors duration-200 after:absolute after:bottom-[-4px] after:left-0 after:h-px after:w-0 after:bg-gold-500 after:transition-all after:duration-300 hover:after:w-full"
             >
               {item.name}
             </a>
           ))}
           <a
             href="/#contact"
-            className="font-mono text-xs tracking-wide uppercase rounded-lg border border-primary/60 text-primary-700 px-5 py-2.5 hover:bg-primary hover:text-ink-900 transition-all duration-300 hover:shadow-[0_0_20px_rgba(205,164,0,0.35)]"
+            className="font-mono text-xs tracking-wide uppercase rounded-lg border border-primary/60 text-gold-400 px-5 py-2.5 hover:bg-primary hover:text-ink-950 transition-all duration-300 hover:shadow-[0_0_20px_rgba(205,164,0,0.35)]"
           >
             Start a project
           </a>
@@ -49,7 +49,7 @@ export default function Header() {
 
         <button
           type="button"
-          className="md:hidden text-neutral-600 hover:text-ink-900 transition-colors duration-200"
+          className="md:hidden text-ink-300 hover:text-ink-50 transition-colors duration-200"
           onClick={() => setOpen(true)}
         >
           <span className="sr-only">Open menu</span>
@@ -59,12 +59,12 @@ export default function Header() {
 
       <Dialog className="md:hidden" open={open} onClose={setOpen}>
         <div className="fixed inset-0 z-50 bg-ink-900/40 backdrop-blur-sm" />
-        <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full max-w-xs bg-cream-50 border-l border-cream-300 px-6 py-6">
+        <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full max-w-xs bg-ink-900 border-l border-ink-700 px-6 py-6">
           <div className="flex items-center justify-between">
             <Wordmark className="text-lg" />
             <button
               type="button"
-              className="text-neutral-600 hover:text-ink-900"
+              className="text-ink-300 hover:text-ink-50"
               onClick={() => setOpen(false)}
             >
               <span className="sr-only">Close</span>
@@ -77,7 +77,7 @@ export default function Header() {
                 key={item.name}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className="font-mono text-sm tracking-wide uppercase py-3.5 text-neutral-600 hover:text-ink-900 border-b border-cream-300 transition-colors duration-200"
+                className="font-mono text-sm tracking-wide uppercase py-3.5 text-ink-300 hover:text-ink-50 border-b border-ink-700 transition-colors duration-200"
               >
                 {item.name}
               </a>
@@ -85,7 +85,7 @@ export default function Header() {
             <a
               href="/#contact"
               onClick={() => setOpen(false)}
-              className="mt-8 font-mono text-sm tracking-wide uppercase text-center rounded-lg border border-primary/60 text-primary-700 px-4 py-3.5 hover:bg-primary hover:text-ink-900 transition-all duration-300"
+              className="mt-8 font-mono text-sm tracking-wide uppercase text-center rounded-lg border border-primary/60 text-gold-400 px-4 py-3.5 hover:bg-primary hover:text-ink-950 transition-all duration-300"
             >
               Start a project
             </a>

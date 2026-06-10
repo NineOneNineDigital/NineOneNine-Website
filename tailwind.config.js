@@ -8,94 +8,73 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        /* ── Editorial palette ──────────────────────────────────────────
+        /* ── Midnight Studio palette ─────────────────────────────────────
            Hex literals here mirror the CSS custom properties in
-           globals.css. Keep the two in sync. Tailwind shades support
-           opacity modifiers (e.g. text-ink-900/40); the CSS variables
-           cover the functional aliases (var(--brand), var(--text-body)). */
+           globals.css (the raw ramps). Keep the two in sync. Prefer the
+           functional aliases (var(--brand), var(--text-body), …) for new
+           component styles; the ramp classes below remain for utilities
+           that need a specific shade or an opacity modifier
+           (e.g. text-ink-50/70, border-gold-500/30). */
 
-        // Cream — page backgrounds, surfaces, borders
-        cream: {
-          50: "#FAF7F0",
-          100: "#F4EFE3", // page background
-          200: "#EBE4D3", // elevated surfaces (cards)
-          300: "#DDD4BE", // borders / hairlines
-          400: "#C7BB9D", // stronger borders / decorative
-        },
-
-        // Ink — headings and body text
+        // Ink — the dark spine of the system.
+        // 950 = page background (midnight) … 50 = ivory (primary text).
         ink: {
-          700: "#3A3A37",
-          800: "#2A2A28", // body text
-          900: "#1A1A1A", // headings
+          50: "#FAFAF7", // ivory — primary text / headings
+          100: "#EBEBE8", // body text
+          200: "#D5D5D2",
+          300: "#B0B0AD", // secondary text
+          400: "#8E8E92", // muted text
+          500: "#6C6C73", // faint / disabled-ish
+          600: "#46464D", // strong borders / disabled text
+          700: "#2D2D32", // default borders
+          800: "#1F1F23", // elevated surfaces (cards)
+          900: "#1A1A1D", // surface
+          950: "#0E0E10", // page background — midnight
         },
 
-        // Neutral (warm) — secondary / muted / disabled text
-        neutral: {
-          300: "#B9AE96", // decorative only
-          400: "#998F76", // disabled / lightest readable text
-          500: "#7A7060", // muted
-          600: "#5C5547", // secondary text (captions, metadata)
-          700: "#423D33",
-        },
-
-        // Gold — the brand
+        // Gold — the brand. On dark backgrounds the readable/hover shades
+        // run LIGHTER than the base (gold-400/200), not darker.
         gold: {
-          50: "#FBF7E6",
-          100: "#F6EDC0",
-          200: "#ECDA8A",
-          300: "#E0C654",
-          400: "#D6B22A",
+          50: "#FCF5D9",
+          100: "#F9EDB8",
+          200: "#F4E4A1",
+          300: "#ECD672",
+          400: "#E5C84B", // readable gold on dark / hover
           500: "#CDA400", // brand
           600: "#B38F00",
-          700: "#997900", // hover (darker = more readable on cream)
-          800: "#6B5500",
-          900: "#463800",
+          700: "#997900",
+          800: "#665100",
+          900: "#4D3D00", // brand-subtle background
         },
 
         // primary = gold (backwards-compatible alias)
         primary: {
           DEFAULT: "#CDA400",
-          50: "#FBF7E6",
-          100: "#F6EDC0",
-          200: "#ECDA8A",
-          300: "#E0C654",
-          400: "#D6B22A",
+          50: "#FCF5D9",
+          100: "#F9EDB8",
+          200: "#F4E4A1",
+          300: "#ECD672",
+          400: "#E5C84B",
           500: "#CDA400",
           600: "#B38F00",
           700: "#997900",
-          800: "#6B5500",
-          900: "#463800",
+          800: "#665100",
+          900: "#4D3D00",
         },
 
-        // Teal — editorial counterpoint (links, secondary CTAs, rules)
-        teal: {
-          50: "#EBF2F1",
-          100: "#D2E0DF", // subtle callout / info-card bg
-          200: "#A7C5C3",
-          300: "#79A6A3",
-          400: "#4E827F",
-          500: "#2C5F5D", // accent
-          600: "#234C4A",
-          700: "#1B3938", // hover / readable teal text on cream
-          800: "#122625",
-          900: "#0A1413",
-        },
-
-        // Semantic — kept in their own lane
-        success: "#3F7A52",
-        warning: "#C2703D", // terracotta-leaning, distinct from gold
-        danger: "#B23B3B",
-        info: "#2F6E7B",
+        // Semantic — tuned to read on dark backgrounds.
+        success: "#6EAB52",
+        warning: "#E89643",
+        danger: "#D85555",
+        info: "#5688C9",
       },
       fontFamily: {
-        // One warm humanist family throughout. `mono` and `serif` are
-        // intentionally mapped to Hanken too: existing font-mono labels
-        // (eyebrows, buttons, nav) keep their tracked-uppercase treatment
-        // but render in the sans — refined, not technical.
-        sans: ["var(--font-hanken)", "system-ui", "sans-serif"],
-        mono: ["var(--font-hanken)", "system-ui", "sans-serif"],
-        serif: ["var(--font-hanken)", "system-ui", "sans-serif"],
+        // Space Grotesk for everything structural; JetBrains Mono for the
+        // tracked-uppercase labels (eyebrows, nav, buttons); Newsreader as
+        // an optional editorial serif accent.
+        sans: ["var(--font-space-grotesk)", "system-ui", "sans-serif"],
+        mono: ["var(--font-jetbrains-mono)", "ui-monospace", "monospace"],
+        serif: ["var(--font-newsreader)", "Georgia", "serif"],
       },
     },
   },

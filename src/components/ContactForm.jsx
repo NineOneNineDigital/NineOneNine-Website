@@ -8,7 +8,7 @@ function SuccessMessage() {
   return (
     <div className="border border-success/30 bg-success/5 p-10 text-center rounded-lg">
       <CheckCircleIcon className="mx-auto h-8 w-8 text-success" />
-      <p className="mt-4 text-sm font-medium text-ink-900">
+      <p className="mt-4 text-sm font-medium text-ink-50">
         Message received. We will be in touch shortly.
       </p>
     </div>
@@ -23,7 +23,7 @@ function Form() {
   }
 
   const inputClass =
-    "block w-full bg-cream-50 border border-cream-300 rounded-md px-4 py-3.5 text-sm text-ink-900 placeholder:text-neutral-400 focus:border-primary/60 focus:bg-cream-50 focus:outline-none focus:ring-1 focus:ring-primary/30 transition-all duration-300";
+    "block w-full bg-ink-900 border border-ink-700 rounded-md px-4 py-3.5 text-sm text-ink-50 placeholder:text-ink-500 focus:border-primary/60 focus:bg-ink-900 focus:outline-none focus:ring-1 focus:ring-primary/30 transition-all duration-300";
 
   return (
     <form onSubmit={handleSubmit}>
@@ -31,7 +31,7 @@ function Form() {
         <div>
           <label
             htmlFor="firstName"
-            className="block font-mono text-xs tracking-wide uppercase text-neutral-600 mb-2.5"
+            className="block font-mono text-xs tracking-wide uppercase text-ink-300 mb-2.5"
           >
             First name
           </label>
@@ -54,7 +54,7 @@ function Form() {
         <div>
           <label
             htmlFor="lastName"
-            className="block font-mono text-xs tracking-wide uppercase text-neutral-600 mb-2.5"
+            className="block font-mono text-xs tracking-wide uppercase text-ink-300 mb-2.5"
           >
             Last name
           </label>
@@ -77,7 +77,7 @@ function Form() {
         <div>
           <label
             htmlFor="email"
-            className="block font-mono text-xs tracking-wide uppercase text-neutral-600 mb-2.5"
+            className="block font-mono text-xs tracking-wide uppercase text-ink-300 mb-2.5"
           >
             Email
           </label>
@@ -100,7 +100,7 @@ function Form() {
         <div>
           <label
             htmlFor="website"
-            className="block font-mono text-xs tracking-wide uppercase text-neutral-600 mb-2.5"
+            className="block font-mono text-xs tracking-wide uppercase text-ink-300 mb-2.5"
           >
             Website (optional)
           </label>
@@ -122,7 +122,7 @@ function Form() {
         <div className="sm:col-span-2">
           <label
             htmlFor="message"
-            className="block font-mono text-xs tracking-wide uppercase text-neutral-600 mb-2.5"
+            className="block font-mono text-xs tracking-wide uppercase text-ink-300 mb-2.5"
           >
             Tell us about your project
           </label>
@@ -146,7 +146,7 @@ function Form() {
         <button
           type="submit"
           disabled={state.submitting}
-          className="w-full sm:w-auto font-mono text-sm tracking-wide uppercase rounded-lg bg-primary text-ink-900 px-10 py-4 hover:bg-primary-700 hover:text-cream-50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(205,164,0,0.35)] disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full sm:w-auto font-mono text-sm tracking-wide uppercase rounded-lg bg-primary text-ink-950 px-10 py-4 hover:bg-gold-400 hover:text-ink-950 transition-all duration-300 hover:shadow-[0_0_30px_rgba(205,164,0,0.35)] disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {state.submitting ? "Sending..." : "Send message"}
         </button>
@@ -167,33 +167,33 @@ export default function Contact() {
       <div ref={ref} className="reveal mx-auto max-w-6xl px-6">
         <div className="grid gap-16 lg:grid-cols-5 lg:gap-24">
           <div className="lg:col-span-2">
-            <p className="font-mono text-xs tracking-[0.3em] uppercase text-primary-700">
+            <p className="font-mono text-xs tracking-[0.3em] uppercase text-gold-400">
               Contact
             </p>
-            <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-ink-900 leading-tight">
+            <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-ink-50 leading-tight">
               {"Let's work"}
               <br />
               together.
             </h2>
-            <p className="mt-5 text-base text-neutral-600 leading-relaxed">
+            <p className="mt-5 text-base text-ink-300 leading-relaxed">
               Have a project in mind? Send us a message and {"we'll"} get back to
               you within one business day.
             </p>
 
             <div className="mt-10 space-y-6 text-sm">
               <div>
-                <p className="font-mono text-xs tracking-wide uppercase text-neutral-600">
+                <p className="font-mono text-xs tracking-wide uppercase text-ink-300">
                   Location
                 </p>
-                <p className="mt-1.5 text-ink-800">Raleigh, North Carolina</p>
+                <p className="mt-1.5 text-ink-100">Raleigh, North Carolina</p>
               </div>
               <div>
-                <p className="font-mono text-xs tracking-wide uppercase text-neutral-600">
+                <p className="font-mono text-xs tracking-wide uppercase text-ink-300">
                   Email
                 </p>
                 <a
                   href="mailto:hello@nineoneninedigital.com"
-                  className="mt-1.5 block text-teal-700 hover:text-teal-900 transition-colors duration-200"
+                  className="mt-1.5 block text-gold-400 hover:text-gold-200 transition-colors duration-200"
                 >
                   hello@nineoneninedigital.com
                 </a>
