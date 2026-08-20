@@ -1,15 +1,21 @@
 "use client";
 
 import { ValidationError, useForm } from "@formspree/react";
-import { CheckCircleIcon } from "@heroicons/react/24/outline";
 import { useReveal } from "@/lib/hooks";
+
+// Underline fields rather than boxed inputs — fewer competing rectangles,
+// and it keeps the form on the same ruled grid as the rest of the page.
+const FIELD =
+  "block w-full border-0 border-b border-[color:var(--rule-strong)] bg-transparent px-0 py-3 text-[0.9375rem] text-ink-50 placeholder:text-ink-600 focus:border-gold-500 focus:outline-none focus:ring-0 transition-colors duration-300";
+
+const FIELD_LABEL = "label mb-3 block text-ink-500";
 
 function SuccessMessage() {
   return (
-    <div className="border border-success/30 bg-success/5 p-10 text-center rounded-lg">
-      <CheckCircleIcon className="mx-auto h-8 w-8 text-success" />
-      <p className="mt-4 text-sm font-medium text-ink-50">
-        Message received. We will be in touch shortly.
+    <div className="rule-t rule-b py-14">
+      <p className="label text-gold-500">Message received</p>
+      <p className="prose-editorial mt-5 max-w-md text-ink-100">
+        Thanks — we have it. You will hear back from us within one business day.
       </p>
     </div>
   );
@@ -18,21 +24,13 @@ function SuccessMessage() {
 function Form() {
   const [state, handleSubmit] = useForm("mreypprw");
 
-  if (state.succeeded) {
-    return <SuccessMessage />;
-  }
-
-  const inputClass =
-    "block w-full bg-ink-900 border border-ink-700 rounded-md px-4 py-3.5 text-sm text-ink-50 placeholder:text-ink-500 focus:border-primary/60 focus:bg-ink-900 focus:outline-none focus:ring-1 focus:ring-primary/30 transition-all duration-300";
+  if (state.succeeded) return <SuccessMessage />;
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-x-8 gap-y-9 sm:grid-cols-2">
         <div>
-          <label
-            htmlFor="firstName"
-            className="block font-mono text-xs tracking-wide uppercase text-ink-300 mb-2.5"
-          >
+          <label htmlFor="firstName" className={FIELD_LABEL}>
             First name
           </label>
           <input
@@ -41,21 +39,19 @@ function Form() {
             id="firstName"
             required
             autoComplete="given-name"
-            className={inputClass}
+            className={FIELD}
             placeholder="Jane"
           />
           <ValidationError
             prefix="First Name"
             field="firstName"
             errors={state.errors}
-            className="mt-1 text-xs text-danger"
+            className="mt-2 text-xs text-danger"
           />
         </div>
+
         <div>
-          <label
-            htmlFor="lastName"
-            className="block font-mono text-xs tracking-wide uppercase text-ink-300 mb-2.5"
-          >
+          <label htmlFor="lastName" className={FIELD_LABEL}>
             Last name
           </label>
           <input
@@ -64,21 +60,19 @@ function Form() {
             id="lastName"
             required
             autoComplete="family-name"
-            className={inputClass}
+            className={FIELD}
             placeholder="Smith"
           />
           <ValidationError
             prefix="Last Name"
             field="lastName"
             errors={state.errors}
-            className="mt-1 text-xs text-danger"
+            className="mt-2 text-xs text-danger"
           />
         </div>
+
         <div>
-          <label
-            htmlFor="email"
-            className="block font-mono text-xs tracking-wide uppercase text-ink-300 mb-2.5"
-          >
+          <label htmlFor="email" className={FIELD_LABEL}>
             Email
           </label>
           <input
@@ -87,72 +81,75 @@ function Form() {
             id="email"
             required
             autoComplete="email"
-            className={inputClass}
+            className={FIELD}
             placeholder="jane@company.com"
           />
           <ValidationError
             prefix="Email"
             field="email"
             errors={state.errors}
-            className="mt-1 text-xs text-danger"
+            className="mt-2 text-xs text-danger"
           />
         </div>
+
         <div>
-          <label
-            htmlFor="website"
-            className="block font-mono text-xs tracking-wide uppercase text-ink-300 mb-2.5"
-          >
-            Website (optional)
+          <label htmlFor="website" className={FIELD_LABEL}>
+            Website — optional
           </label>
           <input
             type="url"
             name="website"
             id="website"
             autoComplete="url"
-            className={inputClass}
+            className={FIELD}
             placeholder="https://"
           />
           <ValidationError
             prefix="Website"
             field="website"
             errors={state.errors}
-            className="mt-1 text-xs text-danger"
+            className="mt-2 text-xs text-danger"
           />
         </div>
+
         <div className="sm:col-span-2">
-          <label
-            htmlFor="message"
-            className="block font-mono text-xs tracking-wide uppercase text-ink-300 mb-2.5"
-          >
-            Tell us about your project
+          <label htmlFor="message" className={FIELD_LABEL}>
+            What are you looking to build?
           </label>
           <textarea
             id="message"
             name="message"
-            rows={5}
+            rows={4}
             required
-            className={inputClass + " resize-none"}
-            placeholder="What are you looking to build?"
+            className={`${FIELD} resize-none`}
+            placeholder="A sentence or two is plenty to start."
           />
           <ValidationError
             prefix="Message"
             field="message"
             errors={state.errors}
-            className="mt-1 text-xs text-danger"
+            className="mt-2 text-xs text-danger"
           />
         </div>
       </div>
-      <div className="mt-8">
+
+      <div className="mt-12">
         <button
           type="submit"
           disabled={state.submitting}
-          className="w-full sm:w-auto font-mono text-sm tracking-wide uppercase rounded-lg bg-primary text-ink-950 px-10 py-4 hover:bg-gold-400 hover:text-ink-950 transition-all duration-300 hover:shadow-[0_0_30px_rgba(205,164,0,0.35)] disabled:opacity-50 disabled:cursor-not-allowed"
+          className="group inline-flex items-center gap-3 bg-ink-50 px-8 py-4 text-sm font-medium text-ink-950 transition-colors duration-300 hover:bg-gold-400 disabled:cursor-not-allowed disabled:opacity-50"
         >
-          {state.submitting ? "Sending..." : "Send message"}
+          <span>{state.submitting ? "Sending" : "Send message"}</span>
+          <span
+            aria-hidden="true"
+            className="transition-transform duration-300 group-hover:translate-x-1"
+          >
+            →
+          </span>
         </button>
         <ValidationError
           errors={state.errors}
-          className="mt-2 text-xs text-danger"
+          className="mt-3 text-xs text-danger"
         />
       </div>
     </form>
@@ -160,48 +157,56 @@ function Form() {
 }
 
 export default function Contact() {
-  const ref = useReveal();
+  const { ref, revealClass } = useReveal();
 
   return (
-    <section id="contact" className="scroll-mt-24 py-24 lg:py-32">
-      <div ref={ref} className="reveal mx-auto max-w-6xl px-6">
-        <div className="grid gap-16 lg:grid-cols-5 lg:gap-24">
-          <div className="lg:col-span-2">
-            <p className="font-mono text-xs tracking-[0.3em] uppercase text-gold-400">
-              Contact
-            </p>
-            <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-ink-50 leading-tight">
-              {"Let's work"}
-              <br />
-              together.
-            </h2>
-            <p className="mt-5 text-base text-ink-300 leading-relaxed">
-              Have a project in mind? Send us a message and {"we'll"} get back to
-              you within one business day.
-            </p>
+    <section id="contact" className="scroll-mt-24 py-24 lg:py-36">
+      <div ref={ref} className={`reveal shell ${revealClass}`}>
+        <div className="flex items-baseline justify-between gap-6 pb-5 rule-b">
+          <p className="label">
+            <span className="text-gold-500">06</span>
+            <span className="ml-3 text-ink-400">Contact</span>
+          </p>
+          <p className="label hidden text-ink-500 sm:block">Replies within a business day</p>
+        </div>
 
-            <div className="mt-10 space-y-6 text-sm">
+        <h2 className="display-xl mt-12 text-ink-50 lg:mt-16">
+          Let&rsquo;s build
+          <br />
+          <span className="text-gold-400">something</span>{" "}
+          together.
+        </h2>
+
+        <div className="mt-16 grid grid-cols-12 gap-x-6 gap-y-14 lg:mt-24">
+          <div className="col-span-12 lg:col-span-3">
+            <dl className="space-y-8">
               <div>
-                <p className="font-mono text-xs tracking-wide uppercase text-ink-300">
-                  Location
-                </p>
-                <p className="mt-1.5 text-ink-100">Raleigh, North Carolina</p>
+                <dt className="label text-ink-500">Email</dt>
+                <dd className="mt-2">
+                  <a
+                    href="mailto:hello@nineoneninedigital.com"
+                    className="link-underline text-[0.9375rem]"
+                  >
+                    hello@nineoneninedigital.com
+                  </a>
+                </dd>
               </div>
               <div>
-                <p className="font-mono text-xs tracking-wide uppercase text-ink-300">
-                  Email
-                </p>
-                <a
-                  href="mailto:hello@nineoneninedigital.com"
-                  className="mt-1.5 block text-gold-400 hover:text-gold-200 transition-colors duration-200"
-                >
-                  hello@nineoneninedigital.com
-                </a>
+                <dt className="label text-ink-500">Based in</dt>
+                <dd className="mt-2 text-[0.9375rem] text-ink-200">
+                  Raleigh, North Carolina
+                </dd>
               </div>
-            </div>
+              <div>
+                <dt className="label text-ink-500">Engagements</dt>
+                <dd className="mt-2 text-[0.9375rem] text-ink-200">
+                  Project &amp; retainer
+                </dd>
+              </div>
+            </dl>
           </div>
 
-          <div className="lg:col-span-3">
+          <div className="col-span-12 lg:col-span-8 lg:col-start-5">
             <Form />
           </div>
         </div>

@@ -69,12 +69,10 @@ module.exports = {
         info: "#5688C9",
       },
       fontFamily: {
-        // Space Grotesk for everything structural; JetBrains Mono for the
-        // tracked-uppercase labels (eyebrows, nav, buttons); Newsreader as
-        // an optional editorial serif accent.
-        sans: ["var(--font-space-grotesk)", "system-ui", "sans-serif"],
-        mono: ["var(--font-jetbrains-mono)", "ui-monospace", "monospace"],
-        serif: ["var(--font-newsreader)", "Georgia", "serif"],
+        // Schibsted Grotesk for everything — display, UI, and body. Geist
+        // Mono for the tracked uppercase labels and indices. No serif.
+        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+        mono: ["var(--font-geist-mono)", "ui-monospace", "monospace"],
       },
     },
   },

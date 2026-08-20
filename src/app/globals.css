@@ -3,20 +3,16 @@
 @tailwind utilities;
 
 @layer base {
-  /* ── Midnight Studio design tokens ────────────────────────────────────
-     Single source of truth for the design system. Raw ramps mirror
-     tailwind.config.js (keep in sync). Reference the functional aliases
-     (--brand, --bg-page, --text-body, …) in component styles, not the raw
-     ramp tokens — that way the system can be retuned without touching
-     component CSS. */
+  /* ── Design tokens ────────────────────────────────────────────────────
+     Raw ramps mirror tailwind.config.js (keep in sync). Component styles
+     should reference the functional aliases (--brand, --bg-page,
+     --text-body, …) rather than the raw ramp tokens. */
   :root {
-    /* ── Core anchors ── */
     --color-midnight: #0e0e10;
     --color-surface: #1a1a1d;
     --color-ivory: #fafaf7;
     --color-gold: #cda400;
 
-    /* ── Ink scale ── */
     --ink-50: #fafaf7;
     --ink-100: #ebebe8;
     --ink-200: #d5d5d2;
@@ -29,7 +25,6 @@
     --ink-900: #1a1a1d;
     --ink-950: #0e0e10;
 
-    /* ── Gold scale ── */
     --gold-50: #fcf5d9;
     --gold-200: #f4e4a1;
     --gold-400: #e5c84b;
@@ -37,23 +32,23 @@
     --gold-700: #997900;
     --gold-900: #4d3d00;
 
-    /* ── Semantic — tuned for dark backgrounds ── */
     --color-success: #6eab52;
     --color-warning: #e89643;
     --color-danger: #d85555;
     --color-info: #5688c9;
 
     --color-success-bg: rgba(110, 171, 82, 0.12);
-    --color-warning-bg: rgba(232, 150, 67, 0.12);
     --color-danger-bg: rgba(216, 85, 85, 0.12);
-    --color-info-bg: rgba(86, 136, 201, 0.12);
 
-    /* ── Functional aliases — use these in components ── */
     --bg-page: var(--ink-950);
-    --bg-page-alt: var(--ink-900);
     --bg-surface: var(--ink-900);
     --bg-elevated: var(--ink-800);
-    --bg-hover: var(--ink-800);
+
+    /* Hairlines. The site is built on ruled lines, so these carry a lot of
+       the design — they are deliberately quieter than a solid ink-700. */
+    --rule: rgba(250, 250, 247, 0.09);
+    --rule-strong: rgba(250, 250, 247, 0.16);
+    --rule-brand: rgba(205, 164, 0, 0.34);
 
     --border-subtle: var(--ink-800);
     --border: var(--ink-700);
@@ -61,21 +56,29 @@
     --border-strong: var(--ink-600);
     --border-focus: var(--gold-500);
 
-    --text-primary: var(--ink-50); /* headings */
-    --text-body: var(--ink-100); /* body copy */
+    --text-primary: var(--ink-50);
+    --text-body: var(--ink-100);
     --text-secondary: var(--ink-300);
-    --text-muted: var(--ink-400); /* captions, metadata */
+    --text-muted: var(--ink-400);
     --text-disabled: var(--ink-600);
-    --text-inverse: var(--ink-950); /* dark text on gold buttons */
+    --text-inverse: var(--ink-950);
 
     --brand: var(--gold-500);
-    --brand-hover: var(--gold-400); /* lighter on hover (dark-mode convention) */
-    --brand-active: var(--gold-700);
-    --brand-strong: var(--gold-400); /* readable gold on dark */
+    --brand-hover: var(--gold-400);
+    --brand-strong: var(--gold-400);
     --brand-subtle: var(--gold-900);
 
-    /* Tell browsers we're a dark UI — improves form controls, scrollbars. */
+    /* Shared page gutter — the header, every section, and the footer all
+       align to this so the vertical rules run unbroken down the page. */
+    --gutter: 1.5rem;
+
     color-scheme: dark;
+  }
+
+  @media (min-width: 1024px) {
+    :root {
+      --gutter: 2.5rem;
+    }
   }
 
   body {
@@ -83,6 +86,7 @@
     color: var(--text-body);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-synthesis-weight: none;
   }
 
   h1,
@@ -95,142 +99,256 @@
   }
 
   ::selection {
-    background-color: rgb(205 164 0 / 0.32);
+    background-color: rgb(205 164 0 / 0.28);
     color: var(--ink-50);
   }
 
   :focus-visible {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(205, 164, 0, 0.4);
-    border-radius: 4px;
+    outline: 2px solid var(--gold-500);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Tabular figures for the indices and metadata so numbers in a column
+     line up rather than jittering between rows. */
+  .label,
+  .font-mono {
+    font-variant-numeric: tabular-nums;
   }
 }
 
-/* Noise texture overlay — light grain reads on the dark ground */
+@layer components {
+  /* ── Layout primitives ──────────────────────────────────────────────── */
+
+  /* Every full-width band uses .shell so content columns line up across
+     sections and the vertical rules stay continuous. */
+  .shell {
+    width: 100%;
+    max-width: 84rem;
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  .rule-t {
+    border-top: 1px solid var(--rule);
+  }
+
+  .rule-b {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  /* Display face. Newsreader carries the voice; the optical sizes below
+     are hand-tuned rather than a uniform clamp so each level sits right. */
+  .display-xl {
+    font-weight: 500;
+    font-size: clamp(2.75rem, 7.4vw, 6.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.042em;
+  }
+
+  .display-lg {
+    font-weight: 500;
+    font-size: clamp(2.125rem, 4.4vw, 3.5rem);
+    line-height: 1.04;
+    letter-spacing: -0.035em;
+  }
+
+  .display-md {
+    font-weight: 500;
+    font-size: clamp(1.5rem, 2.5vw, 2.125rem);
+    line-height: 1.15;
+    letter-spacing: -0.028em;
+  }
+
+  /* The one recurring structural label. Small, monospaced, wide-tracked —
+     used for section indices and metadata only, never for body content. */
+  .label {
+    font-family: var(--font-geist-mono), ui-monospace, monospace;
+    font-size: 0.6875rem;
+    line-height: 1;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  /* Editorial body copy — serif, generous measure, for prose blocks that
+     should read like an essay rather than UI text. */
+  .prose-editorial {
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    letter-spacing: -0.011em;
+    color: var(--text-secondary);
+  }
+
+  @media (min-width: 1024px) {
+    .prose-editorial {
+      font-size: 1.1875rem;
+    }
+  }
+
+  /* ── Interaction ────────────────────────────────────────────────────── */
+
+  /* Underline that draws in from the left. Used for every inline text link
+     so link affordance is consistent site-wide. */
+  .link-underline {
+    position: relative;
+    color: var(--gold-400);
+  }
+
+  .link-underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    height: 1px;
+    width: 100%;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .link-underline:hover::after,
+  .link-underline:focus-visible::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  /* Row that lights up on hover — the index list pattern used by Work,
+     Services, and Process. The gold rule wipes in beneath the row. */
+  .row-hover {
+    position: relative;
+  }
+
+  .row-hover::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 1px;
+    background: var(--gold-500);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .row-hover:hover::after,
+  .row-hover:focus-within::after {
+    transform: scaleX(1);
+  }
+}
+
+/* ── Grain ──────────────────────────────────────────────────────────────
+   A single static grain layer over the whole page. Keeps large flat areas
+   of midnight from banding on wide gamut displays. */
 .noise::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: 9999;
   pointer-events: none;
-  opacity: 0.025;
+  opacity: 0.022;
   mix-blend-mode: screen;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-repeat: repeat;
   background-size: 256px 256px;
 }
 
-/* Scroll-triggered entrance */
-.reveal {
-  opacity: 0;
-  transform: translateY(32px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+/* ── Motion ─────────────────────────────────────────────────────────────
+   The site has one motion idea: things arrive from beneath a mask. Display
+   lines wipe upward, rules draw outward, blocks lift slightly. Nothing
+   loops, nothing follows the cursor, nothing pulses. */
+
+/* Per-line mask reveal for display type. Each line needs its own
+   .reveal-line wrapper (overflow clip) around an inline-block child. */
+.reveal-line {
+  display: block;
+  overflow: hidden;
 }
 
-.reveal.is-visible {
+.reveal-line > * {
+  display: block;
+  transform: translateY(105%);
+  transition: transform 1.05s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.is-visible .reveal-line > * {
+  transform: translateY(0);
+}
+
+.is-visible .reveal-line:nth-child(2) > * { transition-delay: 90ms; }
+.is-visible .reveal-line:nth-child(3) > * { transition-delay: 180ms; }
+.is-visible .reveal-line:nth-child(4) > * { transition-delay: 270ms; }
+
+/* Quiet lift for supporting blocks. */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* `is-visible` may land on the element itself or on an ancestor section —
+   a section that reveals as a unit marks itself and its children follow. */
+.reveal.is-visible,
+.is-visible .reveal {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Stagger children */
+.reveal-delay-1 { transition-delay: 120ms; }
+.reveal-delay-2 { transition-delay: 240ms; }
+
+/* Staggered children — used by list sections so rows cascade in. */
 .reveal-stagger > * {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(16px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.reveal-stagger.is-visible > *:nth-child(1) { transition-delay: 0ms; opacity: 1; transform: translateY(0); }
-.reveal-stagger.is-visible > *:nth-child(2) { transition-delay: 100ms; opacity: 1; transform: translateY(0); }
-.reveal-stagger.is-visible > *:nth-child(3) { transition-delay: 200ms; opacity: 1; transform: translateY(0); }
-.reveal-stagger.is-visible > *:nth-child(4) { transition-delay: 300ms; opacity: 1; transform: translateY(0); }
-.reveal-stagger.is-visible > *:nth-child(5) { transition-delay: 400ms; opacity: 1; transform: translateY(0); }
-.reveal-stagger.is-visible > *:nth-child(6) { transition-delay: 500ms; opacity: 1; transform: translateY(0); }
-
-/* Animated gradient border */
-@keyframes border-glow {
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 1; }
-}
-
-.animate-border-glow {
-  animation: border-glow 3s ease-in-out infinite;
-}
-
-/* Subtle pulse for ambient elements */
-@keyframes ambient-pulse {
-  0%, 100% { opacity: 0.15; transform: scale(1); }
-  50% { opacity: 0.25; transform: scale(1.05); }
-}
-
-.animate-ambient {
-  animation: ambient-pulse 6s ease-in-out infinite;
-}
-
-/* Gradient text utility — metallic gold, bright enough to read on midnight */
-.text-gradient {
-  background: linear-gradient(135deg, #e5c84b 0%, #cda400 50%, #997900 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Horizontal marquee — content must be duplicated in markup */
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
-.animate-marquee {
-  animation: marquee 40s linear infinite;
-}
-
-.marquee-mask {
-  -webkit-mask-image: linear-gradient(to right, transparent 0, black 8%, black 92%, transparent 100%);
-  mask-image: linear-gradient(to right, transparent 0, black 8%, black 92%, transparent 100%);
-}
-
-/* Kinetic word — vertical slide-in for the cycling display word */
-@keyframes word-in {
-  0% { opacity: 0; transform: translateY(40%); filter: blur(6px); }
-  60% { opacity: 1; filter: blur(0); }
-  100% { opacity: 1; transform: translateY(0); filter: blur(0); }
-}
-
-.animate-word-in {
-  animation: word-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-/* Status pill dot pulse */
-@keyframes status-pulse {
-  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(205, 164, 0, 0.6); }
-  50% { opacity: 0.6; box-shadow: 0 0 0 6px rgba(205, 164, 0, 0); }
-}
-
-.animate-status {
-  animation: status-pulse 2.2s ease-in-out infinite;
-}
-
-/* Premium card hover glow */
-.card-glow {
-  position: relative;
-}
-
-.card-glow::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  background: radial-gradient(
-    600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    rgba(205, 164, 0, 0.12),
-    transparent 40%
-  );
-  pointer-events: none;
-}
-
-.card-glow:hover::after {
+.reveal-stagger.is-visible > *,
+.is-visible .reveal-stagger > * {
   opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-stagger.is-visible > *:nth-child(1) { transition-delay: 0ms; }
+.reveal-stagger.is-visible > *:nth-child(2) { transition-delay: 70ms; }
+.reveal-stagger.is-visible > *:nth-child(3) { transition-delay: 140ms; }
+.reveal-stagger.is-visible > *:nth-child(4) { transition-delay: 210ms; }
+.reveal-stagger.is-visible > *:nth-child(5) { transition-delay: 280ms; }
+.reveal-stagger.is-visible > *:nth-child(6) { transition-delay: 350ms; }
+
+/* Hairline that draws outward from the left as its section enters. */
+.reveal-rule {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-rule.is-visible,
+.is-visible .reveal-rule {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal-stagger > *,
+  .reveal-rule,
+  .reveal-line > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .link-underline::after,
+  .row-hover::after {
+    transition: none;
+  }
+
+  html {
+    scroll-behavior: auto !important;
+  }
 }

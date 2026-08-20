@@ -1,68 +1,76 @@
 "use client";
 
-import { useReveal, useCountUp } from "@/lib/hooks";
+import SectionHeader from "@/components/SectionHeader";
+import { useReveal } from "@/lib/hooks";
 
-function Stat({ value, suffix, label, highlight }) {
-  const { ref, count } = useCountUp(parseInt(value), 2000);
-  return (
-    <div ref={ref}>
-      <p
-        className={`font-mono text-3xl lg:text-4xl font-bold tracking-tight ${
-          highlight ? "text-gradient" : "text-ink-50"
-        }`}
-      >
-        {count}
-        {suffix}
-      </p>
-      <p className="mt-2 font-mono text-xs tracking-wide uppercase text-ink-400">
-        {label}
-      </p>
-    </div>
-  );
-}
+// Static facts, set as a ruled table. These were previously animated
+// counters; the numbers say the same thing without the theatre.
+const FACTS = [
+  { label: "Founded", value: "2019" },
+  { label: "Based in", value: "Raleigh, NC" },
+  { label: "Projects shipped", value: "50+" },
+  { label: "Built from scratch", value: "100%" },
+];
 
 export default function About() {
-  const ref = useReveal();
+  const { ref: bodyRef, revealClass: bodyClass } = useReveal();
 
   return (
-    <section id="about" className="scroll-mt-24 py-24 lg:py-32">
-      <div ref={ref} className="reveal mx-auto max-w-6xl px-6">
-        <div className="grid gap-16 lg:grid-cols-2 lg:gap-24 items-start">
-          <div>
-            <p className="font-mono text-xs tracking-[0.3em] uppercase text-gold-400">
-              About
-            </p>
-            <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-ink-50 leading-tight">
-              Building for the web
+    <section id="about" className="scroll-mt-24 py-24 lg:py-36">
+      <div className="shell">
+        <SectionHeader
+          index="02"
+          label="About"
+          title={
+            <>
+              A small team,
               <br />
-              <span className="text-ink-500">since 2019.</span>
-            </h2>
+              <span className="text-ink-500">deliberately.</span>
+            </>
+          }
+          standfirst="No account layer, no handoff to a junior team. The people who scope your project are the people who build it."
+        />
+
+        <div
+          ref={bodyRef}
+          className={`reveal mt-16 grid grid-cols-12 gap-x-6 gap-y-14 lg:mt-24 ${bodyClass}`}
+        >
+          <div className="col-span-12 lg:col-span-7">
+            <div className="space-y-7">
+              <p className="prose-editorial text-ink-200">
+                We started NineOneNine to do one thing well — build custom
+                software for businesses that have outgrown off-the-shelf tools.
+                We work directly with founders, product managers, and operators
+                to turn a rough idea into something in production.
+              </p>
+              <p className="prose-editorial">
+                We handle the full stack. Database architecture through to the
+                pixels on screen, every project gets the same attention whether
+                it is a single marketing site or a multi-tenant platform. We
+                choose tools that will still be maintainable in three years, not
+                the ones that trended last quarter.
+              </p>
+            </div>
           </div>
 
-          <div className="space-y-6 text-base leading-7 text-ink-300">
-            <p>
-              We started NineOneNine to do one thing well — build custom software
-              for businesses that have outgrown off-the-shelf tools. Based in
-              Raleigh, North Carolina, our team works directly with founders,
-              product managers, and operators to turn ideas into production-ready
-              applications.
-            </p>
-            <p>
-              We handle the full stack. From database architecture to the pixels
-              on screen, every project gets the same level of care whether
-              {"it's"} a single landing page or a complex multi-tenant platform.
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 pt-8 border-t border-ink-700">
-              <Stat value="10" suffix="+" label="Years experience" />
-              <Stat value="50" suffix="+" label="Projects shipped" />
-              <Stat value="100" suffix="%" label="Custom built" highlight />
-            </div>
+          {/* Ruled fact table */}
+          <div className="col-span-12 lg:col-span-4 lg:col-start-9">
+            <dl>
+              {FACTS.map((fact) => (
+                <div
+                  key={fact.label}
+                  className="flex items-baseline justify-between gap-6 rule-b py-4 first:border-t first:border-[color:var(--rule)]"
+                >
+                  <dt className="label text-ink-500">{fact.label}</dt>
+                  <dd className="text-base font-medium tracking-[-0.02em] text-ink-100">
+                    {fact.value}
+                  </dd>
+                </div>
+              ))}
+            </dl>
           </div>
         </div>
       </div>
-
-      {/* Bottom line */}
-      <div className="mt-24 lg:mt-32 h-px bg-gradient-to-r from-transparent via-gold-500/25 to-transparent" />
     </section>
   );
 }
