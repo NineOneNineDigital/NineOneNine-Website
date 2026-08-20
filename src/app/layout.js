@@ -1,22 +1,20 @@
-import { Space_Grotesk, JetBrains_Mono, Newsreader } from "next/font/google";
+import { Schibsted_Grotesk, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-const spaceGrotesk = Space_Grotesk({
+// Schibsted Grotesk carries the whole system — display, UI, and body. Its
+// flat terminals and tight apertures give the large display sizes real
+// presence while staying neutral at body sizes. Variable, so no weight list.
+const schibsted = Schibsted_Grotesk({
   subsets: ["latin"],
-  variable: "--font-space-grotesk",
-  weight: ["400", "500", "600", "700"],
+  variable: "--font-sans",
+  display: "swap",
 });
 
-const jetbrainsMono = JetBrains_Mono({
+// Geist Mono is used only for the small tracked labels and indices.
+const geistMono = Geist_Mono({
   subsets: ["latin"],
-  variable: "--font-jetbrains-mono",
-  weight: ["400", "500", "600"],
-});
-
-const newsreader = Newsreader({
-  subsets: ["latin"],
-  variable: "--font-newsreader",
-  style: ["normal", "italic"],
+  variable: "--font-geist-mono",
+  display: "swap",
 });
 
 const SITE_URL = "https://nineoneninedigital.com";
@@ -179,7 +177,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body
-        className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} ${newsreader.variable} font-sans antialiased noise`}
+        className={`${schibsted.variable} ${geistMono.variable} font-sans antialiased noise`}
       >
         {children}
       </body>

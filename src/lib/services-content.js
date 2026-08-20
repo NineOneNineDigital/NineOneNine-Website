@@ -1,13 +1,6 @@
-import {
-  CodeBracketSquareIcon,
-  ShoppingCartIcon,
-  DevicePhoneMobileIcon,
-} from "@heroicons/react/24/outline";
-
 export const servicePages = {
   "web-development": {
     slug: "web-development",
-    icon: CodeBracketSquareIcon,
     name: "Web Development",
     title: "Custom Web Development in Raleigh, NC",
     metaTitle: "Custom Web Development in Raleigh, NC",
@@ -16,7 +9,7 @@ export const servicePages = {
     hero: {
       headline: "Custom web development,",
       headlineAccent: "built end to end.",
-      lede: "Production-grade web applications and marketing sites — designed, engineered, and deployed by a Raleigh-based studio that handles the full stack.",
+      lede: "Production-grade web applications and marketing sites — designed, engineered, and deployed by a Raleigh-based development team that handles the full stack.",
     },
     intro: [
       "We design and build custom web applications from scratch — not templates, not no-code stitched together with duct tape. Whether you need a customer-facing platform, an internal tool, or a content-heavy marketing site, we handle the full stack: database modeling, API design, authentication, hosting, and the interface your users actually see.",
@@ -71,7 +64,6 @@ export const servicePages = {
 
   "mobile-app-development": {
     slug: "mobile-app-development",
-    icon: DevicePhoneMobileIcon,
     name: "Mobile App Development",
     title: "Mobile App Development in Raleigh, NC",
     metaTitle: "Mobile App Development in Raleigh, NC",
@@ -80,7 +72,7 @@ export const servicePages = {
     hero: {
       headline: "Mobile apps,",
       headlineAccent: "native where it counts.",
-      lede: "iOS and Android apps engineered for performance and the long tail of post-launch updates — built by a studio that ships to both app stores.",
+      lede: "iOS and Android apps engineered for performance and the long tail of post-launch updates — built by a team that ships to both app stores.",
     },
     intro: [
       "We build iOS and Android applications — native when the platform demands it, React Native when shared code makes sense. From mobile-first startups to companion apps for existing platforms, we handle design, development, app store submission, and the long tail of post-launch updates.",
@@ -135,7 +127,6 @@ export const servicePages = {
 
   "ecommerce-development": {
     slug: "ecommerce-development",
-    icon: ShoppingCartIcon,
     name: "eCommerce Development",
     title: "eCommerce Development in Raleigh, NC",
     metaTitle: "eCommerce Development in Raleigh, NC",
@@ -144,7 +135,7 @@ export const servicePages = {
     hero: {
       headline: "eCommerce,",
       headlineAccent: "engineered for conversion.",
-      lede: "Custom storefronts, headless Shopify, and Stripe-powered checkout flows built to move product — by a Raleigh studio that treats every conversion as a design decision.",
+      lede: "Custom storefronts, headless Shopify, and Stripe-powered checkout flows built to move product — by a Raleigh development team that treats every conversion as a design decision.",
     },
     intro: [
       "Whether you need a custom-built storefront, a headless Shopify implementation, or a Stripe-powered checkout grafted onto an existing site, we build commerce experiences that move product. Every choice — payment processor, cart UX, checkout flow, tax handling, inventory model — has a measurable effect on conversion. We make those choices deliberately, with your business model in mind.",

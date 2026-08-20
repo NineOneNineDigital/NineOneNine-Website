@@ -1,196 +1,194 @@
 "use client";
 
-import { useRef, useCallback } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import SectionHeader from "@/components/SectionHeader";
 import { projects } from "@/lib/constants";
 import { useReveal } from "@/lib/hooks";
 
-function ProjectCard({ project, className = "" }) {
-  const cardRef = useRef(null);
-  const videoRef = useRef(null);
+/**
+ * Floating preview that trails the cursor across the project index.
+ * Desktop only — it is an enhancement over a list that already works, and
+ * it is skipped entirely for coarse pointers and reduced-motion users.
+ */
+function HoverPreview({ activeIndex }) {
+  const previewRef = useRef(null);
+  const target = useRef({ x: 0, y: 0 });
+  const current = useRef({ x: 0, y: 0 });
+  const frame = useRef(null);
 
-  const handleMouseMove = useCallback((e) => {
-    const el = cardRef.current;
+  useEffect(() => {
+    const el = previewRef.current;
     if (!el) return;
-    const rect = el.getBoundingClientRect();
-    el.style.setProperty("--mouse-x", `${((e.clientX - rect.left) / rect.width) * 100}%`);
-    el.style.setProperty("--mouse-y", `${((e.clientY - rect.top) / rect.height) * 100}%`);
+
+    const onMove = (e) => {
+      target.current.x = e.clientX;
+      target.current.y = e.clientY;
+    };
+
+    // Ease toward the cursor rather than snapping to it — the lag is what
+    // makes the preview feel weighted instead of glued on.
+    const tick = () => {
+      current.current.x += (target.current.x - current.current.x) * 0.12;
+      current.current.y += (target.current.y - current.current.y) * 0.12;
+      el.style.transform = `translate3d(${current.current.x}px, ${current.current.y}px, 0) translate(-50%, -50%)`;
+      frame.current = requestAnimationFrame(tick);
+    };
+
+    window.addEventListener("mousemove", onMove, { passive: true });
+    frame.current = requestAnimationFrame(tick);
+
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      if (frame.current) cancelAnimationFrame(frame.current);
+    };
   }, []);
 
-  const handleMouseEnter = useCallback(() => {
-    videoRef.current?.play().catch(() => {});
-  }, []);
+  return (
+    <div
+      ref={previewRef}
+      aria-hidden="true"
+      className="pointer-events-none fixed left-0 top-0 z-40 hidden h-[260px] w-[380px] lg:block"
+    >
+      {projects.map((project, i) => (
+        <div
+          key={project.id}
+          className={`absolute inset-0 overflow-hidden transition-all duration-500 ease-out ${
+            activeIndex === i
+              ? "scale-100 opacity-100"
+              : "scale-95 opacity-0"
+          }`}
+        >
+          {project.image && (
+            <Image
+              src={project.image}
+              alt=""
+              fill
+              sizes="380px"
+              className="object-cover object-top"
+            />
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
 
-  const handleMouseLeave = useCallback(() => {
-    const v = videoRef.current;
-    if (v) {
-      v.pause();
-      v.currentTime = 0;
-    }
-  }, []);
-
-  const hasMedia = Boolean(project.image || project.video);
+function ProjectRow({ project, onEnter, onLeave }) {
   const isExternal = Boolean(project.href);
 
   return (
     <a
-      ref={cardRef}
-      href={project.href || "#contact"}
+      href={project.href || "/#contact"}
       target={isExternal ? "_blank" : undefined}
       rel={isExternal ? "noopener noreferrer" : undefined}
       aria-label={
-        isExternal ? `${project.name} — opens in new tab` : project.name
+        isExternal
+          ? `${project.name} — ${project.category} for ${project.industry}. Opens in a new tab.`
+          : `${project.name} — ${project.category} for ${project.industry}`
       }
-      onMouseMove={handleMouseMove}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      className={`card-glow group relative block overflow-hidden rounded-lg bg-ink-900 border border-ink-700 hover:border-primary/40 transition-colors duration-500 ${className}`}
+      onMouseEnter={onEnter}
+      onMouseLeave={onLeave}
+      onFocus={onEnter}
+      onBlur={onLeave}
+      className="row-hover group block rule-b py-8 lg:py-11"
     >
-      {project.image && (
-        <Image
-          src={project.image}
-          alt={project.name}
-          fill
-          sizes="(min-width: 1024px) 50vw, 100vw"
-          className="object-cover opacity-100 group-hover:scale-[1.03] transition-all duration-700 ease-out"
-        />
-      )}
-      {project.video && !project.image && (
-        <video
-          ref={videoRef}
-          src={project.video}
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          poster={project.poster}
-          className="absolute inset-0 h-full w-full object-cover opacity-100 transition-opacity duration-500"
-        />
-      )}
+      <div className="grid grid-cols-12 items-baseline gap-x-6 gap-y-5">
+        <span className="col-span-2 font-mono text-[11px] text-ink-600 transition-colors duration-500 group-hover:text-gold-500 lg:col-span-1">
+          {project.id}
+        </span>
 
-      {/* Placeholder visual when no media — intentional, not "missing image" */}
-      {!hasMedia && (
-        <>
-          <div
-            className="absolute inset-0 opacity-[0.06]"
-            style={{
-              backgroundImage:
-                "linear-gradient(to right, rgba(250,250,247,0.5) 1px, transparent 1px), linear-gradient(to bottom, rgba(250,250,247,0.5) 1px, transparent 1px)",
-              backgroundSize: "40px 40px",
-            }}
-          />
-          <div className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-primary/[0.12] blur-[100px] group-hover:bg-primary/[0.20] transition-colors duration-700" />
-          <div className="absolute inset-0 flex items-center justify-center">
-            <span className="font-mono text-[clamp(4rem,12vw,9rem)] leading-none text-ink-50/[0.06] group-hover:text-ink-50/[0.10] transition-colors duration-500 select-none">
-              {project.id}
-            </span>
-          </div>
-        </>
-      )}
+        <h3 className="display-md col-span-10 text-ink-200 transition-colors duration-500 group-hover:text-ink-50 lg:col-span-5">
+          {project.name}
+        </h3>
 
-      {/* Scrims for text legibility over media — dark so the photo stays vivid */}
-      {hasMedia && (
-        <>
-          <div className="absolute inset-x-0 top-0 h-1/4 bg-gradient-to-b from-ink-900/55 to-transparent pointer-events-none" />
-          <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-ink-900/85 via-ink-900/40 to-transparent pointer-events-none" />
-        </>
-      )}
+        <p className="col-span-5 col-start-3 text-sm text-ink-400 lg:col-span-3 lg:col-start-7">
+          {project.category}
+        </p>
 
-      {/* Meta — top row */}
-      <div
-        className={`absolute top-0 inset-x-0 flex items-center justify-between px-6 py-5 text-[10px] font-mono tracking-[0.2em] uppercase ${
-          hasMedia ? "text-ink-100/80" : "text-ink-300"
-        }`}
-      >
-        <span>{project.category}</span>
-        <span>{project.year}</span>
-      </div>
-
-      {/* Title — bottom */}
-      <div className="absolute bottom-0 inset-x-0 px-6 py-6">
-        <div className="flex items-end justify-between gap-4">
-          <div className="min-w-0">
-            <h3
-              className={`text-2xl lg:text-3xl font-semibold tracking-tight transition-colors duration-300 truncate ${
-                hasMedia
-                  ? "text-ink-50 group-hover:text-gold-200"
-                  : "text-ink-50 group-hover:text-gold-400"
-              }`}
-            >
-              {project.name}
-            </h3>
-            {project.summary && (
-              <p
-                className={`mt-1.5 text-sm truncate ${
-                  hasMedia ? "text-ink-100/80" : "text-ink-300"
-                }`}
-              >
-                {project.summary}
-              </p>
-            )}
-          </div>
+        <div className="col-span-5 flex items-baseline justify-between gap-4 lg:col-span-3 lg:col-start-10">
+          <span className="text-sm text-ink-400">{project.industry}</span>
           <span
             aria-hidden="true"
-            className={`shrink-0 font-mono text-xl group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300 ${
-              hasMedia
-                ? "text-ink-100/70 group-hover:text-gold-200"
-                : "text-ink-500 group-hover:text-gold-400"
-            }`}
+            className="shrink-0 text-ink-600 transition-all duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-gold-400"
           >
             ↗
           </span>
         </div>
       </div>
+
+      {/* Mobile carries the screenshot inline, since there is no hover state
+          to reveal the preview with. */}
+      {project.image && (
+        <div className="relative mt-6 aspect-[16/10] overflow-hidden lg:hidden">
+          <Image
+            src={project.image}
+            alt={`${project.name} — ${project.category} for ${project.industry}`}
+            fill
+            sizes="100vw"
+            className="object-cover object-top"
+          />
+        </div>
+      )}
     </a>
   );
 }
 
 export default function Work() {
-  const headingRef = useReveal();
-  const gridRef = useReveal();
+  const { ref: listRef, revealClass } = useReveal();
+  const [activeIndex, setActiveIndex] = useState(null);
+  const [canHover, setCanHover] = useState(false);
 
-  // Bento spans for 3 cards: wide + narrow on top, full-width feature below.
-  const spans = [
-    "lg:col-span-8 min-h-[320px] lg:min-h-[480px]",
-    "lg:col-span-4 min-h-[280px] lg:min-h-[480px]",
-    "lg:col-span-12 min-h-[300px] lg:min-h-[440px]",
-  ];
+  useEffect(() => {
+    const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    setCanHover(fine && !reduce);
+  }, []);
+
+  const handleEnter = useCallback((i) => () => setActiveIndex(i), []);
+  const handleLeave = useCallback(() => setActiveIndex(null), []);
 
   return (
-    <section id="work" className="scroll-mt-24 py-24 lg:py-32 border-t border-ink-700">
-      <div className="mx-auto max-w-6xl px-6">
-        <div
-          ref={headingRef}
-          className="reveal flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-14"
-        >
-          <div className="max-w-2xl">
-            <p className="font-mono text-xs tracking-[0.3em] uppercase text-gold-400">
-              Selected Work
-            </p>
-            <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-ink-50">
-              Recent projects.
-            </h2>
-          </div>
-          <p className="font-mono text-xs tracking-[0.2em] uppercase text-ink-400">
-            {String(projects.length).padStart(2, "0")} / {String(projects.length).padStart(2, "0")} shown
-          </p>
-        </div>
+    <section id="work" className="scroll-mt-24 py-24 lg:py-36">
+      <div className="shell">
+        <SectionHeader
+          index="01"
+          label="Selected work"
+          title="Shipped, live, and earning."
+          standfirst="A sample of recent client engagements. Each was designed, built, and deployed by us end to end."
+          aside={`${String(projects.length).padStart(2, "0")} projects`}
+        />
 
         <div
-          ref={gridRef}
-          className="reveal-stagger grid grid-cols-1 lg:grid-cols-12 gap-3"
+          ref={listRef}
+          className={`reveal-stagger mt-16 lg:mt-20 ${revealClass}`}
         >
           {projects.map((project, i) => (
-            <ProjectCard
+            <ProjectRow
               key={project.id}
               project={project}
-              className={spans[i] || "lg:col-span-6 min-h-[280px]"}
+              onEnter={handleEnter(i)}
+              onLeave={handleLeave}
             />
           ))}
         </div>
+
+        <div className="mt-8 flex items-baseline justify-between gap-6">
+          {canHover && (
+            <p className="label hidden text-ink-600 lg:block">
+              Hover a row to preview
+            </p>
+          )}
+          <a
+            href="/#contact"
+            className="link-underline ml-auto text-sm text-ink-300 hover:text-ink-50"
+          >
+            Start a project
+          </a>
+        </div>
       </div>
 
-      <div className="mt-24 lg:mt-32 h-px bg-gradient-to-r from-transparent via-gold-500/25 to-transparent" />
+      {canHover && <HoverPreview activeIndex={activeIndex} />}
     </section>
   );
 }

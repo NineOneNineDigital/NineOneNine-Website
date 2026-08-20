@@ -1,12 +1,3 @@
-import {
-  CodeBracketSquareIcon,
-  ShoppingCartIcon,
-  DevicePhoneMobileIcon,
-  DocumentTextIcon,
-  ArrowsRightLeftIcon,
-  ChatBubbleLeftRightIcon,
-} from "@heroicons/react/24/outline";
-
 // Anchors use /# so they resolve from subpages back to homepage sections.
 export const navigation = [
   { name: "Work", href: "/#work" },
@@ -19,6 +10,8 @@ export const navigation = [
 // Per-project fields:
 //   image    — screenshot path (preferred; next/image optimizes on demand)
 //   video    — autoplay-on-hover silent loop (used if no image)
+//   category — what we built
+//   industry — the client's sector, taken from the live site
 //   summary  — optional one-liner (omit to render just the title)
 //   href     — optional outbound link to the live site or case study
 export const projects = [
@@ -26,7 +19,7 @@ export const projects = [
     id: "01",
     name: "Bost Homes",
     category: "Website",
-    year: "2024",
+    industry: "Custom home building",
     image: "/bost-homes-site.jpg",
     href: "https://bosthomes.com",
   },
@@ -34,7 +27,7 @@ export const projects = [
     id: "02",
     name: "Grande Manor",
     category: "Website",
-    year: "2024",
+    industry: "Custom home building",
     image: "/grande-manor-site.jpg",
     href: "https://grandemanorhomes.com",
   },
@@ -42,9 +35,17 @@ export const projects = [
     id: "03",
     name: "McMillan Design",
     category: "Website",
-    year: "2024",
+    industry: "Residential design",
     image: "/mcmillan-design-site.jpg",
     href: "https://mcmillan-design.com",
+  },
+  {
+    id: "04",
+    name: "Dealer Lifts",
+    category: "Website & eCommerce",
+    industry: "Automotive service",
+    image: "/dealer-lifts-site.jpg",
+    href: "https://dealerliftsinc.com",
   },
 ];
 
@@ -53,40 +54,34 @@ export const services = [
     name: "Full-Stack Web Development",
     description:
       "From database architecture to pixel-perfect UI — we handle the entire stack. Custom web applications, responsive websites, CRMs, dashboards, and internal tools built end-to-end so nothing falls through the cracks.",
-    icon: CodeBracketSquareIcon,
     slug: "web-development",
   },
   {
     name: "eCommerce",
     description:
       "Storefronts engineered for conversion. Payment processing, inventory management, and checkout flows that feel effortless.",
-    icon: ShoppingCartIcon,
     slug: "ecommerce-development",
   },
   {
     name: "Mobile Development",
     description:
       "Native and cross-platform mobile applications for iOS and Android. Offline-capable, performant, and built to feel right on every device.",
-    icon: DevicePhoneMobileIcon,
     slug: "mobile-app-development",
   },
   {
     name: "CMS Development",
     description:
       "Content management systems that give your team full control. Publish, update, and measure — no developer required.",
-    icon: DocumentTextIcon,
   },
   {
     name: "Consulting",
     description:
       "Technical strategy, architecture reviews, and technology selection. We help teams make informed decisions before writing a single line of code.",
-    icon: ChatBubbleLeftRightIcon,
   },
   {
     name: "API Development",
     description:
       "RESTful and GraphQL APIs that connect your systems. Clean documentation, robust error handling, and built for third-party integration.",
-    icon: ArrowsRightLeftIcon,
   },
 ];
 

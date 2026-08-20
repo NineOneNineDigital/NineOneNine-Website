@@ -1,89 +1,75 @@
 "use client";
 
-import { useRef, useCallback } from "react";
+import SectionHeader from "@/components/SectionHeader";
 import { services } from "@/lib/constants";
 import { useReveal } from "@/lib/hooks";
 
-function ServiceCard({ service }) {
-  const cardRef = useRef(null);
-
-  const handleMouseMove = useCallback((e) => {
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * 100;
-    const y = ((e.clientY - rect.top) / rect.height) * 100;
-    cardRef.current.style.setProperty("--mouse-x", `${x}%`);
-    cardRef.current.style.setProperty("--mouse-y", `${y}%`);
-  }, []);
-
+function ServiceRow({ service, index }) {
   const Wrapper = service.slug ? "a" : "div";
   const wrapperProps = service.slug
-    ? { href: `/services/${service.slug}`, "aria-label": `${service.name} — learn more` }
+    ? {
+        href: `/services/${service.slug}`,
+        "aria-label": `${service.name} — read more`,
+      }
     : {};
 
   return (
     <Wrapper
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
       {...wrapperProps}
-      className="card-glow group relative block bg-ink-900 p-8 lg:p-10 transition-all duration-300 hover:bg-ink-800"
+      className={`row-hover block rule-b py-8 lg:py-10 ${
+        service.slug ? "group" : ""
+      }`}
     >
-      <div className="absolute inset-0 border border-transparent group-hover:border-primary/30 transition-colors duration-300 pointer-events-none" />
-      <service.icon
-        className="h-5 w-5 text-gold-400 transition-transform duration-300 group-hover:scale-110"
-        aria-hidden="true"
-      />
-      <h3 className="mt-5 text-sm font-semibold text-ink-50 group-hover:text-gold-400 transition-colors duration-300">
-        {service.name}
-      </h3>
-      <p className="mt-3 text-sm leading-relaxed text-ink-300">
-        {service.description}
-      </p>
-      {service.slug && (
-        <span className="mt-5 inline-flex items-center gap-2 font-mono text-[10px] tracking-[0.25em] uppercase text-gold-400 group-hover:text-gold-200 transition-colors duration-300">
-          <span>Learn more</span>
-          <span
-            aria-hidden="true"
-            className="transition-transform duration-300 group-hover:translate-x-1"
-          >
-            →
-          </span>
+      <div className="grid grid-cols-12 gap-x-6 gap-y-4">
+        <span className="col-span-2 pt-1 font-mono text-[11px] text-ink-600 transition-colors duration-500 group-hover:text-gold-500 lg:col-span-1">
+          {String(index + 1).padStart(2, "0")}
         </span>
-      )}
+
+        <h3 className="col-span-10 text-xl font-medium leading-tight tracking-[-0.03em] text-ink-100 transition-colors duration-500 group-hover:text-ink-50 lg:col-span-4 lg:text-2xl">
+          {service.name}
+        </h3>
+
+        <div className="col-span-12 lg:col-span-6 lg:col-start-7">
+          <p className="max-w-xl text-[0.9375rem] leading-relaxed text-ink-400 transition-colors duration-500 group-hover:text-ink-300">
+            {service.description}
+          </p>
+          {service.slug && (
+            <span className="mt-4 inline-flex items-center gap-2 text-sm text-gold-400">
+              <span>Read more</span>
+              <span
+                aria-hidden="true"
+                className="transition-transform duration-500 group-hover:translate-x-1"
+              >
+                →
+              </span>
+            </span>
+          )}
+        </div>
+      </div>
     </Wrapper>
   );
 }
 
 export default function Services() {
-  const headingRef = useReveal();
-  const gridRef = useReveal();
+  const { ref: listRef, revealClass: listClass } = useReveal();
 
   return (
-    <section id="services" className="scroll-mt-24 py-24 lg:py-32">
-      <div className="mx-auto max-w-6xl px-6">
-        <div ref={headingRef} className="reveal max-w-2xl">
-          <p className="font-mono text-xs tracking-[0.3em] uppercase text-gold-400">
-            Services
-          </p>
-          <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-ink-50">
-            What we build.
-          </h2>
-          <p className="mt-5 text-base text-ink-300 leading-relaxed">
-            End-to-end development services for teams that need reliable,
-            production-grade software.
-          </p>
-        </div>
+    <section id="services" className="scroll-mt-24 py-24 lg:py-36">
+      <div className="shell">
+        <SectionHeader
+          index="03"
+          label="Services"
+          title="What we build."
+          standfirst="Engagements run end to end — discovery through launch and the maintenance that follows."
+          aside={`${String(services.length).padStart(2, "0")} disciplines`}
+        />
 
-        <div
-          ref={gridRef}
-          className="reveal-stagger mt-16 grid grid-cols-1 gap-px bg-ink-800 sm:grid-cols-2 lg:grid-cols-3 border border-ink-700 rounded-lg overflow-hidden"
-        >
-          {services.map((service) => (
-            <ServiceCard key={service.name} service={service} />
+        <div ref={listRef} className={`reveal-stagger mt-16 lg:mt-20 ${listClass}`}>
+          {services.map((service, i) => (
+            <ServiceRow key={service.name} service={service} index={i} />
           ))}
         </div>
       </div>
-
-      <div className="mt-24 lg:mt-32 h-px bg-gradient-to-r from-transparent via-gold-500/25 to-transparent" />
     </section>
   );
 }

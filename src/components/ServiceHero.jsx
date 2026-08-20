@@ -1,71 +1,70 @@
-import InteractiveDotGrid from "@/components/InteractiveDotGrid";
+"use client";
+
+import { useReveal } from "@/lib/hooks";
 
 export default function ServiceHero({ service }) {
   const { hero, name } = service;
+  const { ref, revealClass } = useReveal({ threshold: 0, rootMargin: "0px" });
 
   return (
-    <section className="relative overflow-hidden border-b border-ink-700">
-      <InteractiveDotGrid />
-      <div className="absolute -bottom-32 -left-32 w-[640px] h-[640px] rounded-full bg-primary/[0.07] blur-[140px]" />
-      <div className="absolute -top-24 -right-24 w-[320px] h-[320px] rounded-full bg-primary/[0.04] blur-[100px]" />
-
-      <div className="relative z-10 pt-32 lg:pt-40">
-        <div className="mx-auto max-w-6xl px-6 flex flex-wrap items-center justify-between gap-4 text-[10px] font-mono tracking-[0.3em] uppercase">
+    <section
+      ref={ref}
+      className={`rule-b pt-28 lg:pt-32 ${revealClass}`}
+    >
+      <div className="shell">
+        <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2 pb-5 rule-b">
           <nav aria-label="Breadcrumb">
-            <ol className="flex items-center gap-3 text-ink-300">
+            <ol className="label flex items-center gap-2.5">
               <li>
                 <a
                   href="/"
-                  className="hover:text-ink-50 transition-colors duration-200"
+                  className="text-ink-400 transition-colors duration-300 hover:text-ink-50"
                 >
                   Home
                 </a>
               </li>
-              <li aria-hidden="true" className="text-ink-500">
+              <li aria-hidden="true" className="text-ink-600">
                 /
               </li>
               <li>
                 <a
                   href="/#services"
-                  className="hover:text-ink-50 transition-colors duration-200"
+                  className="text-ink-400 transition-colors duration-300 hover:text-ink-50"
                 >
                   Services
                 </a>
               </li>
-              <li aria-hidden="true" className="text-ink-500">
+              <li aria-hidden="true" className="text-ink-600">
                 /
               </li>
-              <li aria-current="page" className="text-gold-400">
+              <li aria-current="page" className="text-gold-500">
                 {name}
               </li>
             </ol>
           </nav>
-          <div className="flex items-center gap-6 text-ink-400">
-            <span>Raleigh, NC</span>
-            <span aria-hidden="true" className="h-px w-6 bg-ink-700" />
-            <span>35.78°N · 78.64°W</span>
-          </div>
+          <p className="label hidden text-ink-500 sm:block">Raleigh, North Carolina</p>
         </div>
-      </div>
 
-      <div className="relative z-10 mx-auto w-full max-w-6xl px-6 py-16 lg:py-24">
-        <div className="grid grid-cols-12 gap-x-6 gap-y-12 items-end">
-          <h1 className="col-span-12 lg:col-span-9 text-ink-50 font-bold tracking-[-0.03em] leading-[0.95] text-[clamp(2.75rem,8vw,6.5rem)]">
-            <span className="block">{hero.headline}</span>
-            <span className="block font-serif italic font-light text-gold-400">
-              {hero.headlineAccent}
+        <div className="grid grid-cols-12 gap-x-6 gap-y-12 py-16 lg:py-24">
+          {/* The accent here is a full clause, not the one or two words the
+              homepage headlines use — gold across two whole lines overpowers
+              the page, so it takes the muted treatment instead. */}
+          <h1 className="display-xl col-span-12 text-ink-50 lg:col-span-10">
+            <span className="reveal-line">
+              <span>{hero.headline}</span>
+            </span>
+            <span className="reveal-line">
+              <span className="text-ink-500">{hero.headlineAccent}</span>
             </span>
           </h1>
 
-          <div className="col-span-12 lg:col-span-8 lg:col-start-1 flex flex-col gap-8">
-            <p className="text-base lg:text-lg text-ink-300 leading-relaxed max-w-2xl">
-              {hero.lede}
-            </p>
+          <div className="reveal reveal-delay-1 col-span-12 flex flex-col gap-9 lg:col-span-7">
+            <p className="prose-editorial max-w-2xl">{hero.lede}</p>
 
-            <div className="flex flex-col sm:flex-row gap-3">
+            <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
               <a
                 href="/#contact"
-                className="group relative inline-flex items-center justify-between gap-4 rounded-lg bg-primary text-ink-950 font-mono text-xs tracking-[0.2em] uppercase px-6 py-4 hover:bg-gold-400 hover:text-ink-950 transition-all duration-300 hover:shadow-[0_0_40px_rgba(205,164,0,0.35)]"
+                className="group inline-flex items-center gap-3 bg-ink-50 px-7 py-4 text-sm font-medium text-ink-950 transition-colors duration-300 hover:bg-gold-400"
               >
                 <span>Start a project</span>
                 <span
@@ -77,22 +76,18 @@ export default function ServiceHero({ service }) {
               </a>
               <a
                 href="/#work"
-                className="group inline-flex items-center justify-between gap-4 rounded-lg font-mono text-xs tracking-[0.2em] uppercase text-gold-400 px-6 py-4 border border-gold-500/40 hover:border-gold-500 hover:bg-gold-500/[0.06] hover:text-gold-300 transition-all duration-300"
+                className="link-underline text-sm text-ink-200 hover:text-ink-50"
               >
-                <span>See our work</span>
-                <span
-                  aria-hidden="true"
-                  className="transition-transform duration-300 group-hover:translate-x-1"
-                >
-                  ↘
-                </span>
+                See selected work
               </a>
             </div>
           </div>
         </div>
       </div>
 
-      <span className="sr-only">{name} in Raleigh, North Carolina by NineOneNine</span>
+      <span className="sr-only">
+        {name} in Raleigh, North Carolina by NineOneNine
+      </span>
     </section>
   );
 }
