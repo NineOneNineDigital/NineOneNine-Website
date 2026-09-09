@@ -1,15 +1,21 @@
+import About from "@/components/About";
+import Contact from "@/components/ContactForm";
+import FAQ from "@/components/FAQ";
+import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-import Work from "@/components/Work";
-import About from "@/components/About";
-import Services from "@/components/Services";
-import Process from "@/components/Process";
-import FAQ from "@/components/FAQ";
-import Contact from "@/components/ContactForm";
-import Footer from "@/components/Footer";
-import { faqs, services } from "@/lib/constants";
 import JsonLd from "@/components/JsonLd";
-import { SITE_URL, BUSINESS_ID, WEBSITE_ID, SITE_TITLE, SITE_DESCRIPTION } from "@/lib/site";
+import Process from "@/components/Process";
+import Services from "@/components/Services";
+import Work from "@/components/Work";
+import { faqs, services } from "@/lib/constants";
+import {
+  BUSINESS_ID,
+  SITE_DESCRIPTION,
+  SITE_TITLE,
+  SITE_URL,
+  WEBSITE_ID,
+} from "@/lib/site";
 
 export default function HomePage() {
   const faqSchema = {
@@ -57,8 +63,8 @@ export default function HomePage() {
       <JsonLd data={serviceSchema} />
       <JsonLd data={webPageSchema} />
       <a
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-ink-50 focus:px-5 focus:py-3 focus:font-medium focus:text-ink-950 focus:text-sm"
         href="#main"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-ink-50 focus:px-5 focus:py-3 focus:text-sm focus:font-medium focus:text-ink-950"
       >
         Skip to content
       </a>

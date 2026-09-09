@@ -1,8 +1,8 @@
 "use client";
 
-import { ValidationError, useForm } from "@formspree/react";
+import { useForm, ValidationError } from "@formspree/react";
+import { useCallback, useEffect, useRef } from "react";
 import { useReveal } from "@/lib/hooks";
-import { useEffect, useRef } from "react";
 import { trackEvent } from "@/lib/measurement";
 
 // Underline fields rather than boxed inputs — fewer competing rectangles,
@@ -14,7 +14,7 @@ const FIELD_LABEL = "label mb-3 block text-ink-400";
 
 function SuccessMessage() {
   return (
-    <div role="status" className="rule-t rule-b py-14">
+    <div className="rule-t rule-b py-14" role="status">
       <p className="label text-gold-500">Message received</p>
       <p className="prose-editorial mt-5 max-w-md text-ink-100">
         Thanks for telling us about your project. We will reply by email within
@@ -28,6 +28,12 @@ function Form() {
   const [state, handleSubmit] = useForm("mreypprw");
   const started = useRef(false);
   const recordedSuccess = useRef(false);
+  const handleInput = useCallback(() => {
+    if (!started.current) {
+      started.current = true;
+      trackEvent("form_start", "contact_form");
+    }
+  }, []);
 
   useEffect(() => {
     if (state.succeeded && !recordedSuccess.current) {
@@ -36,113 +42,113 @@ function Form() {
     }
   }, [state.succeeded]);
 
-  if (state.succeeded) return <SuccessMessage />;
+  if (state.succeeded) {
+    return <SuccessMessage />;
+  }
 
   return (
     <form
       action="https://formspree.io/f/mreypprw"
       method="POST"
+      onInput={handleInput}
       onSubmit={handleSubmit}
-      onInput={() => {
-        if (!started.current) {
-          started.current = true;
-          trackEvent("form_start", "contact_form");
-        }
-      }}
     >
       <div className="grid grid-cols-1 gap-x-8 gap-y-9 sm:grid-cols-2">
         <div>
-          <label htmlFor="name" className={FIELD_LABEL}>
+          <label className={FIELD_LABEL} htmlFor="name">
             Name
           </label>
           <input
-            type="text"
-            name="name"
-            id="name"
-            required
             autoComplete="name"
             className={FIELD}
+            id="name"
+            name="name"
             placeholder="Jane Smith"
+            required
+            type="text"
           />
           <ValidationError
-            prefix="Name"
-            field="name"
+            className="mt-2 text-danger text-xs"
             errors={state.errors}
-            className="mt-2 text-xs text-danger"
+            field="name"
+            prefix="Name"
           />
         </div>
 
         <div>
-          <label htmlFor="email" className={FIELD_LABEL}>
+          <label className={FIELD_LABEL} htmlFor="email">
             Email
           </label>
           <input
-            type="email"
-            name="email"
-            id="email"
-            required
             autoComplete="email"
             className={FIELD}
+            id="email"
+            name="email"
             placeholder="jane@company.com"
+            required
+            type="email"
           />
           <ValidationError
-            prefix="Email"
-            field="email"
+            className="mt-2 text-danger text-xs"
             errors={state.errors}
-            className="mt-2 text-xs text-danger"
+            field="email"
+            prefix="Email"
           />
         </div>
 
         <div className="sm:col-span-2">
-          <label htmlFor="website" className={FIELD_LABEL}>
+          <label className={FIELD_LABEL} htmlFor="website">
             Website — optional
           </label>
           <input
-            type="url"
-            name="website"
-            id="website"
             autoComplete="url"
             className={FIELD}
+            id="website"
+            name="website"
             placeholder="https://"
+            type="url"
           />
           <ValidationError
-            prefix="Website"
-            field="website"
+            className="mt-2 text-danger text-xs"
             errors={state.errors}
-            className="mt-2 text-xs text-danger"
+            field="website"
+            prefix="Website"
           />
         </div>
 
         <div className="sm:col-span-2">
-          <label htmlFor="message" className={FIELD_LABEL}>
+          <label className={FIELD_LABEL} htmlFor="message">
             What would you like to achieve?
           </label>
           <textarea
-            id="message"
-            name="message"
-            rows={4}
-            required
             aria-describedby="message-hint"
             className={`${FIELD} resize-none`}
+            id="message"
+            name="message"
             placeholder="For example: more website inquiries, an online store, or less manual work for our team."
+            required
+            rows={4}
           />
-          <p id="message-hint" className="mt-3 text-sm leading-relaxed text-ink-400">
+          <p
+            className="mt-3 text-ink-400 text-sm leading-relaxed"
+            id="message-hint"
+          >
             A few sentences are enough. You do not need a technical brief.
           </p>
           <ValidationError
-            prefix="Message"
-            field="message"
+            className="mt-2 text-danger text-xs"
             errors={state.errors}
-            className="mt-2 text-xs text-danger"
+            field="message"
+            prefix="Message"
           />
         </div>
       </div>
 
       <div className="mt-12">
         <button
-          type="submit"
+          className="group inline-flex items-center gap-3 bg-ink-50 px-8 py-4 font-medium text-ink-950 text-sm transition-colors duration-300 hover:bg-gold-400 disabled:cursor-not-allowed disabled:opacity-50"
           disabled={state.submitting}
-          className="group inline-flex items-center gap-3 bg-ink-50 px-8 py-4 text-sm font-medium text-ink-950 transition-colors duration-300 hover:bg-gold-400 disabled:cursor-not-allowed disabled:opacity-50"
+          type="submit"
         >
           <span>{state.submitting ? "Sending" : "Discuss my project"}</span>
           <span
@@ -152,12 +158,12 @@ function Form() {
             →
           </span>
         </button>
-        <p className="mt-4 text-sm text-ink-400">
+        <p className="mt-4 text-ink-400 text-sm">
           Expect a reply within one business day.
         </p>
         <ValidationError
+          className="mt-3 text-danger text-xs"
           errors={state.errors}
-          className="mt-3 text-xs text-danger"
         />
       </div>
     </form>
@@ -168,14 +174,16 @@ export default function Contact() {
   const { ref, revealClass } = useReveal();
 
   return (
-    <section id="contact" className="scroll-mt-24 py-24 lg:py-36">
-      <div ref={ref} className={`reveal shell ${revealClass}`}>
-        <div className="flex items-baseline justify-between gap-6 pb-5 rule-b">
+    <section className="scroll-mt-24 py-24 lg:py-36" id="contact">
+      <div className={`reveal shell ${revealClass}`} ref={ref}>
+        <div className="rule-b flex items-baseline justify-between gap-6 pb-5">
           <p className="label">
             <span className="text-gold-500">06</span>
             <span className="ml-3 text-ink-400">Contact</span>
           </p>
-          <p className="label hidden text-ink-500 sm:block">Replies within a business day</p>
+          <p className="label hidden text-ink-500 sm:block">
+            Replies within a business day
+          </p>
         </div>
 
         <h2 className="display-xl mt-12 text-ink-50 lg:mt-16">
@@ -188,21 +196,30 @@ export default function Contact() {
           approach for your business.
         </p>
 
-        <div className="mt-16 grid grid-cols-1 lg:grid-cols-12 gap-x-6 gap-y-14 lg:mt-24">
+        <div className="mt-16 grid grid-cols-1 gap-x-6 gap-y-14 lg:mt-24 lg:grid-cols-12">
           <div className="lg:col-span-3">
             <p className="label">What happens next</p>
-            <ol className="mt-5 mb-10 space-y-4 text-sm leading-relaxed text-ink-300">
-              <li><span className="mr-3 font-mono text-gold-400">01</span>We reply within one business day.</li>
-              <li><span className="mr-3 font-mono text-gold-400">02</span>We discuss your goals, timeline, and fit.</li>
-              <li><span className="mr-3 font-mono text-gold-400">03</span>If we are a fit, you receive a scoped proposal with fixed pricing.</li>
+            <ol className="mt-5 mb-10 space-y-4 text-ink-300 text-sm leading-relaxed">
+              <li>
+                <span className="mr-3 font-mono text-gold-400">01</span>We reply
+                within one business day.
+              </li>
+              <li>
+                <span className="mr-3 font-mono text-gold-400">02</span>We
+                discuss your goals, timeline, and fit.
+              </li>
+              <li>
+                <span className="mr-3 font-mono text-gold-400">03</span>If we
+                are a fit, you receive a scoped proposal with fixed pricing.
+              </li>
             </ol>
             <dl className="space-y-8">
               <div>
                 <dt className="label text-ink-500">Email</dt>
                 <dd className="mt-2">
                   <a
-                    href="mailto:hello@nineoneninedigital.com"
                     className="link-underline text-[0.9375rem]"
+                    href="mailto:hello@nineoneninedigital.com"
                   >
                     hello@nineoneninedigital.com
                   </a>

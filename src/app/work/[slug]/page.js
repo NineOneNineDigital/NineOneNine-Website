@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Header from "@/components/Header";
 import JsonLd from "@/components/JsonLd";
-import { projectPages, projectPageList } from "@/lib/projects-content";
+import { projectPageList, projectPages } from "@/lib/projects-content";
 import { servicePages } from "@/lib/services-content";
 import { BUSINESS_ID, SITE_URL } from "@/lib/site";
 
@@ -15,7 +15,9 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const project = Object.hasOwn(projectPages, slug) ? projectPages[slug] : null;
-  if (!project) return {};
+  if (!project) {
+    return {};
+  }
 
   const canonical = `${SITE_URL}/work/${project.slug}`;
   const images = [
@@ -50,10 +52,14 @@ export async function generateMetadata({ params }) {
 export default async function ProjectPage({ params }) {
   const { slug } = await params;
   const project = Object.hasOwn(projectPages, slug) ? projectPages[slug] : null;
-  if (!project) notFound();
+  if (!project) {
+    notFound();
+  }
 
   const canonical = `${SITE_URL}/work/${project.slug}`;
-  const relatedServices = project.serviceSlugs.map((slug) => servicePages[slug]);
+  const relatedServices = project.serviceSlugs.map(
+    (serviceSlug) => servicePages[serviceSlug]
+  );
   const schema = {
     "@context": "https://schema.org",
     "@graph": [
@@ -92,7 +98,12 @@ export default async function ProjectPage({ params }) {
             name: "Work",
             item: `${SITE_URL}/#work`,
           },
-          { "@type": "ListItem", position: 3, name: project.name, item: canonical },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: project.name,
+            item: canonical,
+          },
         ],
       },
     ],
@@ -102,8 +113,8 @@ export default async function ProjectPage({ params }) {
     <>
       <JsonLd data={schema} />
       <a
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-ink-50 focus:px-5 focus:py-3 focus:font-medium focus:text-ink-950 focus:text-sm"
         href="#main"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-ink-50 focus:px-5 focus:py-3 focus:text-sm focus:font-medium focus:text-ink-950"
       >
         Skip to content
       </a>
@@ -113,51 +124,76 @@ export default async function ProjectPage({ params }) {
           <div className="shell">
             <nav aria-label="Breadcrumb" className="rule-b pb-5">
               <ol className="label flex flex-wrap items-center gap-2.5">
-                <li><Link href="/" className="text-ink-400 hover:text-ink-50">Home</Link></li>
-                <li aria-hidden="true" className="text-ink-600">/</li>
-                <li><Link href="/#work" className="text-ink-400 hover:text-ink-50">Work</Link></li>
-                <li aria-hidden="true" className="text-ink-600">/</li>
-                <li aria-current="page" className="text-gold-500">{project.name}</li>
+                <li>
+                  <Link className="text-ink-400 hover:text-ink-50" href="/">
+                    Home
+                  </Link>
+                </li>
+                <li aria-hidden="true" className="text-ink-600">
+                  /
+                </li>
+                <li>
+                  <Link
+                    className="text-ink-400 hover:text-ink-50"
+                    href="/#work"
+                  >
+                    Work
+                  </Link>
+                </li>
+                <li aria-hidden="true" className="text-ink-600">
+                  /
+                </li>
+                <li aria-current="page" className="text-gold-500">
+                  {project.name}
+                </li>
               </ol>
             </nav>
 
             <div className="grid grid-cols-12 gap-x-6 gap-y-10 py-16 lg:py-24">
               <div className="col-span-12 lg:col-span-8">
-                <p className="label mb-6 text-gold-500">{project.category} · Selected work</p>
+                <p className="label mb-6 text-gold-500">
+                  {project.category} · Selected work
+                </p>
                 <h1 className="display-xl text-ink-50">{project.name}</h1>
                 <p className="prose-editorial mt-8 max-w-2xl">{project.lede}</p>
               </div>
               <dl className="col-span-12 grid gap-6 self-end sm:grid-cols-2 lg:col-span-3 lg:col-start-10 lg:grid-cols-1">
                 <div>
                   <dt className="label text-ink-500">Industry</dt>
-                  <dd className="mt-2 text-sm text-ink-200">{project.industry}</dd>
+                  <dd className="mt-2 text-ink-200 text-sm">
+                    {project.industry}
+                  </dd>
                 </div>
                 <div>
                   <dt className="label text-ink-500">Client location</dt>
-                  <dd className="mt-2 text-sm text-ink-200">{project.location}</dd>
+                  <dd className="mt-2 text-ink-200 text-sm">
+                    {project.location}
+                  </dd>
                 </div>
               </dl>
             </div>
 
             <figure>
               <Image
-                src={project.image}
                 alt={`${project.name} website homepage`}
-                width={1920}
-                height={1070}
-                sizes="(max-width: 1344px) 100vw, 1264px"
-                preload
                 className="h-auto w-full border border-ink-800"
+                height={1070}
+                preload
+                sizes="(max-width: 1344px) 100vw, 1264px"
+                src={project.image}
+                width={1920}
               />
-              <figcaption className="mt-4 flex flex-wrap items-center justify-between gap-4 text-sm text-ink-400">
+              <figcaption className="mt-4 flex flex-wrap items-center justify-between gap-4 text-ink-400 text-sm">
                 <span>{project.name} — website preview</span>
                 <a
-                  href={project.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="link-underline text-ink-200 hover:text-ink-50"
+                  href={project.href}
+                  rel="noopener noreferrer"
+                  target="_blank"
                 >
-                  Visit {project.name}<span className="sr-only"> (opens in a new tab)</span> <span aria-hidden="true">↗</span>
+                  Visit {project.name}
+                  <span className="sr-only"> (opens in a new tab)</span>{" "}
+                  <span aria-hidden="true">↗</span>
                 </a>
               </figcaption>
             </figure>
@@ -168,16 +204,27 @@ export default async function ProjectPage({ params }) {
           <div className="shell grid grid-cols-12 gap-x-6 gap-y-10">
             <div className="col-span-12 lg:col-span-4">
               <p className="label text-gold-500">01 / Project overview</p>
-              <h2 className="display-md mt-6">The business<br />behind the website.</h2>
+              <h2 className="display-md mt-6">
+                The business
+                <br />
+                behind the website.
+              </h2>
             </div>
             <div className="col-span-12 space-y-7 lg:col-span-7 lg:col-start-6">
               <p className="prose-editorial text-ink-200">{project.context}</p>
               <p className="prose-editorial">{project.overview}</p>
-              <p className="text-sm leading-relaxed text-ink-400">
+              <p className="text-ink-400 text-sm leading-relaxed">
                 Explore the business and website on{" "}
-                <a href={project.href} target="_blank" rel="noopener noreferrer" className="link-underline text-ink-200 hover:text-ink-50">
-                  {project.name}&rsquo;s live site<span className="sr-only"> (opens in a new tab)</span>
-                </a>.
+                <a
+                  className="link-underline text-ink-200 hover:text-ink-50"
+                  href={project.href}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  {project.name}&rsquo;s live site
+                  <span className="sr-only"> (opens in a new tab)</span>
+                </a>
+                .
               </p>
             </div>
           </div>
@@ -191,9 +238,13 @@ export default async function ProjectPage({ params }) {
             </div>
             <div className="mt-12 grid gap-x-10 gap-y-10 md:grid-cols-3">
               {project.highlights.map((highlight) => (
-                <div key={highlight.title} className="rule-t pt-6">
-                  <h3 className="text-xl font-medium tracking-tight text-ink-200">{highlight.title}</h3>
-                  <p className="mt-4 text-[0.9375rem] leading-relaxed text-ink-400">{highlight.description}</p>
+                <div className="rule-t pt-6" key={highlight.title}>
+                  <h3 className="font-medium text-ink-200 text-xl tracking-tight">
+                    {highlight.title}
+                  </h3>
+                  <p className="mt-4 text-[0.9375rem] text-ink-400 leading-relaxed">
+                    {highlight.description}
+                  </p>
                 </div>
               ))}
             </div>
@@ -208,22 +259,38 @@ export default async function ProjectPage({ params }) {
                 <ul className="mt-6 flex flex-wrap gap-x-8 gap-y-4">
                   {relatedServices.map((service) => (
                     <li key={service.slug}>
-                      <Link href={`/services/${service.slug}`} className="link-underline text-ink-200 hover:text-ink-50">
+                      <Link
+                        className="link-underline text-ink-200 hover:text-ink-50"
+                        href={`/services/${service.slug}`}
+                      >
                         {service.name} <span aria-hidden="true">→</span>
                       </Link>
                     </li>
                   ))}
                 </ul>
-                <h2 className="display-lg mt-12">What could your<br /><span className="text-gold-400">website do?</span></h2>
+                <h2 className="display-lg mt-12">
+                  What could your
+                  <br />
+                  <span className="text-gold-400">website do?</span>
+                </h2>
               </div>
               <div className="col-span-12 flex flex-col items-start justify-end gap-7 lg:col-span-4 lg:col-start-9">
-                <p className="text-[0.9375rem] leading-relaxed text-ink-400">
-                  Tell us about your business and what you want to improve. We reply within one business day with next steps.
+                <p className="text-[0.9375rem] text-ink-400 leading-relaxed">
+                  Tell us about your business and what you want to improve. We
+                  reply within one business day with next steps.
                 </p>
-                <Link href="/#contact" className="inline-flex items-center gap-3 bg-ink-50 px-7 py-4 text-sm font-medium text-ink-950 transition-colors hover:bg-gold-400">
+                <Link
+                  className="inline-flex items-center gap-3 bg-ink-50 px-7 py-4 font-medium text-ink-950 text-sm transition-colors hover:bg-gold-400"
+                  href="/#contact"
+                >
                   Discuss your project <span aria-hidden="true">→</span>
                 </Link>
-                <Link href="/#work" className="link-underline text-sm text-ink-300 hover:text-ink-50">Explore all projects</Link>
+                <Link
+                  className="link-underline text-ink-300 text-sm hover:text-ink-50"
+                  href="/#work"
+                >
+                  Explore all projects
+                </Link>
               </div>
             </div>
           </div>

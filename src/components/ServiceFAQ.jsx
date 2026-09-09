@@ -7,8 +7,8 @@ export default function ServiceFAQ({ service }) {
 
   return (
     <section className="py-24 lg:py-36">
-      <div ref={ref} className={`reveal shell ${revealClass}`}>
-        <div className="flex items-baseline justify-between gap-6 pb-5 rule-b">
+      <div className={`reveal shell ${revealClass}`} ref={ref}>
+        <div className="rule-b flex items-baseline justify-between gap-6 pb-5">
           <p className="label">
             <span className="text-gold-500">04</span>
             <span className="ml-3 text-ink-400">Questions</span>
@@ -33,17 +33,17 @@ export default function ServiceFAQ({ service }) {
           <dl className="col-span-12 lg:col-span-7 lg:col-start-6">
             {service.faqs.map((faq, i) => (
               <div
-                key={i}
-                className="grid grid-cols-12 gap-x-6 gap-y-3 rule-b py-8 first:border-t first:border-[color:var(--rule)] lg:py-10"
+                className="rule-b grid grid-cols-12 gap-x-6 gap-y-3 py-8 first:border-[color:var(--rule)] first:border-t lg:py-10"
+                key={faq.question}
               >
                 <span className="col-span-12 font-mono text-[11px] text-gold-500 lg:col-span-1">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <div className="col-span-12 lg:col-span-11">
-                  <dt className="text-lg font-medium leading-snug tracking-[-0.025em] text-ink-50">
+                  <dt className="font-medium text-ink-50 text-lg leading-snug tracking-[-0.025em]">
                     {faq.question}
                   </dt>
-                  <dd className="mt-3 max-w-xl text-[0.9375rem] leading-[1.75] text-ink-400">
+                  <dd className="mt-3 max-w-xl text-[0.9375rem] text-ink-400 leading-[1.75]">
                     {faq.answer}
                   </dd>
                 </div>

@@ -1,0 +1,57 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "extends": [
+    "ultracite/biome/core",
+    "ultracite/biome/react",
+    "ultracite/biome/next"
+  ],
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "assist": {
+    "actions": {
+      "source": {
+        // Content objects are also ordered lists (for example service navigation).
+        "useSortedKeys": "off",
+        "useSortedProperties": "off"
+      }
+    }
+  },
+  "linter": {
+    "rules": {
+      "style": {
+        // Keep the repository's PascalCase React components and kebab-case modules.
+        "useFilenamingConvention": {
+          "level": "error",
+          "options": {
+            "strictCase": false,
+            "filenameCases": ["kebab-case", "PascalCase", "export"]
+          }
+        }
+      }
+    }
+  },
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
+    }
+  },
+  "overrides": [
+    {
+      "includes": ["src/app/globals.css"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            // Tailwind 3 uses @tailwind; the parser option covers newer directives.
+            "noUnknownAtRules": {
+              "level": "error",
+              "options": { "ignore": ["tailwind"] }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

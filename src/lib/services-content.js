@@ -45,7 +45,8 @@ export const servicePages = {
           "Pricing depends on the pages, design, business workflows, integrations, and launch timeline. We discuss those requirements in an initial consultation, then provide a scoped proposal with fixed pricing. Share your goals and any existing website so we can give you a relevant estimate.",
       },
       {
-        question: "Is a custom website or application the right fit for our business?",
+        question:
+          "Is a custom website or application the right fit for our business?",
         answer:
           "A marketing website helps customers understand your services and contact you. A web application supports tasks such as customer accounts, reporting, or internal workflows. We start with what your business needs to accomplish and help you decide which approach fits.",
       },
@@ -190,7 +191,8 @@ export const servicePages = {
           "The product catalog, design, payment and shipping requirements, integrations, and any data migration determine the scope. After an initial consultation, we provide a fixed-price proposal and launch plan for your store. Share your current platform and what needs to change to start the discussion.",
       },
       {
-        question: "Who owns the storefront, and can you support it after launch?",
+        question:
+          "Who owns the storefront, and can you support it after launch?",
         answer:
           "Your business owns the custom code and data we deliver. Third-party platforms such as Shopify have their own subscription terms. We offer maintenance retainers for ongoing development and updates, or per-task pricing for smaller changes.",
       },

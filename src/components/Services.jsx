@@ -16,7 +16,7 @@ function ServiceRow({ service, index }) {
   return (
     <Wrapper
       {...wrapperProps}
-      className={`row-hover block rule-b py-8 lg:py-10 ${
+      className={`rule-b row-hover block py-8 lg:py-10 ${
         service.slug ? "group" : ""
       }`}
     >
@@ -25,16 +25,16 @@ function ServiceRow({ service, index }) {
           {String(index + 1).padStart(2, "0")}
         </span>
 
-        <h3 className="col-span-10 text-xl font-medium leading-tight tracking-[-0.03em] text-ink-100 transition-colors duration-500 group-hover:text-ink-50 lg:col-span-4 lg:text-2xl">
+        <h3 className="col-span-10 font-medium text-ink-100 text-xl leading-tight tracking-[-0.03em] transition-colors duration-500 group-hover:text-ink-50 lg:col-span-4 lg:text-2xl">
           {service.name}
         </h3>
 
         <div className="col-span-12 lg:col-span-6 lg:col-start-7">
-          <p className="max-w-xl text-[0.9375rem] leading-relaxed text-ink-400 transition-colors duration-500 group-hover:text-ink-300">
+          <p className="max-w-xl text-[0.9375rem] text-ink-400 leading-relaxed transition-colors duration-500 group-hover:text-ink-300">
             {service.description}
           </p>
-          {service.slug && (
-            <span className="mt-4 inline-flex items-center gap-2 text-sm text-gold-400">
+          {Boolean(service.slug) && (
+            <span className="mt-4 inline-flex items-center gap-2 text-gold-400 text-sm">
               <span>Read more</span>
               <span
                 aria-hidden="true"
@@ -54,19 +54,22 @@ export default function Services() {
   const { ref: listRef, revealClass: listClass } = useReveal();
 
   return (
-    <section id="services" className="scroll-mt-24 py-24 lg:py-36">
+    <section className="scroll-mt-24 py-24 lg:py-36" id="services">
       <div className="shell">
         <SectionHeader
+          aside={`${String(services.length).padStart(2, "0")} disciplines`}
           index="03"
           label="Services"
-          title="What we build."
           standfirst="Engagements run end to end — discovery through launch and the maintenance that follows."
-          aside={`${String(services.length).padStart(2, "0")} disciplines`}
+          title="What we build."
         />
 
-        <div ref={listRef} className={`reveal-stagger mt-16 lg:mt-20 ${listClass}`}>
+        <div
+          className={`reveal-stagger mt-16 lg:mt-20 ${listClass}`}
+          ref={listRef}
+        >
           {services.map((service, i) => (
-            <ServiceRow key={service.name} service={service} index={i} />
+            <ServiceRow index={i} key={service.name} service={service} />
           ))}
         </div>
       </div>

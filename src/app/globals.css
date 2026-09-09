@@ -277,15 +277,22 @@
   transform: translateY(0);
 }
 
-.is-visible .reveal-line:nth-child(2) > * { transition-delay: 90ms; }
-.is-visible .reveal-line:nth-child(3) > * { transition-delay: 180ms; }
-.is-visible .reveal-line:nth-child(4) > * { transition-delay: 270ms; }
+.is-visible .reveal-line:nth-child(2) > * {
+  transition-delay: 90ms;
+}
+.is-visible .reveal-line:nth-child(3) > * {
+  transition-delay: 180ms;
+}
+.is-visible .reveal-line:nth-child(4) > * {
+  transition-delay: 270ms;
+}
 
 /* Quiet lift for supporting blocks. */
 .reveal {
   opacity: 0;
   transform: translateY(18px);
-  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+  transition:
+    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -297,29 +304,51 @@
   transform: translateY(0);
 }
 
-.reveal-delay-1 { transition-delay: 120ms; }
-.reveal-delay-2 { transition-delay: 240ms; }
+.reveal-delay-1 {
+  transition-delay: 120ms;
+}
+.reveal-delay-2 {
+  transition-delay: 240ms;
+}
 
 /* Staggered children — used by list sections so rows cascade in. */
+/* biome-ignore lint/style/noDescendingSpecificity: Staggered children and reveal-line children are separate animation patterns. */
 .reveal-stagger > * {
   opacity: 0;
   transform: translateY(16px);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* biome-ignore lint/style/noDescendingSpecificity: The two selectors intentionally reveal the same staggered children. */
 .reveal-stagger.is-visible > *,
-.is-visible .reveal-stagger > * {
+/* biome-ignore lint/style/noDescendingSpecificity: This targets staggered children, not the preceding reveal-line pattern. */
+  .is-visible
+  .reveal-stagger
+  > * {
   opacity: 1;
   transform: translateY(0);
 }
 
-.reveal-stagger.is-visible > *:nth-child(1) { transition-delay: 0ms; }
-.reveal-stagger.is-visible > *:nth-child(2) { transition-delay: 70ms; }
-.reveal-stagger.is-visible > *:nth-child(3) { transition-delay: 140ms; }
-.reveal-stagger.is-visible > *:nth-child(4) { transition-delay: 210ms; }
-.reveal-stagger.is-visible > *:nth-child(5) { transition-delay: 280ms; }
-.reveal-stagger.is-visible > *:nth-child(6) { transition-delay: 350ms; }
+.reveal-stagger.is-visible > *:nth-child(1) {
+  transition-delay: 0ms;
+}
+.reveal-stagger.is-visible > *:nth-child(2) {
+  transition-delay: 70ms;
+}
+.reveal-stagger.is-visible > *:nth-child(3) {
+  transition-delay: 140ms;
+}
+.reveal-stagger.is-visible > *:nth-child(4) {
+  transition-delay: 210ms;
+}
+.reveal-stagger.is-visible > *:nth-child(5) {
+  transition-delay: 280ms;
+}
+.reveal-stagger.is-visible > *:nth-child(6) {
+  transition-delay: 350ms;
+}
 
 /* Hairline that draws outward from the left as its section enters. */
 .reveal-rule {

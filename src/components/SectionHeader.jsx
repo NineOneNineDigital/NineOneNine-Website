@@ -24,22 +24,22 @@ export default function SectionHeader({
   const { ref, revealClass } = useReveal();
 
   return (
-    <div ref={ref} className={`reveal ${revealClass}`}>
-      <div className="flex items-baseline justify-between gap-6 pb-5 rule-b">
+    <div className={`reveal ${revealClass}`} ref={ref}>
+      <div className="rule-b flex items-baseline justify-between gap-6 pb-5">
         <p className="label">
           <span className="text-gold-500">{index}</span>
           <span className="ml-3 text-ink-400">{label}</span>
         </p>
-        {aside && <p className="label text-ink-500">{aside}</p>}
+        {Boolean(aside) && <p className="label text-ink-500">{aside}</p>}
       </div>
 
-      <div className="mt-10 grid grid-cols-12 gap-x-6 gap-y-6 items-end lg:mt-14">
+      <div className="mt-10 grid grid-cols-12 items-end gap-x-6 gap-y-6 lg:mt-14">
         <h2 className="display-lg col-span-12 text-ink-50 lg:col-span-7">
           {title}
         </h2>
-        {standfirst && (
+        {Boolean(standfirst) && (
           <div className="col-span-12 lg:col-span-4 lg:col-start-9">
-            <p className="text-[0.9375rem] leading-relaxed text-ink-400">
+            <p className="text-[0.9375rem] text-ink-400 leading-relaxed">
               {standfirst}
             </p>
           </div>

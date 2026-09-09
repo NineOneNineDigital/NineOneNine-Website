@@ -1,5 +1,5 @@
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Header from "@/components/Header";
 
 export const metadata = {
   title: "Page not found",
@@ -12,7 +12,7 @@ export default function NotFound() {
       <Header />
       <main className="flex flex-1 items-center pt-28">
         <div className="shell w-full">
-          <div className="flex items-baseline justify-between gap-6 pb-5 rule-b">
+          <div className="rule-b flex items-baseline justify-between gap-6 pb-5">
             <p className="label">
               <span className="text-gold-500">404</span>
               <span className="ml-3 text-ink-400">Not found</span>
@@ -34,8 +34,8 @@ export default function NotFound() {
               </p>
               <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
                 <a
+                  className="group inline-flex items-center gap-3 bg-ink-50 px-7 py-4 font-medium text-ink-950 text-sm transition-colors duration-300 hover:bg-gold-400"
                   href="/"
-                  className="group inline-flex items-center gap-3 bg-ink-50 px-7 py-4 text-sm font-medium text-ink-950 transition-colors duration-300 hover:bg-gold-400"
                 >
                   <span>Back home</span>
                   <span
@@ -46,8 +46,8 @@ export default function NotFound() {
                   </span>
                 </a>
                 <a
+                  className="link-underline text-ink-200 text-sm hover:text-ink-50"
                   href="/#contact"
-                  className="link-underline text-sm text-ink-200 hover:text-ink-50"
                 >
                   Get in touch
                 </a>
