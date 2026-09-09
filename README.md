@@ -42,6 +42,9 @@ activation are documented in [Search and measurement](docs/search-and-measuremen
 Analytics reporting and Search Console verification require the owner's account
 setup; inquiry events are currently available locally for a provider to consume.
 
+The [follow-up plan](docs/launch-follow-up-plan.md) tracks verified team details,
+testimonials/results, business profiles, and analytics/Search Console activation.
+
 ## Getting Started
 
 ```bash
