@@ -1,21 +1,16 @@
 import { servicePageList } from "@/lib/services-content";
+import { projectPageList } from "@/lib/projects-content";
+import { SITE_URL } from "@/lib/site";
 
 export default function sitemap() {
-  const baseUrl = "https://nineoneninedigital.com";
-  const lastModified = new Date();
-
+  // Omit lastModified until content has independently maintained update dates.
   return [
-    {
-      url: baseUrl,
-      lastModified,
-      changeFrequency: "weekly",
-      priority: 1,
-    },
+    { url: SITE_URL },
     ...servicePageList.map((s) => ({
-      url: `${baseUrl}/services/${s.slug}`,
-      lastModified,
-      changeFrequency: "monthly",
-      priority: 0.8,
+      url: `${SITE_URL}/services/${s.slug}`,
+    })),
+    ...projectPageList.map((project) => ({
+      url: `${SITE_URL}/work/${project.slug}`,
     })),
   ];
 }

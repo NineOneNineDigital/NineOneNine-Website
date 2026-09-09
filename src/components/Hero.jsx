@@ -1,6 +1,7 @@
 "use client";
 
 import { useReveal } from "@/lib/hooks";
+import { projects } from "@/lib/constants";
 
 // The disciplines row that closes the hero. Static and ruled — it states
 // what the company does rather than scrolling a stack of vendor logos past.
@@ -29,7 +30,7 @@ export default function Hero() {
           <p className="label text-ink-400">
             <span className="sm:hidden">Development — Raleigh, NC</span>
             <span className="hidden sm:inline">
-              Software development — Raleigh, North Carolina
+              Websites & software — Raleigh, North Carolina
             </span>
           </p>
           <p className="label text-ink-400">Est. 2019</p>
@@ -41,31 +42,31 @@ export default function Hero() {
           filled rather than leaving a column of dead space beside the type. */}
       <div className="shell flex flex-1 flex-col justify-center py-12 lg:py-16">
         <h1 className="display-xl text-ink-50">
-          <span className="reveal-line">
-            <span>We build the software</span>
+          <span className="reveal-line pb-[0.12em] -mb-[0.12em]">
+            <span>Websites &amp; software.</span>
           </span>
-          <span className="reveal-line">
+          <span className="reveal-line pb-[0.12em] -mb-[0.12em]">
             <span>
-              your business <span className="text-gold-400">runs on</span>.
+              Built to <span className="text-gold-400">grow your business</span>.
             </span>
           </span>
         </h1>
 
-        <div className="mt-12 grid grid-cols-12 gap-x-6 gap-y-8 rule-t pt-8 lg:mt-16 lg:pt-10">
-          <div className="reveal reveal-delay-1 col-span-12 lg:col-span-5">
+        <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-x-6 gap-y-8 rule-t pt-8 lg:mt-16 lg:pt-10">
+          <div className="reveal reveal-delay-1 lg:col-span-6">
             <p className="prose-editorial max-w-lg">
-              Custom web applications, mobile apps, commerce, and APIs —
-              designed and engineered end to end for teams that have outgrown
-              the template.
+              Win new clients, sell online, or simplify the way your team works.
+              We design and build custom websites and software around your
+              business goals, from the first conversation through launch.
             </p>
           </div>
 
-          <div className="reveal reveal-delay-2 col-span-12 flex flex-wrap items-center gap-x-8 gap-y-4 lg:col-span-4 lg:col-start-9 lg:justify-end">
+          <div className="reveal reveal-delay-2 flex flex-wrap items-center gap-x-8 gap-y-4 lg:col-span-5 lg:col-start-8 lg:justify-end">
             <a
               href="/#contact"
               className="group inline-flex items-center gap-3 bg-ink-50 px-7 py-4 text-sm font-medium text-ink-950 transition-colors duration-300 hover:bg-gold-400"
             >
-              <span>Start a project</span>
+              <span>Discuss your project</span>
               <span
                 aria-hidden="true"
                 className="transition-transform duration-300 group-hover:translate-x-1"
@@ -79,7 +80,18 @@ export default function Hero() {
             >
               See selected work
             </a>
+            <p className="w-full text-sm leading-relaxed text-ink-400 lg:text-right">
+              Tell us what you have in mind. We reply within one business day.
+            </p>
           </div>
+        </div>
+        <div className="mt-10 rule-t pt-6">
+          <p className="label">Selected website clients</p>
+          <ul className="mt-4 flex flex-wrap gap-x-8 gap-y-3 text-sm text-ink-200">
+            {projects.map((project) => (
+              <li key={project.id}>{project.name}</li>
+            ))}
+          </ul>
         </div>
       </div>
 

@@ -6,8 +6,9 @@ import ServiceDetail from "@/components/ServiceDetail";
 import ServiceFAQ from "@/components/ServiceFAQ";
 import ServiceCTA from "@/components/ServiceCTA";
 import { servicePages, servicePageList } from "@/lib/services-content";
-
-const SITE_URL = "https://nineoneninedigital.com";
+import { SITE_URL, BUSINESS_ID } from "@/lib/site";
+import JsonLd from "@/components/JsonLd";
+import RelatedProjects from "@/components/RelatedProjects";
 
 export function generateStaticParams() {
   return servicePageList.map((s) => ({ slug: s.slug }));
@@ -15,7 +16,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  const service = servicePages[slug];
+  const service = Object.hasOwn(servicePages, slug) ? servicePages[slug] : null;
   if (!service) return {};
 
   const canonical = `${SITE_URL}/services/${service.slug}`;
@@ -40,7 +41,7 @@ export async function generateMetadata({ params }) {
 
 export default async function ServicePage({ params }) {
   const { slug } = await params;
-  const service = servicePages[slug];
+  const service = Object.hasOwn(servicePages, slug) ? servicePages[slug] : null;
   if (!service) notFound();
 
   const canonical = `${SITE_URL}/services/${service.slug}`;
@@ -53,7 +54,7 @@ export default async function ServicePage({ params }) {
     serviceType: service.name,
     description: service.metaDescription,
     url: canonical,
-    provider: { "@id": `${SITE_URL}/#business` },
+    provider: { "@id": BUSINESS_ID },
     areaServed: [
       { "@type": "City", name: "Raleigh" },
       { "@type": "AdministrativeArea", name: "North Carolina" },
@@ -88,18 +89,9 @@ export default async function ServicePage({ params }) {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
+      <JsonLd data={serviceSchema} />
+      <JsonLd data={faqSchema} />
+      <JsonLd data={breadcrumbSchema} />
 
       <a
         href="#main"
@@ -111,6 +103,7 @@ export default async function ServicePage({ params }) {
       <main id="main">
         <ServiceHero service={service} />
         <ServiceDetail service={service} />
+        <RelatedProjects serviceSlug={service.slug} />
         <ServiceFAQ service={service} />
         <ServiceCTA service={service} />
       </main>

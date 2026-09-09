@@ -17,6 +17,7 @@ export const navigation = [
 export const projects = [
   {
     id: "01",
+    slug: "bost-homes",
     name: "Bost Homes",
     category: "Website",
     industry: "Custom home building",
@@ -25,6 +26,7 @@ export const projects = [
   },
   {
     id: "02",
+    slug: "grande-manor",
     name: "Grande Manor",
     category: "Website",
     industry: "Custom home building",
@@ -33,6 +35,7 @@ export const projects = [
   },
   {
     id: "03",
+    slug: "mcmillan-design",
     name: "McMillan Design",
     category: "Website",
     industry: "Residential design",
@@ -41,6 +44,7 @@ export const projects = [
   },
   {
     id: "04",
+    slug: "dealer-lifts",
     name: "Dealer Lifts",
     category: "Website & eCommerce",
     industry: "Automotive service",
@@ -117,4 +121,3 @@ export const faqs = [
       "Our core stack includes React, Next.js, Node.js, and PostgreSQL. We also work with TypeScript, Python, AWS, and Vercel depending on project needs. We choose tools based on what solves your problem best — not what's trendy.",
   },
 ];
-

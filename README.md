@@ -9,7 +9,7 @@ The official website for **NineOneNine Digital**, a software development studio 
 - **Styling:** [Tailwind CSS](https://tailwindcss.com/) 3.4
 - **Components:** [Headless UI](https://headlessui.com/), [Heroicons](https://heroicons.com/)
 - **Forms:** [Formspree](https://formspree.io/)
-- **Fonts:** Space Grotesk, Space Mono (Google Fonts)
+- **Fonts:** Schibsted Grotesk, Geist Mono (Google Fonts)
 
 ## Features
 
@@ -24,11 +24,23 @@ The official website for **NineOneNine Digital**, a software development studio 
 ## Sections
 
 - **Hero** — Introduction with tagline and CTA
+- **Work** — Four project overviews with dedicated pages, screenshots, and related services
 - **About** — Company story and key stats
 - **Services** — Full-stack web dev, eCommerce, mobile, CMS, consulting, API development
 - **Process** — 4-step methodology (Discovery, Plan & Design, Build, Launch & Support)
 - **FAQ** — Collapsible accordion with common questions
 - **Contact** — Project inquiry form
+
+The landing page leads with business goals and all four selected website
+clients. “Discuss your project” links open the contact section. The Formspree
+form collects `name`, `email`, optional `website`, and `message`, with a reply
+expected within one business day. It uses a single `name` field in place of
+the previous `firstName` and `lastName` fields.
+
+Canonical URLs, crawlability, project evidence, inquiry events, and Search Console
+activation are documented in [Search and measurement](docs/search-and-measurement.md).
+Analytics reporting and Search Console verification require the owner's account
+setup; inquiry events are currently available locally for a provider to consume.
 
 ## Getting Started
 
@@ -50,6 +62,11 @@ Open [http://localhost:3000](http://localhost:3000) to view the site.
 | `npm run build` | Build for production     |
 | `npm run start` | Start production server  |
 | `npm run lint`  | Run ESLint               |
+| `npm run check:seo` | Validate prerendered SEO output after a build |
+
+The legacy `npm run lint` command uses `next lint`, which is unavailable in
+Next.js 16. Until the lint configuration is migrated, run ESLint 9 directly
+with the installed `eslint-config-next/core-web-vitals` flat configuration.
 
 ## Project Structure
 

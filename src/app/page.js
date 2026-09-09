@@ -8,17 +8,8 @@ import FAQ from "@/components/FAQ";
 import Contact from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 import { faqs, services } from "@/lib/constants";
-
-const SITE_URL = "https://nineoneninedigital.com";
-
-function JsonLd({ data }) {
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
-    />
-  );
-}
+import JsonLd from "@/components/JsonLd";
+import { SITE_URL, BUSINESS_ID, WEBSITE_ID, SITE_TITLE, SITE_DESCRIPTION } from "@/lib/site";
 
 export default function HomePage() {
   const faqSchema = {
@@ -44,11 +35,7 @@ export default function HomePage() {
         "@type": "Service",
         name: service.name,
         description: service.description,
-        provider: {
-          "@type": "Organization",
-          name: "NineOneNine",
-          url: SITE_URL,
-        },
+        provider: { "@id": BUSINESS_ID },
       },
     })),
   };
@@ -56,15 +43,12 @@ export default function HomePage() {
   const webPageSchema = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    name: "NineOneNine — Software Development Studio",
-    description:
-      "NineOneNine is a software development studio in Raleigh, North Carolina. We design and build custom web applications, mobile apps, eCommerce platforms, and APIs for businesses of all sizes.",
+    "@id": `${SITE_URL}/#webpage`,
+    name: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     url: SITE_URL,
-    isPartOf: {
-      "@type": "WebSite",
-      name: "NineOneNine",
-      url: SITE_URL,
-    },
+    isPartOf: { "@id": WEBSITE_ID },
+    about: { "@id": BUSINESS_ID },
   };
 
   return (

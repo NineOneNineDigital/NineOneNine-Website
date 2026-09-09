@@ -40,6 +40,16 @@ export const servicePages = {
     ],
     faqs: [
       {
+        question: "How much does a custom website or web application cost?",
+        answer:
+          "Pricing depends on the pages, design, business workflows, integrations, and launch timeline. We discuss those requirements in an initial consultation, then provide a scoped proposal with fixed pricing. Share your goals and any existing website so we can give you a relevant estimate.",
+      },
+      {
+        question: "Is a custom website or application the right fit for our business?",
+        answer:
+          "A marketing website helps customers understand your services and contact you. A web application supports tasks such as customer accounts, reporting, or internal workflows. We start with what your business needs to accomplish and help you decide which approach fits.",
+      },
+      {
         question: "How long does a custom web application take to build?",
         answer:
           "Most full-stack applications take 8–16 weeks from kickoff to launch. Marketing sites and lighter projects run 4–8 weeks. We scope everything upfront so timelines are committed, not guessed.",
@@ -103,6 +113,16 @@ export const servicePages = {
     ],
     faqs: [
       {
+        question: "How are mobile app pricing and timelines determined?",
+        answer:
+          "We scope the platforms, screens, backend connections, offline requirements, and app store work before providing a fixed-price proposal and timeline. Existing designs or APIs help define the scope. Share the core tasks your users need to complete so we can discuss a practical first release.",
+      },
+      {
+        question: "Will our business own the app and its source code?",
+        answer:
+          "Yes. The code is delivered into your repository, and your business owns the application and its data. We can hand off operations or continue working with you through a maintenance retainer.",
+      },
+      {
         question: "Should we go native or use React Native?",
         answer:
           "It depends on the app. If you need deep platform integration, high-frame-rate animation, or hardware access, native is usually the right call. If your app is primarily forms, lists, and content, React Native lets us ship to both platforms from one codebase — at a meaningful cost savings.",
@@ -164,6 +184,16 @@ export const servicePages = {
       "Resend",
     ],
     faqs: [
+      {
+        question: "What determines the cost and timeline of an online store?",
+        answer:
+          "The product catalog, design, payment and shipping requirements, integrations, and any data migration determine the scope. After an initial consultation, we provide a fixed-price proposal and launch plan for your store. Share your current platform and what needs to change to start the discussion.",
+      },
+      {
+        question: "Who owns the storefront, and can you support it after launch?",
+        answer:
+          "Your business owns the custom code and data we deliver. Third-party platforms such as Shopify have their own subscription terms. We offer maintenance retainers for ongoing development and updates, or per-task pricing for smaller changes.",
+      },
       {
         question: "Should we use Shopify or build a custom platform?",
         answer:

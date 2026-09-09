@@ -1,5 +1,10 @@
 import { Schibsted_Grotesk, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import JsonLd from "@/components/JsonLd";
+import SiteMeasurement from "@/components/SiteMeasurement";
+import {
+  SITE_URL, SITE_TITLE, SITE_DESCRIPTION, businessSchema, websiteSchema,
+} from "@/lib/site";
 
 // Schibsted Grotesk carries the whole system — display, UI, and body. Its
 // flat terminals and tight apertures give the large display sizes real
@@ -17,34 +22,16 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
-const SITE_URL = "https://nineoneninedigital.com";
-
 export const metadata = {
   metadataBase: new URL(SITE_URL),
+  verification: {
+    google: process.env.GOOGLE_SITE_VERIFICATION || undefined,
+  },
   title: {
-    default: "NineOneNine — Software Development Studio | Raleigh, NC",
+    default: SITE_TITLE,
     template: "%s | NineOneNine",
   },
-  description:
-    "NineOneNine is a software development studio in Raleigh, North Carolina. We design and build custom web applications, mobile apps, eCommerce platforms, and APIs for businesses of all sizes.",
-  keywords: [
-    "web development",
-    "software development",
-    "mobile app development",
-    "iOS app development",
-    "Android app development",
-    "React Native development",
-    "Raleigh NC",
-    "custom web applications",
-    "React",
-    "Next.js",
-    "eCommerce development",
-    "API development",
-    "software development studio Raleigh",
-    "web developer North Carolina",
-    "mobile app developer Raleigh NC",
-    "custom software Raleigh NC",
-  ],
+  description: SITE_DESCRIPTION,
   icons: {
     icon: [
       { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
@@ -58,9 +45,8 @@ export const metadata = {
     canonical: SITE_URL,
   },
   openGraph: {
-    title: "NineOneNine — Software Development Studio | Raleigh, NC",
-    description:
-      "Custom web applications, mobile apps, eCommerce platforms, and APIs. Based in Raleigh, NC.",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     url: SITE_URL,
     siteName: "NineOneNine",
     type: "website",
@@ -68,9 +54,8 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "NineOneNine — Software Development Studio | Raleigh, NC",
-    description:
-      "Custom web applications, mobile apps, eCommerce platforms, and APIs. Based in Raleigh, NC.",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
   },
   robots: {
     index: true,
@@ -86,99 +71,25 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  const CONTACT_EMAIL = "hello@nineoneninedigital.com";
-
-  const organizationSchema = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "NineOneNine",
-    legalName: "NineOneNine, Inc.",
-    url: SITE_URL,
-    logo: `${SITE_URL}/logo-gold.png`,
-    email: CONTACT_EMAIL,
-    description: metadata.description,
-    foundingDate: "2019",
-    slogan: "We build software, end to end.",
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Raleigh",
-      addressRegion: "NC",
-      addressCountry: "US",
-    },
-    contactPoint: {
-      "@type": "ContactPoint",
-      contactType: "customer support",
-      email: CONTACT_EMAIL,
-      areaServed: "US",
-      availableLanguage: ["English"],
-    },
-  };
-
-  const localBusinessSchema = {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "@id": `${SITE_URL}/#business`,
-    name: "NineOneNine",
-    url: SITE_URL,
-    logo: `${SITE_URL}/logo-gold.png`,
-    email: CONTACT_EMAIL,
-    description: metadata.description,
-    foundingDate: "2019",
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Raleigh",
-      addressRegion: "NC",
-      addressCountry: "US",
-    },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: 35.7796,
-      longitude: -78.6382,
-    },
-    areaServed: [
-      {
-        "@type": "City",
-        name: "Raleigh",
-      },
-      {
-        "@type": "AdministrativeArea",
-        name: "North Carolina",
-      },
-      {
-        "@type": "Country",
-        name: "United States",
-      },
-    ],
-    priceRange: "$$",
-    serviceType: [
-      "Web Development",
-      "Mobile Development",
-      "eCommerce Development",
-      "API Development",
-      "CMS Development",
-      "Software Consulting",
-    ],
-  };
-
   return (
     <html lang="en" className="scroll-smooth">
       <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(organizationSchema),
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(localBusinessSchema),
-          }}
-        />
+        <JsonLd data={businessSchema} />
+        <JsonLd data={websiteSchema} />
+        <noscript>
+          <style>{`
+            .reveal, .reveal-stagger > *, .reveal-rule, .reveal-line > * {
+              opacity: 1 !important;
+              transform: none !important;
+              transition: none !important;
+            }
+          `}</style>
+        </noscript>
       </head>
       <body
         className={`${schibsted.variable} ${geistMono.variable} font-sans antialiased noise`}
       >
+        <SiteMeasurement />
         {children}
       </body>
     </html>

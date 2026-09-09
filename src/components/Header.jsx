@@ -31,7 +31,7 @@ export default function Header() {
           className="flex items-baseline gap-3"
         >
           <Wordmark className="text-xl lg:text-2xl" />
-          <span className="hidden sm:block label text-ink-500">Development</span>
+          <span className="hidden lg:block label text-ink-500">Development</span>
         </a>
 
         <nav aria-label="Main" className="hidden md:flex items-center gap-9">
@@ -51,7 +51,7 @@ export default function Header() {
             href="/#contact"
             className="group flex items-center gap-2 text-sm text-ink-50 border-b border-gold-500/50 pb-0.5 hover:border-gold-400 transition-colors duration-300"
           >
-            <span>Start a project</span>
+            <span>Discuss your project</span>
             <span
               aria-hidden="true"
               className="text-gold-400 transition-transform duration-300 group-hover:translate-x-0.5"
@@ -106,7 +106,7 @@ export default function Header() {
               onClick={() => setOpen(false)}
               className="flex items-center justify-between border border-gold-500/40 px-5 py-4 text-sm text-gold-400"
             >
-              <span>Start a project</span>
+              <span>Discuss your project</span>
               <span aria-hidden="true">→</span>
             </a>
           </div>

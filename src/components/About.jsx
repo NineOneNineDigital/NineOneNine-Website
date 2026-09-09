@@ -2,6 +2,7 @@
 
 import SectionHeader from "@/components/SectionHeader";
 import { useReveal } from "@/lib/hooks";
+import Link from "next/link";
 
 // Static facts, set as a ruled table. These were previously animated
 // counters; the numbers say the same thing without the theatre.
@@ -38,10 +39,19 @@ export default function About() {
           <div className="col-span-12 lg:col-span-7">
             <div className="space-y-7">
               <p className="prose-editorial text-ink-200">
-                We started NineOneNine to do one thing well — build custom
+                Founded in 2019 and based in Raleigh, North Carolina,
+                NineOneNine Digital builds custom
                 software for businesses that have outgrown off-the-shelf tools.
                 We work directly with founders, product managers, and operators
                 to turn a rough idea into something in production.
+              </p>
+              <p className="prose-editorial">
+                Our website work includes custom home builders, residential
+                designers, and automotive businesses. Explore the{" "}
+                <Link href="/work/dealer-lifts" className="link-underline">Dealer Lifts project</Link>
+                {" "}for website and eCommerce work, or{" "}
+                <Link href="/work/bost-homes" className="link-underline">Bost Homes</Link>
+                {" "}for a custom home builder website.
               </p>
               <p className="prose-editorial">
                 We handle the full stack. Database architecture through to the

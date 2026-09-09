@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import SectionHeader from "@/components/SectionHeader";
 import { projects } from "@/lib/constants";
 import { useReveal } from "@/lib/hooks";
@@ -75,18 +76,10 @@ function HoverPreview({ activeIndex }) {
 }
 
 function ProjectRow({ project, onEnter, onLeave }) {
-  const isExternal = Boolean(project.href);
-
   return (
-    <a
-      href={project.href || "/#contact"}
-      target={isExternal ? "_blank" : undefined}
-      rel={isExternal ? "noopener noreferrer" : undefined}
-      aria-label={
-        isExternal
-          ? `${project.name} — ${project.category} for ${project.industry}. Opens in a new tab.`
-          : `${project.name} — ${project.category} for ${project.industry}`
-      }
+    <Link
+      href={`/work/${project.slug}`}
+      aria-label={`Explore ${project.name} — ${project.category} for ${project.industry}`}
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
       onFocus={onEnter}
@@ -110,9 +103,9 @@ function ProjectRow({ project, onEnter, onLeave }) {
           <span className="text-sm text-ink-400">{project.industry}</span>
           <span
             aria-hidden="true"
-            className="shrink-0 text-ink-600 transition-all duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-gold-400"
+            className="shrink-0 text-ink-600 transition-all duration-500 group-hover:translate-x-0.5 group-hover:text-gold-400"
           >
-            ↗
+            →
           </span>
         </div>
       </div>
@@ -130,7 +123,7 @@ function ProjectRow({ project, onEnter, onLeave }) {
           />
         </div>
       )}
-    </a>
+    </Link>
   );
 }
 
@@ -154,8 +147,8 @@ export default function Work() {
         <SectionHeader
           index="01"
           label="Selected work"
-          title="Shipped, live, and earning."
-          standfirst="A sample of recent client engagements. Each was designed, built, and deployed by us end to end."
+          title="Real businesses. Work you can explore."
+          standfirst="Websites and eCommerce for home builders, residential designers, and automotive businesses. Select a project to explore the work."
           aside={`${String(projects.length).padStart(2, "0")} projects`}
         />
 
@@ -179,12 +172,12 @@ export default function Work() {
               Hover a row to preview
             </p>
           )}
-          <a
+          <Link
             href="/#contact"
             className="link-underline ml-auto text-sm text-ink-300 hover:text-ink-50"
           >
-            Start a project
-          </a>
+            Discuss your project
+          </Link>
         </div>
       </div>
 
