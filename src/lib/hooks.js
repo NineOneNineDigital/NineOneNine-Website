@@ -28,12 +28,16 @@ export function useReveal({
 
   useEffect(() => {
     const el = ref.current;
-    if (!el || isVisible) return;
+    if (!el || isVisible) {
+      return;
+    }
 
     // Reduced motion and browsers without IntersectionObserver render the
     // final state immediately — the CSS hides content until this lands, so
     // it must always arrive one way or another.
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduce = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
     if (reduce || typeof IntersectionObserver === "undefined") {
       setIsVisible(true);
       return;

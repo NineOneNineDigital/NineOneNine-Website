@@ -34,8 +34,8 @@ export default function Process() {
 
   return (
     <section className="py-24 lg:py-36">
-      <div ref={ref} className={`reveal shell ${revealClass}`}>
-        <div className="flex items-baseline justify-between gap-6 pb-5 rule-b">
+      <div className={`reveal shell ${revealClass}`} ref={ref}>
+        <div className="rule-b flex items-baseline justify-between gap-6 pb-5">
           <p className="label">
             <span className="text-gold-500">04</span>
             <span className="ml-3 text-ink-400">Process</span>
@@ -52,7 +52,7 @@ export default function Process() {
                 <br />
                 <span className="text-ink-500">work.</span>
               </h2>
-              <p className="mt-6 max-w-xs text-[0.9375rem] leading-relaxed text-ink-400">
+              <p className="mt-6 max-w-xs text-[0.9375rem] text-ink-400 leading-relaxed">
                 The same sequence every time. It is deliberately unremarkable —
                 predictability is the point.
               </p>
@@ -62,17 +62,17 @@ export default function Process() {
           <ol className="col-span-12 lg:col-span-7 lg:col-start-6">
             {steps.map((step) => (
               <li
+                className="rule-b grid grid-cols-12 gap-x-6 gap-y-3 py-8 first:border-[color:var(--rule)] first:border-t lg:py-10"
                 key={step.number}
-                className="grid grid-cols-12 gap-x-6 gap-y-3 rule-b py-8 first:border-t first:border-[color:var(--rule)] lg:py-10"
               >
                 <span className="col-span-12 font-mono text-[11px] text-gold-500 lg:col-span-1">
                   {step.number}
                 </span>
                 <div className="col-span-12 lg:col-span-11">
-                  <h3 className="text-xl font-medium leading-tight tracking-[-0.03em] text-ink-50">
+                  <h3 className="font-medium text-ink-50 text-xl leading-tight tracking-[-0.03em]">
                     {step.name}
                   </h3>
-                  <p className="mt-3 max-w-xl text-[0.9375rem] leading-relaxed text-ink-400">
+                  <p className="mt-3 max-w-xl text-[0.9375rem] text-ink-400 leading-relaxed">
                     {step.description}
                   </p>
                 </div>

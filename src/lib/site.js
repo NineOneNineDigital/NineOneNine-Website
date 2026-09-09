@@ -2,7 +2,8 @@
 export const SITE_URL = "https://www.nineoneninedigital.com";
 export const BUSINESS_ID = `${SITE_URL}/#business`;
 export const WEBSITE_ID = `${SITE_URL}/#website`;
-export const SITE_TITLE = "Websites & Custom Software in Raleigh, NC | NineOneNine";
+export const SITE_TITLE =
+  "Websites & Custom Software in Raleigh, NC | NineOneNine";
 export const SITE_DESCRIPTION =
   "NineOneNine builds custom websites, web applications, mobile apps, and eCommerce experiences. Work directly with our Raleigh, NC development team from planning through launch.";
 

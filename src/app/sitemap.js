@@ -1,5 +1,5 @@
-import { servicePageList } from "@/lib/services-content";
 import { projectPageList } from "@/lib/projects-content";
+import { servicePageList } from "@/lib/services-content";
 import { SITE_URL } from "@/lib/site";
 
 export default function sitemap() {

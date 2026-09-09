@@ -4,7 +4,7 @@
 export default function Wordmark({ className = "" }) {
   return (
     <span
-      className={`font-sans font-semibold tracking-[-0.045em] leading-none whitespace-nowrap text-ink-50 ${className}`}
+      className={`whitespace-nowrap font-sans font-semibold text-ink-50 leading-none tracking-[-0.045em] ${className}`}
     >
       NineOneNine
     </span>

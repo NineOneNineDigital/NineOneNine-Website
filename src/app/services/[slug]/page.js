@@ -1,14 +1,14 @@
 import { notFound } from "next/navigation";
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import ServiceHero from "@/components/ServiceHero";
-import ServiceDetail from "@/components/ServiceDetail";
-import ServiceFAQ from "@/components/ServiceFAQ";
-import ServiceCTA from "@/components/ServiceCTA";
-import { servicePages, servicePageList } from "@/lib/services-content";
-import { SITE_URL, BUSINESS_ID } from "@/lib/site";
+import Header from "@/components/Header";
 import JsonLd from "@/components/JsonLd";
 import RelatedProjects from "@/components/RelatedProjects";
+import ServiceCTA from "@/components/ServiceCTA";
+import ServiceDetail from "@/components/ServiceDetail";
+import ServiceFAQ from "@/components/ServiceFAQ";
+import ServiceHero from "@/components/ServiceHero";
+import { servicePageList, servicePages } from "@/lib/services-content";
+import { BUSINESS_ID, SITE_URL } from "@/lib/site";
 
 export function generateStaticParams() {
   return servicePageList.map((s) => ({ slug: s.slug }));
@@ -17,7 +17,9 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const service = Object.hasOwn(servicePages, slug) ? servicePages[slug] : null;
-  if (!service) return {};
+  if (!service) {
+    return {};
+  }
 
   const canonical = `${SITE_URL}/services/${service.slug}`;
 
@@ -42,7 +44,9 @@ export async function generateMetadata({ params }) {
 export default async function ServicePage({ params }) {
   const { slug } = await params;
   const service = Object.hasOwn(servicePages, slug) ? servicePages[slug] : null;
-  if (!service) notFound();
+  if (!service) {
+    notFound();
+  }
 
   const canonical = `${SITE_URL}/services/${service.slug}`;
 
@@ -94,8 +98,8 @@ export default async function ServicePage({ params }) {
       <JsonLd data={breadcrumbSchema} />
 
       <a
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-ink-50 focus:px-5 focus:py-3 focus:font-medium focus:text-ink-950 focus:text-sm"
         href="#main"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-ink-50 focus:px-5 focus:py-3 focus:text-sm focus:font-medium focus:text-ink-950"
       >
         Skip to content
       </a>

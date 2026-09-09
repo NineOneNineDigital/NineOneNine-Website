@@ -16,8 +16,8 @@ export default function Footer() {
               applications, built end to end.
             </p>
             <a
-              href="mailto:hello@nineoneninedigital.com"
               className="link-underline mt-8 inline-block text-[0.9375rem]"
+              href="mailto:hello@nineoneninedigital.com"
             >
               hello@nineoneninedigital.com
             </a>
@@ -32,8 +32,8 @@ export default function Footer() {
               {navigation.map((item) => (
                 <li key={item.name}>
                   <a
+                    className="text-ink-400 text-sm transition-colors duration-300 hover:text-ink-50"
                     href={item.href}
-                    className="text-sm text-ink-400 transition-colors duration-300 hover:text-ink-50"
                   >
                     {item.name}
                   </a>
@@ -41,8 +41,8 @@ export default function Footer() {
               ))}
               <li>
                 <a
+                  className="text-ink-400 text-sm transition-colors duration-300 hover:text-ink-50"
                   href="/#contact"
-                  className="text-sm text-ink-400 transition-colors duration-300 hover:text-ink-50"
                 >
                   Contact
                 </a>
@@ -59,8 +59,8 @@ export default function Footer() {
               {servicePageList.map((service) => (
                 <li key={service.slug}>
                   <a
+                    className="text-ink-400 text-sm transition-colors duration-300 hover:text-ink-50"
                     href={`/services/${service.slug}`}
-                    className="text-sm text-ink-400 transition-colors duration-300 hover:text-ink-50"
                   >
                     {service.name}
                   </a>
@@ -70,7 +70,7 @@ export default function Footer() {
           </nav>
         </div>
 
-        <div className="mt-16 flex flex-col justify-between gap-3 rule-t pt-7 sm:flex-row">
+        <div className="rule-t mt-16 flex flex-col justify-between gap-3 pt-7 sm:flex-row">
           <p className="label text-ink-600">
             &copy; {currentYear} NineOneNine, Inc.
           </p>

@@ -1,9 +1,13 @@
-import { Schibsted_Grotesk, Geist_Mono } from "next/font/google";
+import { Geist_Mono, Schibsted_Grotesk } from "next/font/google";
 import "./globals.css";
 import JsonLd from "@/components/JsonLd";
 import SiteMeasurement from "@/components/SiteMeasurement";
 import {
-  SITE_URL, SITE_TITLE, SITE_DESCRIPTION, businessSchema, websiteSchema,
+  businessSchema,
+  SITE_DESCRIPTION,
+  SITE_TITLE,
+  SITE_URL,
+  websiteSchema,
 } from "@/lib/site";
 
 // Schibsted Grotesk carries the whole system — display, UI, and body. Its
@@ -72,7 +76,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html className="scroll-smooth" lang="en">
       <head>
         <JsonLd data={businessSchema} />
         <JsonLd data={websiteSchema} />
@@ -87,7 +91,7 @@ export default function RootLayout({ children }) {
         </noscript>
       </head>
       <body
-        className={`${schibsted.variable} ${geistMono.variable} font-sans antialiased noise`}
+        className={`${schibsted.variable} ${geistMono.variable} noise font-sans antialiased`}
       >
         <SiteMeasurement />
         {children}

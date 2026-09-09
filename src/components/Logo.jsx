@@ -1,21 +1,21 @@
 export default function Logo({ className = "" }) {
   return (
     <svg
-      viewBox="0 0 280 56"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
       aria-label="NineOneNine"
+      className={className}
+      fill="none"
+      viewBox="0 0 280 56"
+      xmlns="http://www.w3.org/2000/svg"
     >
       <defs>
         {/* Gold gradient for the badge */}
-        <linearGradient id="goldGrad" x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id="goldGrad" x1="0" x2="0" y1="0" y2="1">
           <stop offset="0%" stopColor="#E8C840" />
           <stop offset="50%" stopColor="#CDA400" />
           <stop offset="100%" stopColor="#A88500" />
         </linearGradient>
         {/* Subtle fill for badge interior */}
-        <linearGradient id="badgeFill" x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id="badgeFill" x1="0" x2="0" y1="0" y2="1">
           <stop offset="0%" stopColor="#CDA400" stopOpacity="0.08" />
           <stop offset="100%" stopColor="#CDA400" stopOpacity="0.02" />
         </linearGradient>
@@ -36,8 +36,8 @@ export default function Logo({ className = "" }) {
            Z"
         fill="url(#badgeFill)"
         stroke="url(#goldGrad)"
-        strokeWidth="1.5"
         strokeLinejoin="round"
+        strokeWidth="1.5"
       />
 
       {/* Inner border for depth */}
@@ -55,53 +55,69 @@ export default function Logo({ className = "" }) {
            Z"
         fill="none"
         stroke="#CDA400"
-        strokeWidth="0.5"
-        strokeOpacity="0.3"
         strokeLinejoin="round"
+        strokeOpacity="0.3"
+        strokeWidth="0.5"
       />
 
       {/* 919 text */}
       <text
+        fill="url(#goldGrad)"
+        fontFamily="ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, monospace"
+        fontSize="20"
+        fontWeight="700"
+        letterSpacing="1.5"
+        textAnchor="middle"
         x="28"
         y="33"
-        textAnchor="middle"
-        fontFamily="ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, monospace"
-        fontWeight="700"
-        fontSize="20"
-        fill="url(#goldGrad)"
-        letterSpacing="1.5"
       >
         919
       </text>
 
       {/* Decorative line above text */}
-      <line x1="14" y1="14" x2="42" y2="14" stroke="#CDA400" strokeWidth="0.5" strokeOpacity="0.4" />
+      <line
+        stroke="#CDA400"
+        strokeOpacity="0.4"
+        strokeWidth="0.5"
+        x1="14"
+        x2="42"
+        y1="14"
+        y2="14"
+      />
       {/* Decorative line below text */}
-      <line x1="14" y1="40" x2="42" y2="40" stroke="#CDA400" strokeWidth="0.5" strokeOpacity="0.4" />
+      <line
+        stroke="#CDA400"
+        strokeOpacity="0.4"
+        strokeWidth="0.5"
+        x1="14"
+        x2="42"
+        y1="40"
+        y2="40"
+      />
 
       {/* NINEONENINE wordmark */}
       <text
+        fill="url(#goldGrad)"
+        fontFamily="ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, monospace"
+        fontSize="16"
+        fontWeight="600"
+        letterSpacing="3"
         x="72"
         y="28"
-        fontFamily="ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, monospace"
-        fontWeight="600"
-        fontSize="16"
-        fill="url(#goldGrad)"
-        letterSpacing="3"
       >
         NINEONENINE
       </text>
 
       {/* Subtitle */}
       <text
+        fill="#CDA400"
+        fontFamily="ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, monospace"
+        fontSize="7.5"
+        fontWeight="400"
+        letterSpacing="4.5"
+        opacity="0.45"
         x="72"
         y="44"
-        fontFamily="ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, monospace"
-        fontWeight="400"
-        fontSize="7.5"
-        fill="#CDA400"
-        opacity="0.45"
-        letterSpacing="4.5"
       >
         RALEIGH, NC
       </text>

@@ -3,7 +3,9 @@
 const EVENTS = new Set(["contact_click", "form_start", "generate_lead"]);
 
 export function trackEvent(event, source) {
-  if (typeof window === "undefined" || !EVENTS.has(event)) return;
+  if (typeof window === "undefined" || !EVENTS.has(event)) {
+    return;
+  }
   const detail = {
     event,
     page_path: window.location.pathname,
@@ -12,7 +14,9 @@ export function trackEvent(event, source) {
   try {
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push(detail);
-    window.dispatchEvent(new CustomEvent("nineonenine:measurement", { detail }));
+    window.dispatchEvent(
+      new CustomEvent("nineonenine:measurement", { detail })
+    );
   } catch {
     // A third-party measurement adapter must never interrupt an inquiry.
   }

@@ -1,13 +1,16 @@
 "use client";
 
 import { Dialog, DialogPanel } from "@headlessui/react";
-import { useState, useEffect } from "react";
+import Link from "next/link";
+import { useCallback, useEffect, useState } from "react";
 import Wordmark from "@/components/Wordmark";
 import { navigation } from "@/lib/constants";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const openMenu = useCallback(() => setOpen(true), []);
+  const closeMenu = useCallback(() => setOpen(false), []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -20,36 +23,38 @@ export default function Header() {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${
         scrolled
-          ? "bg-ink-950/80 backdrop-blur-md border-b border-[color:var(--rule)]"
-          : "border-b border-transparent"
+          ? "border-[color:var(--rule)] border-b bg-ink-950/80 backdrop-blur-md"
+          : "border-transparent border-b"
       }`}
     >
       <div className="shell flex items-center justify-between py-5 lg:py-6">
         <a
-          href="/"
           aria-label="NineOneNine — home"
           className="flex items-baseline gap-3"
+          href="/"
         >
           <Wordmark className="text-xl lg:text-2xl" />
-          <span className="hidden lg:block label text-ink-500">Development</span>
+          <span className="label hidden text-ink-500 lg:block">
+            Development
+          </span>
         </a>
 
-        <nav aria-label="Main" className="hidden md:flex items-center gap-9">
+        <nav aria-label="Main" className="hidden items-center gap-9 md:flex">
           {navigation.map((item, i) => (
             <a
-              key={item.name}
+              className="group flex items-baseline gap-1.5 text-ink-300 text-sm transition-colors duration-300 hover:text-ink-50"
               href={item.href}
-              className="group flex items-baseline gap-1.5 text-sm text-ink-300 hover:text-ink-50 transition-colors duration-300"
+              key={item.name}
             >
-              <span className="font-mono text-[10px] text-ink-600 group-hover:text-gold-500 transition-colors duration-300">
+              <span className="font-mono text-[10px] text-ink-600 transition-colors duration-300 group-hover:text-gold-500">
                 {String(i + 1).padStart(2, "0")}
               </span>
               <span>{item.name}</span>
             </a>
           ))}
           <a
+            className="group flex items-center gap-2 border-gold-500/50 border-b pb-0.5 text-ink-50 text-sm transition-colors duration-300 hover:border-gold-400"
             href="/#contact"
-            className="group flex items-center gap-2 text-sm text-ink-50 border-b border-gold-500/50 pb-0.5 hover:border-gold-400 transition-colors duration-300"
           >
             <span>Discuss your project</span>
             <span
@@ -62,35 +67,35 @@ export default function Header() {
         </nav>
 
         <button
+          className="label text-ink-200 transition-colors duration-200 hover:text-gold-400 md:hidden"
+          onClick={openMenu}
           type="button"
-          className="md:hidden label text-ink-200 hover:text-gold-400 transition-colors duration-200"
-          onClick={() => setOpen(true)}
         >
           Menu
         </button>
       </div>
 
-      <Dialog className="md:hidden" open={open} onClose={setOpen}>
+      <Dialog className="md:hidden" onClose={setOpen} open={open}>
         <div className="fixed inset-0 z-50 bg-ink-950/70 backdrop-blur-sm" />
-        <DialogPanel className="fixed inset-0 z-50 bg-ink-950 flex flex-col">
+        <DialogPanel className="fixed inset-0 z-50 flex flex-col bg-ink-950">
           <div className="shell flex items-center justify-between py-5">
             <Wordmark className="text-xl" />
             <button
+              className="label text-ink-200 transition-colors duration-200 hover:text-gold-400"
+              onClick={closeMenu}
               type="button"
-              className="label text-ink-200 hover:text-gold-400 transition-colors duration-200"
-              onClick={() => setOpen(false)}
             >
               Close
             </button>
           </div>
 
-          <nav className="shell flex-1 flex flex-col justify-center">
+          <nav className="shell flex flex-1 flex-col justify-center">
             {navigation.map((item, i) => (
               <a
-                key={item.name}
+                className="rule-b flex items-baseline gap-4 py-5 text-ink-50"
                 href={item.href}
-                onClick={() => setOpen(false)}
-                className="flex items-baseline gap-4 py-5 rule-b text-ink-50"
+                key={item.name}
+                onClick={closeMenu}
               >
                 <span className="font-mono text-[10px] text-ink-600">
                   {String(i + 1).padStart(2, "0")}
@@ -101,14 +106,14 @@ export default function Header() {
           </nav>
 
           <div className="shell pb-10">
-            <a
+            <Link
+              className="flex items-center justify-between border border-gold-500/40 px-5 py-4 text-gold-400 text-sm"
               href="/#contact"
-              onClick={() => setOpen(false)}
-              className="flex items-center justify-between border border-gold-500/40 px-5 py-4 text-sm text-gold-400"
+              onClick={closeMenu}
             >
               <span>Discuss your project</span>
               <span aria-hidden="true">→</span>
-            </a>
+            </Link>
           </div>
         </DialogPanel>
       </Dialog>
